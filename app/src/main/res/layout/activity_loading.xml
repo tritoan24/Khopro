@@ -7,6 +7,7 @@
     tools:context=".LoadingActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="#A8A2A2"
     >
 
     <ImageView
@@ -18,7 +19,9 @@
         android:layout_margin="36dp"
         android:layout_centerInParent="true"
         android:background="@drawable/circle_background"
-        android:layerType="hardware" />
+        android:layerType="hardware"
+        android:layout_marginTop="50dp"
+        />
 <TextView
     android:id="@+id/txtchaomung"
     android:layout_width="wrap_content"
