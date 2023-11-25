@@ -5,30 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="#727272"
+    android:background="#B6B3B3"
     >
 
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="72dp"
         android:src="@drawable/goctrenlogin"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="-21dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:src="@drawable/gocduoilogin"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-22dp"
-        tools:layout_editor_absoluteY="444dp" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/iconlogin"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +46,7 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="320dp"
         android:layout_height="360dp"
         android:background="#FFF6F5"
@@ -49,59 +57,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.557">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp"
+
             >
+
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="270dp"
-                android:layout_height="60dp"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/iconnguoidung" />
-
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#BAAFAF"
+                app:startIconDrawable="@drawable/userlogin"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                >
                 <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Mã người dùng"/>
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Mật khẩu -->
+                    android:id="@+id/ed_manguoidung_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mã người dùng"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#000000"
+                    android:textColorHint="#DDD5D5"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="270dp"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#BAAFAF"
+                app:startIconDrawable="@drawable/passwordlogin"
+                app:passwordToggleEnabled="true"
+                app:iconTint="@null"
+                android:layout_marginTop="14dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
                 >
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/iconmatkhau"/>
-
                 <EditText
-                    android:layout_width="0dp"
+                    android:id="@+id/ed_password_login"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Mật Khẩu"/>
+                    android:hint="Mật khẩu"
+                    android:textColor="#000000"
+                    android:textColorHint="#DDD5D5"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="30dp"
-                >
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="Đăng Nhập"
-                android:backgroundTint="#F71B33"
-                app:cardCornerRadius="30dp"
-                />
-            </androidx.cardview.widget.CardView>
+                <Button
+                    android:id="@+id/btndangnhap_login"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#F71B33"
+                    android:text="Đăng Nhập"
+                    app:cardCornerRadius="30dp"
+                    android:layout_marginTop="50dp"
+                    />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
