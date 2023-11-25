@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/buncha_image"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:src="@drawable/anhbunchaloading"
         android:layout_gravity="center"
         android:layout_margin="36dp"
@@ -28,7 +28,7 @@
     android:layout_height="wrap_content"
     android:text="Chào mừng đến với ..."
     android:textSize="23dp"
-    android:layout_marginTop="80dp"
+    android:layout_marginTop="60dp"
     android:fontFamily="@font/font2loading"
     />
     <LinearLayout
