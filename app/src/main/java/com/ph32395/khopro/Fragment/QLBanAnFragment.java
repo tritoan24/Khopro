@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.ph32395.khopro.Adapter.BanAn_Adapter;
+import com.ph32395.khopro.Adapter.BanAnAdapter;
 import com.ph32395.khopro.DAO.BanAnDAO;
 import com.ph32395.khopro.Model.BanAn;
 import com.ph32395.khopro.R;
@@ -27,6 +27,8 @@ public class QLBanAnFragment extends Fragment {
     ImageView img_addBanAn;
     RecyclerView rc_qlba;
     BanAnDAO banAnDAO;
+    ArrayList<BanAn> list;
+    BanAnAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,17 +38,21 @@ public class QLBanAnFragment extends Fragment {
         img_addBanAn = v.findViewById(R.id.img_add_banAn);
         rc_qlba = v.findViewById(R.id.rc_quanLyBanAn);
         banAnDAO = new BanAnDAO(getContext());
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rc_qlba.setLayoutManager(layoutManager);
-        ArrayList<BanAn> list = banAnDAO.getListBanAn();
-        BanAn_Adapter adapter = new BanAn_Adapter(getContext(),list);
+
+        list = (ArrayList<BanAn>) banAnDAO.getAll();
+        adapter = new BanAnAdapter(getContext(), list);
         rc_qlba.setAdapter(adapter);
+
         img_addBanAn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogAddBanAn();
             }
         });
+
         return v;
     }
 
@@ -62,5 +68,32 @@ public class QLBanAnFragment extends Fragment {
         Button btn_them = v.findViewById(R.id.btn_themBanAn);
         Button btn_huy = v.findViewById(R.id.btn_huyThemBanAn);
 
+        btn_them.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Xử lý thêm bàn ăn vào database
+                String tenBanAn = ed_banAn.getText().toString().trim();
+                if (!tenBanAn.isEmpty()) {
+                    BanAn banAn = new BanAn();
+                    banAn.setSoBan(Integer.parseInt(tenBanAn)); // Giả sử bạn đang lưu số bàn ăn vào trường soBan
+                    banAnDAO.insert(banAn);
+                    capNhatList();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        btn_huy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    void capNhatList() {
+        list.clear();
+        list.addAll(banAnDAO.getAll());
+        adapter.notifyDataSetChanged();
     }
 }

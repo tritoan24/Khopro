@@ -81,7 +81,7 @@ public class NhanVienDAO {
             cursor = db.query("NhanVien", columns, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
-                @SuppressLint("Range") String loaitaikhoan = cursor.getString(cursor.getColumnIndex("loaitaikhoan"));
+                @SuppressLint("Range") String loaitaikhoan = cursor.getString(cursor.getColumnIndex("loaiTaiKhoan"));
 
                 // Lưu loại tài khoản vào SharedPreferences
                 SharedPreferences.Editor editor = sharedPreferences.edit();
