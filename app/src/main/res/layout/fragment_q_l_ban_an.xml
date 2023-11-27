@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.QLBanAnFragment"
-    android:background="#EFE9E9"
-    >
+    android:background="#EFE9E9">
     
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_quanLyBanAn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:padding="16dp"/>
 
     <ImageView
         android:id="@+id/img_add_banAn"

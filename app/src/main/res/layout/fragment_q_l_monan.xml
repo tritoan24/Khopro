@@ -5,23 +5,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.QLMonanFragment"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:background="#EFE9E9">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_quanLyMonAn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
+        android:layout_gravity="center"
+        android:padding="16dp"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/iconaddthanhvien"
+    <ImageView
+        android:id="@+id/img_add_MonAn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="19dp"
-        app:srcCompat="@drawable/addfood"
-        app:layout_anchorGravity="bottom|right|end"
-        />
+        android:src="@drawable/add"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"/>
 
 </FrameLayout>
