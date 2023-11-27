@@ -61,6 +61,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_HOADON);
         db.execSQL(CREATE_TABLE_GIAMGIA);
         db.execSQL(DataSql.INSERT_TB_NHANVIEN);
+        db.execSQL(DataSql.INSERT_TB_BANAN);
+        db.execSQL(DataSql.INSERT_TB_DANHMUC);
+        db.execSQL(DataSql.INSERT_TB_MONAN);
+        db.execSQL(DataSql.INSERT_TB_GIAMGIA);
+        db.execSQL(DataSql.INSERT_TB_HOADON);
+
     }
 
     @Override
