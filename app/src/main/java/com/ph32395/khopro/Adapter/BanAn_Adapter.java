@@ -9,6 +9,8 @@ import android.media.TimedText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,10 +49,28 @@ public class BanAn_Adapter extends RecyclerView.Adapter<BanAn_Adapter.ViewHolder
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-                View view = inflater.inflate(R.layout.update_loaisach,null);
+                view = inflater.inflate(R.layout.update_banan,null);
                 builder.setView(view);
                 Dialog dialog = builder.create();
                 dialog.show();
+
+                EditText ed_tenBanAn = view.findViewById(R.id.ed_tenBanAn_update);
+                Button btn_sua = view.findViewById(R.id.btn_suaBanAn_update);
+                Button btn_huy = view.findViewById(R.id.btn_huyThemBanAn_update);
+
+                ed_tenBanAn.setText(String.valueOf(list.get(position).getSoBan()));
+                btn_sua.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                btn_huy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
