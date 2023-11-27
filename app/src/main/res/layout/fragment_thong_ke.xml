@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EFE9E9"
     tools:context=".Fragment.ThongKeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/tv_ngayBatDau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày bắt đầu"
+            android:background="#00B3DB"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="60dp"
+            android:textColor="@color/white"/>
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_ngayKetThuc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="60dp"
+            android:paddingVertical="20dp"
+            android:text="Ngày kết thúc" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_doanhThu"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng doanh thu: "
+            android:textSize="20dp"
+            android:gravity="start"/>
+        <TextView
+            android:id="@+id/tv_tongDoanhThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.000.000 "
+            android:layout_gravity="center"
+            android:layout_marginLeft="70dp"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_doanhThu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="90dp"
+        android:text="Doanh thu"
+        android:background="@drawable/button_doanhthu_custom"
+        android:layout_marginVertical="10dp"/>
+</LinearLayout>

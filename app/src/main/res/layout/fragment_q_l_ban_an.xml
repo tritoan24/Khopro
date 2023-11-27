@@ -4,13 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.QLBanAnFragment"
-    android:background="#000000"
+    android:background="#EFE9E9"
     >
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_quanLyBanAn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="center"/>
 
+    <ImageView
+        android:id="@+id/img_add_banAn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"/>
 </FrameLayout>
