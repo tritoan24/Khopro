@@ -10,8 +10,7 @@ public class HoaDon {
     private Integer id_BanAn; // Sử dụng Integer để cho phép giá trị null
     private Integer id_GiamGia;
     private int soLuong;
-    private Timestamp gioVao;
-    private Date ngayTao;
+    private Timestamp ngayGio;
     private int giaTien;
     private String kieuThanhToan;
     private double tongTien;
@@ -19,15 +18,14 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(int id_HoaDon, int id_MonAn, int id_NhanVien, Integer id_BanAn, Integer id_GiamGia, int soLuong, Timestamp gioVao, Date ngayTao, int giaTien, String kieuThanhToan, double tongTien) {
+    public HoaDon(int id_HoaDon, int id_MonAn, int id_NhanVien, Integer id_BanAn, Integer id_GiamGia, int soLuong, Timestamp ngayGio, int giaTien, String kieuThanhToan, double tongTien) {
         this.id_HoaDon = id_HoaDon;
         this.id_MonAn = id_MonAn;
         this.id_NhanVien = id_NhanVien;
         this.id_BanAn = id_BanAn;
         this.id_GiamGia = id_GiamGia;
         this.soLuong = soLuong;
-        this.gioVao = gioVao;
-        this.ngayTao = ngayTao;
+        this.ngayGio = ngayGio;
         this.giaTien = giaTien;
         this.kieuThanhToan = kieuThanhToan;
         this.tongTien = tongTien;
@@ -81,20 +79,12 @@ public class HoaDon {
         this.soLuong = soLuong;
     }
 
-    public Timestamp getGioVao() {
-        return gioVao;
+    public Timestamp getNgayGio() {
+        return ngayGio;
     }
 
-    public void setGioVao(Timestamp gioVao) {
-        this.gioVao = gioVao;
-    }
-
-    public Date getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setNgayGio(Timestamp ngayGio) {
+        this.ngayGio = ngayGio;
     }
 
     public int getGiaTien() {
