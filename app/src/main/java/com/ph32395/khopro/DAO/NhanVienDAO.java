@@ -26,12 +26,15 @@ public class NhanVienDAO {
         sharedPreferences = context.getSharedPreferences("THONGTIN", MODE_PRIVATE);
 
     }
-    public int updatePass(NhanVien obj){
+    public int updatePass(NhanVien obj) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("hoTen",obj.getHoTen());
-        values.put("matKhau",obj.getMatKhau());
-        return db.update("NhanVien",values,"maNhanVien=?",new String[]{obj.getId_NhanVien()});
+        values.put("matKhau", obj.getMatKhau());
+        int result = db.update("NhanVien", values, "maNhanVien=?", new String[]{obj.getMaNhanVien()});
+        // db.close();  // Do not close the database here; let the calling code handle it
+        return result;
     }
+
     public int delete (String id){
         return db.delete("NhanVien","maNhanVien=?",new String[]{id});
     }
@@ -41,19 +44,30 @@ public class NhanVienDAO {
         Cursor c = db.rawQuery(sql, selectionArgs);
         while (c.moveToNext()) {
             NhanVien obj = new NhanVien();
-            obj.setId_NhanVien((c.getString(c.getColumnIndex("maNhanVien"))));
+            obj.setMaNhanVien((c.getString(c.getColumnIndex("maNhanVien"))));
             obj.setHoTen(c.getString(c.getColumnIndex("hoTen")));
             obj.setMatKhau(c.getString(c.getColumnIndex("matKhau")));
             list.add(obj);
         }
         return list;
     }
+    public  List<NhanVien> getAll(){
+        String sql = "Select * from NhanVien ";
+
+        return getData(sql);
+    }
 
     public NhanVien getID(String id){
-        String sql = "Select * from ThuThu where maNhanVien=?";
-        List<NhanVien>list = getData(sql,id);
-        return list.get(0);
+        String sql = "Select * from NhanVien where maNhanVien=?";
+        List<NhanVien> list = getData(sql, id);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        } else {
+            return null; // Trả về null nếu danh sách rỗng
+        }
     }
+
     public int checkLogin(String id, String password) {
         SQLiteDatabase db = null;
         Cursor cursor = null;
@@ -90,7 +104,7 @@ public class NhanVienDAO {
 
     public long insert(NhanVien nhanVien) {
         ContentValues values = new ContentValues();
-        values.put("maTT", nhanVien.getId_NhanVien());
+        values.put("maTT", nhanVien.getMaNhanVien());
         values.put("hoTen", nhanVien.getHoTen());
         values.put("matKhau", nhanVien.getMatKhau());
 

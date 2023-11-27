@@ -1,24 +1,36 @@
 package com.ph32395.khopro.Fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.ph32395.khopro.DAO.NhanVienDAO;
+import com.ph32395.khopro.MainActivity;
+import com.ph32395.khopro.Model.NhanVien;
 import com.ph32395.khopro.R;
 
 public class DoiMatKhauFragment extends Fragment {
 
     EditText ed_manguoidung_changePass, ed_username_changePass, ed_mkCu, ed_mkMoi;
     Button btn_cancel_changePass, btn_confirm_changPass;
+    NhanVienDAO dao;
+    NhanVien nhanVien;
+    String ma;
+    String mk;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,15 +56,71 @@ public class DoiMatKhauFragment extends Fragment {
         btn_confirm_changPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String oldPass = ed_mkCu.getText().toString();
-                String newPass = ed_mkMoi.getText().toString();
-
-                SharedPreferences sharedPreferences = getContext().getSharedPreferences("User_File" , getContext().MODE_PRIVATE);
-                String user = sharedPreferences.getString("Username", "");
-                String pass = sharedPreferences.getString("Password", "");
-                NhanVienDAO nhanVienDAO = new NhanVienDAO(getContext());
+            checkpass_manv();
             }
         });
         return v;
     }
+    public void checkpass_manv() {
+        ma = ed_manguoidung_changePass.getText().toString();
+        dao = new NhanVienDAO(getContext());
+        nhanVien = dao.getID(ma);
+
+        if (nhanVien == null) {
+            Toast.makeText(getContext(), "Mã người dùng không đúng", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mk = nhanVien.getMatKhau();
+        String oldPass = ed_mkCu.getText().toString();
+        String newPass = ed_mkMoi.getText().toString();
+
+        if (ma.isEmpty() || oldPass.isEmpty() || newPass.isEmpty()) {
+            Toast.makeText(getContext(), "Mã người dùng và mật khẩu không được bỏ trống", Toast.LENGTH_SHORT).show();
+        } else {
+            if (mk.equals(oldPass)) {
+                // Tạo đối tượng NhanVien mới với thông tin mới
+                NhanVien newNhanVien = new NhanVien();
+                newNhanVien.setMaNhanVien(ma);
+                newNhanVien.setMatKhau(newPass);
+                // Cập nhật mật khẩu trong cơ sở dữ liệu
+                int updateResult = dao.updatePass(newNhanVien);
+
+                if (updateResult > 0) {
+                    ImageView ivSuccess = getView().findViewById(R.id.ivSuccess);
+                    ivSuccess.setVisibility(View.VISIBLE);
+
+                    // Sử dụng Handler để ẩn ảnh dấu tích sau 2 giây
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ivSuccess.setVisibility(View.INVISIBLE);
+                        }
+                    }, 2000);
+                    ed_username_changePass.setText("");
+                    ed_manguoidung_changePass.setText("");
+                    ed_mkMoi.setText("");
+                    ed_mkCu.setText("");
+                    Toast.makeText(getContext(), "Đổi Mật Khẩu Thành Công", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Toast.makeText(getContext(), "Đổi Mật Khẩu Thất Bại", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getContext(), "Mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
+                ImageView iverorr = getView().findViewById(R.id.iverorr);
+                iverorr.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        iverorr.setVisibility(View.INVISIBLE);
+                    }
+                }, 2000);
+            }
+        }
+    }
+
+
+
+
 }
