@@ -1,14 +1,37 @@
 package com.ph32395.khopro.Model;
 
+import java.security.Timestamp;
+import java.util.Date;
+
 public class HoaDon {
     private int id_HoaDon;
     private int id_MonAn;
     private int id_NhanVien;
-    private int id_BanAn;
-    private String ngayTao;
+    private Integer id_BanAn; // Sử dụng Integer để cho phép giá trị null
+    private Integer id_GiamGia;
+    private int soLuong;
+    private Timestamp gioVao;
+    private Date ngayTao;
     private int giaTien;
     private String kieuThanhToan;
-    private String trangThai;
+    private double tongTien;
+
+    public HoaDon() {
+    }
+
+    public HoaDon(int id_HoaDon, int id_MonAn, int id_NhanVien, Integer id_BanAn, Integer id_GiamGia, int soLuong, Timestamp gioVao, Date ngayTao, int giaTien, String kieuThanhToan, double tongTien) {
+        this.id_HoaDon = id_HoaDon;
+        this.id_MonAn = id_MonAn;
+        this.id_NhanVien = id_NhanVien;
+        this.id_BanAn = id_BanAn;
+        this.id_GiamGia = id_GiamGia;
+        this.soLuong = soLuong;
+        this.gioVao = gioVao;
+        this.ngayTao = ngayTao;
+        this.giaTien = giaTien;
+        this.kieuThanhToan = kieuThanhToan;
+        this.tongTien = tongTien;
+    }
 
     public int getId_HoaDon() {
         return id_HoaDon;
@@ -34,19 +57,43 @@ public class HoaDon {
         this.id_NhanVien = id_NhanVien;
     }
 
-    public int getId_BanAn() {
+    public Integer getId_BanAn() {
         return id_BanAn;
     }
 
-    public void setId_BanAn(int id_BanAn) {
+    public void setId_BanAn(Integer id_BanAn) {
         this.id_BanAn = id_BanAn;
     }
 
-    public String getNgayTao() {
+    public Integer getId_GiamGia() {
+        return id_GiamGia;
+    }
+
+    public void setId_GiamGia(Integer id_GiamGia) {
+        this.id_GiamGia = id_GiamGia;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public Timestamp getGioVao() {
+        return gioVao;
+    }
+
+    public void setGioVao(Timestamp gioVao) {
+        this.gioVao = gioVao;
+    }
+
+    public Date getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(String ngayTao) {
+    public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
 
@@ -66,25 +113,11 @@ public class HoaDon {
         this.kieuThanhToan = kieuThanhToan;
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    public double getTongTien() {
+        return tongTien;
     }
 
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public HoaDon(int id_HoaDon, int id_MonAn, int id_NhanVien, int id_BanAn, String ngayTao, int giaTien, String kieuThanhToan, String trangThai) {
-        this.id_HoaDon = id_HoaDon;
-        this.id_MonAn = id_MonAn;
-        this.id_NhanVien = id_NhanVien;
-        this.id_BanAn = id_BanAn;
-        this.ngayTao = ngayTao;
-        this.giaTien = giaTien;
-        this.kieuThanhToan = kieuThanhToan;
-        this.trangThai = trangThai;
-    }
-
-    public HoaDon() {
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
     }
 }

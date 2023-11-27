@@ -4,16 +4,18 @@ public class MonAn {
     private int id_MonAn;
     private String tenMonAn;
     private int id_DanhMuc;
-    private int giaTien;
+    private Integer id_GiamGia; // Sử dụng Integer để cho phép giá trị null
+    private double giaTien;
 
-    public MonAn(int id_MonAn, String tenMonAn, int id_DanhMuc, int giaTien) {
+    public MonAn() {
+    }
+
+    public MonAn(int id_MonAn, String tenMonAn, int id_DanhMuc, Integer id_GiamGia, double giaTien) {
         this.id_MonAn = id_MonAn;
         this.tenMonAn = tenMonAn;
         this.id_DanhMuc = id_DanhMuc;
+        this.id_GiamGia = id_GiamGia;
         this.giaTien = giaTien;
-    }
-
-    public MonAn() {
     }
 
     public int getId_MonAn() {
@@ -40,11 +42,19 @@ public class MonAn {
         this.id_DanhMuc = id_DanhMuc;
     }
 
-    public int getGiaTien() {
+    public Integer getId_GiamGia() {
+        return id_GiamGia;
+    }
+
+    public void setId_GiamGia(Integer id_GiamGia) {
+        this.id_GiamGia = id_GiamGia;
+    }
+
+    public double getGiaTien() {
         return giaTien;
     }
 
-    public void setGiaTien(int giaTien) {
+    public void setGiaTien(double giaTien) {
         this.giaTien = giaTien;
     }
 }
