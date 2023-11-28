@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ph32395.khopro.DAO.BanAnDAO;
+import com.ph32395.khopro.Fragment.QLBanAnFragment;
 import com.ph32395.khopro.Model.BanAn;
 import com.ph32395.khopro.R;
 
@@ -24,11 +26,12 @@ import java.util.ArrayList;
 public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
     Context context;
     ArrayList<BanAn> list;
+    static BanAnDAO dao;
+    QLBanAnFragment fragment;
 
     public BanAnAdapter(Context context, ArrayList<BanAn> list) {
-        this.context = context;
-        this.list = list;
     }
+
 
     @NonNull
     @Override
