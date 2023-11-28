@@ -12,7 +12,7 @@ import com.ph32395.khopro.Model.MonAn;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonAnDAO {
+public class MonAnDAO{
     private com.ph32395.khopro.Database.DbHelper DbHelper;
     private SQLiteDatabase db;
     public MonAnDAO(Context context){

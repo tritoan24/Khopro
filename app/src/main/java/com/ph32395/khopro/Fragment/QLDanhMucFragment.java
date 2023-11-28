@@ -78,6 +78,13 @@ public class QLDanhMucFragment extends Fragment {
                     }
                 });
 
+                btn_huyThemDanhMuc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
 
                 dialog.show();
             }
