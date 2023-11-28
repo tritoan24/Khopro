@@ -20,31 +20,53 @@ public class BanAnDAO {
        DbHelper dbHelper = new DbHelper(context);
        db = dbHelper.getWritableDatabase();
    }
-   public long insert(BanAn obj){
-       ContentValues values = new ContentValues();
-       values.put("soBan",obj.getSoBan());
-       return db.insert("BanAn",null,values);
-   }
-   public int update(BanAn obj){
-       ContentValues values = new ContentValues();
-       values.put("soBan",obj.getSoBan());
-       return db.update("BanAn",values,"id_BanAn = ?",new String[]{String.valueOf(obj.getId_BanAn())});
-   }
-   public int delete(String id){
-       return db.delete("BanAn","id_BanAn=?",new String[]{id});
-   }
-   @SuppressLint("Range")
-   public List<BanAn>getData(String sql, String...selectionArgs){
-       List<BanAn>list = new ArrayList<>();
-       Cursor c = db.rawQuery(sql,selectionArgs);
-       while (c.moveToNext()){
-           BanAn obj = new BanAn();
-           obj.setId_BanAn(Integer.parseInt(c.getString(c.getColumnIndex("id_BanAn"))));
-           obj.setSoBan(Integer.parseInt(c.getString(c.getColumnIndex("soBan"))));
-           list.add(obj);
-       }
-       return list;
-   }
+    public long insert(BanAn obj){
+        try {
+            ContentValues values = new ContentValues();
+            values.put("soBan",obj.getSoBan());
+            return db.insertOrThrow("BanAn",null,values);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int update(BanAn obj){
+        try {
+            ContentValues values = new ContentValues();
+            values.put("soBan",obj.getSoBan());
+            return db.update("BanAn",values,"id_BanAn = ?",new String[]{String.valueOf(obj.getId_BanAn())});
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int delete(String id){
+        try {
+            return db.delete("BanAn","id_BanAn=?",new String[]{id});
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    @SuppressLint("Range")
+    public List<BanAn> getData(String sql, String...selectionArgs){
+        List<BanAn> list = new ArrayList<>();
+        try {
+            Cursor c = db.rawQuery(sql, selectionArgs);
+            while (c.moveToNext()){
+                BanAn obj = new BanAn();
+                obj.setId_BanAn(Integer.parseInt(c.getString(c.getColumnIndex("id_BanAn"))));
+                obj.setSoBan(Integer.parseInt(c.getString(c.getColumnIndex("soBan"))));
+                list.add(obj);
+            }
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
    public List<BanAn>getAll(){
        String sql = "Select * from BanAn";
        return getData(sql);

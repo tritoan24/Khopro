@@ -43,7 +43,7 @@ public class QLBanAnFragment extends Fragment {
         rc_qlba.setLayoutManager(layoutManager);
 
         list = (ArrayList<BanAn>) banAnDAO.getAll();
-        adapter = new BanAnAdapter(getContext(), list);
+        adapter = new BanAnAdapter(getActivity(), this, list);
         rc_qlba.setAdapter(adapter);
 
         img_addBanAn.setOnClickListener(new View.OnClickListener() {

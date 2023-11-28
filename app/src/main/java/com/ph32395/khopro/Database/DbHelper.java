@@ -22,6 +22,9 @@ public class DbHelper extends SQLiteOpenHelper {
     static final String CREATE_TABLE_NHANVIEN = "CREATE TABLE NhanVien (" +
             "    maNhanVien    TEXT PRIMARY KEY," +
             "    hoTen    TEXT    NOT NULL," +
+            "    tuoi INTEGER ," +
+            "    gioiTinh TEXT ," +
+            "    soDienThoai TEXT ," +
             "    matKhau TEXT NOT NULL," +
             "    loaiTaiKhoan TEXT" +
             ")";

@@ -39,16 +39,22 @@ public class NhanVienDAO {
         return db.delete("NhanVien","maNhanVien=?",new String[]{id});
     }
     @SuppressLint("Range")
-    public List<NhanVien> getData(String sql, String...selectionArgs) {
-        List<NhanVien> list = new ArrayList<NhanVien>();
+    public List<NhanVien> getData(String sql, String... selectionArgs) {
+        List<NhanVien> list = new ArrayList<>();
         Cursor c = db.rawQuery(sql, selectionArgs);
         while (c.moveToNext()) {
             NhanVien obj = new NhanVien();
-            obj.setMaNhanVien((c.getString(c.getColumnIndex("maNhanVien"))));
+            obj.setMaNhanVien(c.getString(c.getColumnIndex("maNhanVien")));
             obj.setHoTen(c.getString(c.getColumnIndex("hoTen")));
+            obj.setTuoi(c.getInt(c.getColumnIndex("tuoi")));
+            obj.setGioiTinh(c.getString(c.getColumnIndex("gioiTinh")));
+            obj.setSoDienThoai(c.getString(c.getColumnIndex("soDienThoai")));
             obj.setMatKhau(c.getString(c.getColumnIndex("matKhau")));
+            obj.setLoaiTaiKhoan(c.getString(c.getColumnIndex("loaiTaiKhoan")));
+            // Thêm các trường mới vào đây nếu cần
             list.add(obj);
         }
+        c.close();
         return list;
     }
     public  List<NhanVien> getAll(){
@@ -104,10 +110,25 @@ public class NhanVienDAO {
 
     public long insert(NhanVien nhanVien) {
         ContentValues values = new ContentValues();
-        values.put("maTT", nhanVien.getMaNhanVien());
+        values.put("maNhanVien", nhanVien.getMaNhanVien());
         values.put("hoTen", nhanVien.getHoTen());
+        values.put("tuoi", nhanVien.getTuoi());
+        values.put("gioiTinh", nhanVien.getGioiTinh());
+        values.put("soDienThoai", nhanVien.getSoDienThoai());
         values.put("matKhau", nhanVien.getMatKhau());
-
+        values.put("loaiTaiKhoan", nhanVien.getLoaiTaiKhoan());
+        // Thêm các trường mới vào đây nếu cần
         return db.insert("NhanVien", null, values);
+    }
+    public int update_nv(NhanVien obj) {
+        ContentValues values = new ContentValues();
+        values.put("hoTen", obj.getHoTen());
+        values.put("tuoi", obj.getTuoi());
+        values.put("gioiTinh", obj.getGioiTinh());
+        values.put("soDienThoai", obj.getSoDienThoai());
+        values.put("matKhau", obj.getMatKhau());
+        values.put("loaiTaiKhoan", obj.getLoaiTaiKhoan());
+
+        return db.update("NhanVien", values, "maNhanVien=?", new String[]{obj.getMaNhanVien()});
     }
 }
