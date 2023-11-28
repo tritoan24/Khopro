@@ -1,40 +1,59 @@
 package com.ph32395.khopro.Adapter;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ph32395.khopro.DAO.BanAnDAO;
+import com.ph32395.khopro.DAO.NhanVienDAO;
+import com.ph32395.khopro.Fragment.QLNhanVienFragment;
+import com.ph32395.khopro.Model.BanAn;
 import com.ph32395.khopro.Model.NhanVien;
 import com.ph32395.khopro.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NhanVien_Adapter extends RecyclerView.Adapter<NhanVien_Adapter.ViewHolder> {
     private Context context;
-    private List<NhanVien> nhanVienList;
+    private ArrayList<NhanVien> list;
+    static NhanVienDAO dao;
+    QLNhanVienFragment fragment;
 
-    public NhanVien_Adapter(Context context, List<NhanVien> nhanVienList) {
+    public NhanVien_Adapter(Context context,QLNhanVienFragment fragment, ArrayList<NhanVien> list) {
         this.context = context;
-        this.nhanVienList = nhanVienList;
+        this.fragment = fragment;
+        this.list = list;
+        dao = new NhanVienDAO(context);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_nhanvien, parent, false);
+        LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+        View view = inflater.inflate(R.layout.item_nhanvien, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NhanVien nhanVien = nhanVienList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        NhanVien nhanVien = list.get(position);
 
         // Set data to views
         holder.tvMaNhanVien.setText("Mã Nhân Viên: " + nhanVien.getMaNhanVien());
@@ -47,24 +66,122 @@ public class NhanVien_Adapter extends RecyclerView.Adapter<NhanVien_Adapter.View
         // Set click listeners for edit and delete buttons
         holder.btimgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Handle edit button click
-                // You can implement your logic here
+            public void onClick(View dialogView) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                dialogView = inflater.inflate(R.layout.update_nhanvien, null);
+                builder.setView(dialogView);
+                Dialog dialog = builder.create();
+                dialog.show();
+
+                EditText edmaNV = dialogView.findViewById(R.id.ed_maNhanVien_update);
+                EditText edtHoTen = dialogView.findViewById(R.id.ed_tennhanvien_update);
+                EditText edTuoi = dialogView.findViewById(R.id.ed_tuoiNhanVien_update);
+                RadioButton rdoNam = dialogView.findViewById(R.id.rdo_Nam_update);
+                RadioButton rdoNu = dialogView.findViewById(R.id.rdo_Nu_update);
+                EditText edsoDienThoai = dialogView.findViewById(R.id.ed_sdtNhanVien_update);
+                EditText edmatKhau = dialogView.findViewById(R.id.edmatkhau_nv_update);
+                Button btnaddnv = dialogView.findViewById(R.id.btn_themNhanVien_update);
+                Button btnhuythemnv = dialogView.findViewById(R.id.btn_huyThemNhanVien_update);
+
+                String gioiTinh = list.get(position).getGioiTinh();
+                rdoNam.setChecked(gioiTinh.equals("Nam"));
+                rdoNu.setChecked(gioiTinh.equals("Nữ"));
+                edmaNV.setText(list.get(position).getMaNhanVien());
+                edtHoTen.setText(list.get(position).getHoTen());
+                edTuoi.setText(String.valueOf(list.get(position).getTuoi()));
+                edsoDienThoai.setText(list.get(position).getSoDienThoai());
+                edmatKhau.setText(list.get(position).getMatKhau());
+
+
+                btnhuythemnv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                btnaddnv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            String maNhanVien = edmaNV.getText().toString().trim();
+                            String hoTen = edtHoTen.getText().toString().trim();
+                            String tuoi = edTuoi.getText().toString().trim();
+                            String gioiTinh = rdoNam.isChecked() ? "Nam" : (rdoNu.isChecked() ? "Nữ" : "");
+                            String sodienthoai = edsoDienThoai.getText().toString().trim();
+                            String matkhau = edmatKhau.getText().toString().trim();
+                            if (maNhanVien.isEmpty()) {
+                                edmaNV.setError("Mã nhân viên không được để trống");
+                            }  if (hoTen.isEmpty()) {
+                                edtHoTen.setError("Họ tên không được để trống");
+                            } if (tuoi.isEmpty()) {
+                                edTuoi.setError("Tuổi không được để trống");
+                            } if (gioiTinh.isEmpty()) {
+                                // Đặt lỗi cho RadioButton hoặc xử lý theo cách khác tùy thuộc vào ý định của bạn
+                            }  if (sodienthoai.isEmpty()) {
+                                edsoDienThoai.setError("Số điện thoại không được để trống");
+                            }  if (matkhau.isEmpty()) {
+                                edmatKhau.setError("Mật khẩu không được để trống");
+                            } else {
+
+                                int tuoiInt = Integer.parseInt(tuoi);
+
+                                // Tạo đối tượng NhanVien mới với thông tin đã chỉnh sửa
+                                NhanVien updatedNhanVien = new NhanVien(maNhanVien, hoTen, tuoiInt, gioiTinh, sodienthoai, matkhau);
+
+                                // Cập nhật dữ liệu trong danh sách và cơ sở dữ liệu
+                                list.set(position, updatedNhanVien);
+                                dao.update_nv(updatedNhanVien);
+
+                                // Cập nhật giao diện RecyclerView
+                                notifyDataSetChanged();
+
+                                // Đóng dialog sau khi cập nhật thành công
+                                dialog.dismiss();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
             }
         });
 
         holder.btimgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle delete button click
-                // You can implement your logic here
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Xóa loại sách");
+                builder.setCancelable(false);
+                builder.setMessage("Bạn có chắc chắn muốn xoá không ?");
+
+                builder.setNegativeButton("Huỷ", null);
+
+                builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        try {
+                            int result = dao.delete(String.valueOf(list.get(position).getMaNhanVien()));
+                            if (result > 0) {
+                                list.remove(position);
+                                notifyDataSetChanged();
+                            } else {
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                builder.show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return nhanVienList.size();
+        return list.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -85,4 +202,5 @@ public class NhanVien_Adapter extends RecyclerView.Adapter<NhanVien_Adapter.View
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
+
 }

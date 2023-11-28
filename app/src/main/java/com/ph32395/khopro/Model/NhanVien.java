@@ -12,14 +12,13 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String maNhanVien, String hoTen, Integer tuoi, String gioiTinh, String soDienThoai, String matKhau, String loaiTaiKhoan) {
+    public NhanVien(String maNhanVien, String hoTen, Integer tuoi, String gioiTinh, String soDienThoai, String matKhau) {
         this.maNhanVien = maNhanVien;
         this.hoTen = hoTen;
         this.tuoi = tuoi;
         this.gioiTinh = gioiTinh;
         this.soDienThoai = soDienThoai;
         this.matKhau = matKhau;
-        this.loaiTaiKhoan = loaiTaiKhoan;
     }
 
     public String getMaNhanVien() {

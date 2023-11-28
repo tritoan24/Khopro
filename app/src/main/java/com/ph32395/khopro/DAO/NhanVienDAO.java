@@ -41,6 +41,7 @@ public class NhanVienDAO {
     @SuppressLint("Range")
     public List<NhanVien> getData(String sql, String... selectionArgs) {
         List<NhanVien> list = new ArrayList<>();
+        try {
         Cursor c = db.rawQuery(sql, selectionArgs);
         while (c.moveToNext()) {
             NhanVien obj = new NhanVien();
@@ -55,11 +56,13 @@ public class NhanVienDAO {
             list.add(obj);
         }
         c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return list;
     }
     public  List<NhanVien> getAll(){
         String sql = "Select * from NhanVien ";
-
         return getData(sql);
     }
 
@@ -109,6 +112,9 @@ public class NhanVienDAO {
     }
 
     public long insert(NhanVien nhanVien) {
+
+
+
         ContentValues values = new ContentValues();
         values.put("maNhanVien", nhanVien.getMaNhanVien());
         values.put("hoTen", nhanVien.getHoTen());
@@ -116,9 +122,9 @@ public class NhanVienDAO {
         values.put("gioiTinh", nhanVien.getGioiTinh());
         values.put("soDienThoai", nhanVien.getSoDienThoai());
         values.put("matKhau", nhanVien.getMatKhau());
-        values.put("loaiTaiKhoan", nhanVien.getLoaiTaiKhoan());
-        // Thêm các trường mới vào đây nếu cần
+
         return db.insert("NhanVien", null, values);
+
     }
     public int update_nv(NhanVien obj) {
         ContentValues values = new ContentValues();

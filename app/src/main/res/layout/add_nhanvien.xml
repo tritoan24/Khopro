@@ -59,20 +59,32 @@
             android:paddingVertical="20dp"
             android:paddingLeft="15dp"
             android:text="Giới tính: "
-            android:textSize="20dp" />
+            android:textSize="20dp"
 
-        <RadioButton
-            android:id="@+id/rdo_Nam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nam" />
+            />
 
-        <RadioButton
-            android:id="@+id/rdo_Nu"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Nữ" />
+            android:background="@drawable/custom_edt_banan"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            >
+
+            <RadioButton
+                android:id="@+id/rdo_Nam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nam" />
+
+            <RadioButton
+                android:id="@+id/rdo_Nu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="Nữ" />
+        </RadioGroup>
 
     </LinearLayout>
 

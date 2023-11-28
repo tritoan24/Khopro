@@ -24,7 +24,7 @@
         android:paddingLeft="15dp" />
 
     <EditText
-        android:id="@+id/ed_tenBanAn_update"
+        android:id="@+id/ed_tennhanvien_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -61,18 +61,28 @@
             android:text="Giới tính: "
             android:textSize="20dp" />
 
-        <RadioButton
-            android:id="@+id/rdo_Nam_update"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nam" />
+            android:background="@drawable/custom_edt_banan"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            >
 
-        <RadioButton
-            android:id="@+id/rdo_Nu_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Nữ" />
+            <RadioButton
+                android:id="@+id/rdo_Nam_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nam" />
+
+            <RadioButton
+                android:id="@+id/rdo_Nu_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="Nữ" />
+        </RadioGroup>
 
     </LinearLayout>
 
@@ -84,6 +94,16 @@
         android:background="@drawable/custom_edt_banan"
         android:elevation="5dp"
         android:hint="Số điện thoại: "
+        android:paddingVertical="20dp"
+        android:paddingLeft="15dp" />
+    <EditText
+        android:id="@+id/edmatkhau_nv_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_edt_banan"
+        android:elevation="5dp"
+        android:hint="Mật Khẩu: "
         android:paddingVertical="20dp"
         android:paddingLeft="15dp" />
 
@@ -99,7 +119,7 @@
             android:background="@drawable/custom_button_banan"
             android:elevation="5dp"
             android:paddingHorizontal="60dp"
-            android:text="Thêm"
+            android:text="Sửa"
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
