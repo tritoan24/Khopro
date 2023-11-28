@@ -43,9 +43,9 @@ public class MonAnDAO {
 
     }
     public List<MonAn> getAll(){
-        String sql = "SELECT MonAn.id_MonAn , DanhMuc.tenDanhMuc , GiamGia.maGiamGia , MonAn.giaTien FROM MonAn" +
-                "INNER JOIN DanhMuc ON MonAn.id_DanhMuc = DanhMuc.id_DanhMuc" +
-                "INNER JOIN GiamGia ON Monan.id_GiamGia = GiamGia.id_GiamGia";
+        String sql = "SELECT MonAn.id_MonAn , DanhMuc.tenDanhMuc , GiamGia.maGiamGia , MonAn.giaTien FROM MonAn " +
+                " INNER JOIN DanhMuc ON MonAn.id_DanhMuc = DanhMuc.id_DanhMuc " +
+                " INNER JOIN GiamGia ON Monan.id_GiamGia = GiamGia.id_GiamGia";
         return getData(sql);
     }
 
