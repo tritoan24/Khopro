@@ -12,7 +12,6 @@ public class DataSql {
             "('Món Phụ')," +
             "('Đồ Uống')";
 
-
     public static final String INSERT_TB_MONAN = "INSERT INTO MonAn(tenMonAn, id_DanhMuc, id_GiamGia, giaTien) VALUES" +
             "('Bún Chả Băm', 1, 1, 50000.0)," +
             "('Nem Hải Sản', 2, 2, 25000.0)," +

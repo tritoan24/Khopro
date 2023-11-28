@@ -96,7 +96,7 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Xóa loại sách");
+                builder.setTitle("Xóa bàn ăn");
                 builder.setCancelable(false);
                 builder.setMessage("Bạn có chắc chắn muốn xoá không ?");
 

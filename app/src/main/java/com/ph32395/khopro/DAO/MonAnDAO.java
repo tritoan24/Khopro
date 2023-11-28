@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ph32395.khopro.Database.DbHelper;
+import com.ph32395.khopro.Model.BanAn;
 import com.ph32395.khopro.Model.GiamGia;
 import com.ph32395.khopro.Model.MonAn;
 
@@ -43,9 +44,7 @@ public class MonAnDAO{
 
     }
     public List<MonAn> getAll(){
-        String sql = "SELECT MonAn.id_MonAn , DanhMuc.tenDanhMuc , GiamGia.maGiamGia , MonAn.giaTien FROM MonAn " +
-                " INNER JOIN DanhMuc ON MonAn.id_DanhMuc = DanhMuc.id_DanhMuc " +
-                " INNER JOIN GiamGia ON Monan.id_GiamGia = GiamGia.id_GiamGia";
+        String sql = "Select * from BanAn";
         return getData(sql);
     }
 
@@ -56,23 +55,20 @@ public class MonAnDAO{
     }
     public List<MonAn> getData(String sql , String...selectionArgs){
         List<MonAn> list = new ArrayList<>();
-        Cursor c = db.rawQuery(sql,selectionArgs);
-        if(c!=null && c.getCount()>0){
-            c.moveToFirst();
-            do {
-                int id_MonAn = c.getInt(0);
-                String tenMonAn = c.getString(1);
-                int id_DanhMuc = c.getInt(2);
-                int id_GiamGia = c.getInt(3);
-                int GiaTien = c.getInt(4);
-                MonAn monAn = new MonAn();
-                monAn.setId_MonAn(id_MonAn);
-                monAn.setTenMonAn(tenMonAn);
-                monAn.setId_DanhMuc(id_DanhMuc);
-                monAn.setId_GiamGia(id_GiamGia);
-                monAn.setGiaTien(GiaTien);
-                list.add(monAn);
-            }while (c.moveToNext());
+        try {
+            Cursor c = db.rawQuery(sql, selectionArgs);
+            while (c.moveToNext()){
+                MonAn obj = new MonAn();
+                obj.setId_MonAn(Integer.parseInt(String.valueOf(c.getColumnIndex("id_MonAn"))));
+                obj.setTenMonAn(String.valueOf(c.getColumnIndex("tenMonAn")));
+                obj.setId_DanhMuc(Integer.parseInt(String.valueOf(c.getColumnIndex("id_DanhMuc"))));
+                obj.setId_GiamGia(Integer.parseInt(String.valueOf(c.getColumnIndex("id_GiamGia"))));
+                obj.setGiaTien(c.getColumnIndex("giaTien"));
+                list.add(obj);
+            }
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }

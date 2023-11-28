@@ -3,7 +3,9 @@ package com.ph32395.khopro.Fragment;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -39,9 +41,11 @@ public class QLMonanFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_q_l_monan, container, false);
         rc_quanLyMonAn = v.findViewById(R.id.rc_quanLyMonAn);
         img_add_MonAn = v.findViewById(R.id.img_add_MonAn);
-
-
         monAnDAO = new MonAnDAO(getContext());
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        rc_quanLyMonAn.setLayoutManager(layoutManager);
+
         list = (ArrayList<MonAn>) monAnDAO.getAll();
         monAnAdapter = new MonAn_Adapter(getContext(), list);
         rc_quanLyMonAn.setAdapter(monAnAdapter);
@@ -51,9 +55,12 @@ public class QLMonanFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 MonAn monAn = new MonAn();
-                Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.add_monan);
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                LayoutInflater inflater = getLayoutInflater();
+                View v = inflater.inflate(R.layout.add_monan, null);
+                builder.setView(v);
+                Dialog dialog = builder.create();
+                dialog.show();
                 ed_maMonAn = view.findViewById(R.id.ed_tenMonAn);
                 ed_tenMonAn = view.findViewById(R.id.ed_tenMonAn);
                 ed_tenDanhMuc_MonAn = view.findViewById(R.id.ed_tenDanhMuc_MonAn);
@@ -91,7 +98,7 @@ public class QLMonanFragment extends Fragment {
                         dialog.dismiss();
                     }
                 });
-                dialog.show();
+
             }
         });
         return v;

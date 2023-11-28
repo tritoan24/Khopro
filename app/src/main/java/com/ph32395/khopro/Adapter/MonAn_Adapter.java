@@ -34,6 +34,7 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
     public MonAn_Adapter(Context context, ArrayList<MonAn> list) {
         this.context = context;
         this.list = list;
+        monAnDAO = new MonAnDAO(context);
     }
 
     @NonNull
@@ -67,28 +68,6 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
 
 
         });
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tv_maMonAn, tv_tenMonAn, tv_loaiMon, tv_giamGiaMon, tv_giaMonAn;
-        ImageView img_edit, img_delete;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tv_maMonAn = itemView.findViewById(R.id.tv_maMonAn);
-            tv_tenMonAn = itemView.findViewById(R.id.tv_tenMonAn);
-            tv_loaiMon = itemView.findViewById(R.id.tv_loaiMonAn);
-            tv_giamGiaMon = itemView.findViewById(R.id.tv_giamGiaMon);
-            tv_giaMonAn = itemView.findViewById(R.id.tv_giaTienMon);
-
-            img_delete = itemView.findViewById(R.id.img_delete_monAn);
-            img_edit = itemView.findViewById(R.id.img_edit_monAn);
-
-        }
     }
 
     private void dialogXoaMonAn(MonAn monAn) {
@@ -193,4 +172,28 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
         });
         dialog.show();
     }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder{
+        TextView tv_maMonAn, tv_tenMonAn, tv_loaiMon, tv_giamGiaMon, tv_giaMonAn;
+        ImageView img_edit, img_delete;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tv_maMonAn = itemView.findViewById(R.id.tv_maMonAn);
+            tv_tenMonAn = itemView.findViewById(R.id.tv_tenMonAn);
+            tv_loaiMon = itemView.findViewById(R.id.tv_loaiMonAn);
+            tv_giamGiaMon = itemView.findViewById(R.id.tv_giamGiaMon);
+            tv_giaMonAn = itemView.findViewById(R.id.tv_giaTienMon);
+
+            img_delete = itemView.findViewById(R.id.img_delete_monAn);
+            img_edit = itemView.findViewById(R.id.img_edit_monAn);
+
+        }
+    }
+
+
 }
