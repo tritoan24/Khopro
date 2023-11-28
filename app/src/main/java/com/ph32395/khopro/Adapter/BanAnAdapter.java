@@ -29,7 +29,11 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
     static BanAnDAO dao;
     QLBanAnFragment fragment;
 
-    public BanAnAdapter(Context context, ArrayList<BanAn> list) {
+    public BanAnAdapter(Context context, QLBanAnFragment fragment, ArrayList<BanAn> list) {
+        this.context = context;
+        this.fragment = fragment;
+        this.list = list;
+        dao = new BanAnDAO(context);
     }
 
 
@@ -44,12 +48,13 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tv_banAn.setText(String.valueOf(list.get(position).getSoBan()));
+
         holder.img_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-                view = inflater.inflate(R.layout.update_banan,null);
+                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                view = inflater.inflate(R.layout.update_banan, null);
                 builder.setView(view);
                 Dialog dialog = builder.create();
                 dialog.show();
@@ -62,7 +67,20 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
                 btn_sua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        try {
+                            int soBanMoi = Integer.parseInt(ed_tenBanAn.getText().toString());
+                            BanAn banAn = list.get(position);
+                            banAn.setSoBan(soBanMoi);
+                            int result = dao.update(banAn);
+                            if (result > 0) {
+                                list.set(position, banAn);
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                            } else {
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 btn_huy.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +91,7 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
                 });
             }
         });
+
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,12 +105,22 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
                 builder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        try {
+                            int result = dao.delete(String.valueOf(list.get(position).getId_BanAn()));
+                            if (result > 0) {
+                                list.remove(position);
+                                notifyDataSetChanged();
+                            } else {
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 builder.show();
             }
         });
+
     }
 
     @Override

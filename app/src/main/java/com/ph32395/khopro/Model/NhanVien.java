@@ -3,15 +3,21 @@ package com.ph32395.khopro.Model;
 public class NhanVien {
     private String maNhanVien;
     private String hoTen;
+    private Integer tuoi;
+    private String gioiTinh;
+    private String soDienThoai;
     private String matKhau;
     private String loaiTaiKhoan;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNhanVien, String hoTen, String matKhau, String loaiTaiKhoan) {
+    public NhanVien(String maNhanVien, String hoTen, Integer tuoi, String gioiTinh, String soDienThoai, String matKhau, String loaiTaiKhoan) {
         this.maNhanVien = maNhanVien;
         this.hoTen = hoTen;
+        this.tuoi = tuoi;
+        this.gioiTinh = gioiTinh;
+        this.soDienThoai = soDienThoai;
         this.matKhau = matKhau;
         this.loaiTaiKhoan = loaiTaiKhoan;
     }
@@ -30,6 +36,30 @@ public class NhanVien {
 
     public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
+    }
+
+    public Integer getTuoi() {
+        return tuoi;
+    }
+
+    public void setTuoi(Integer tuoi) {
+        this.tuoi = tuoi;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public String getSoDienThoai() {
+        return soDienThoai;
+    }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
 
     public String getMatKhau() {

@@ -15,8 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.ph32395.khopro.Adapter.BanAn_Adapter;
-import com.ph32395.khopro.Adapter.BanAn_Adapter;
+import com.ph32395.khopro.Adapter.BanAnAdapter;
 import com.ph32395.khopro.DAO.BanAnDAO;
 import com.ph32395.khopro.Model.BanAn;
 import com.ph32395.khopro.R;
@@ -29,7 +28,7 @@ public class QLBanAnFragment extends Fragment {
     RecyclerView rc_qlba;
     BanAnDAO banAnDAO;
     ArrayList<BanAn> list;
-    BanAn_Adapter adapter;
+    BanAnAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +43,7 @@ public class QLBanAnFragment extends Fragment {
         rc_qlba.setLayoutManager(layoutManager);
 
         list = (ArrayList<BanAn>) banAnDAO.getAll();
-        adapter = new BanAn_Adapter(getContext(), list);
+        adapter = new BanAnAdapter(getActivity(), this, list);
         rc_qlba.setAdapter(adapter);
 
         img_addBanAn.setOnClickListener(new View.OnClickListener() {
