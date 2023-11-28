@@ -45,7 +45,7 @@ public class GiamGiaDAO {
     }
 
     public GiamGia getID(String id){
-        String sql = "SELECT * FROM tb_sach WHERE id_GiamGia=?";
+        String sql = "SELECT * FROM GiamGia WHERE id_GiamGia=?";
         List<GiamGia> list = getData(sql,id);
         return list.get(0);
     }

@@ -10,7 +10,7 @@ public class HoaDon {
     private Integer id_BanAn; // Sử dụng Integer để cho phép giá trị null
     private Integer id_GiamGia;
     private int soLuong;
-    private Timestamp ngayGio;
+    private String ngayGio;
     private int giaTien;
     private String kieuThanhToan;
     private double tongTien;
@@ -18,7 +18,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(int id_HoaDon, int id_MonAn, int id_NhanVien, Integer id_BanAn, Integer id_GiamGia, int soLuong, Timestamp ngayGio, int giaTien, String kieuThanhToan, double tongTien) {
+    public HoaDon(int id_HoaDon, int id_MonAn, int id_NhanVien, Integer id_BanAn, Integer id_GiamGia, int soLuong, String ngayGio, int giaTien, String kieuThanhToan, double tongTien) {
         this.id_HoaDon = id_HoaDon;
         this.id_MonAn = id_MonAn;
         this.id_NhanVien = id_NhanVien;
@@ -79,11 +79,11 @@ public class HoaDon {
         this.soLuong = soLuong;
     }
 
-    public Timestamp getNgayGio() {
+    public String getNgayGio() {
         return ngayGio;
     }
 
-    public void setNgayGio(Timestamp ngayGio) {
+    public void setNgayGio(String ngayGio) {
         this.ngayGio = ngayGio;
     }
 
