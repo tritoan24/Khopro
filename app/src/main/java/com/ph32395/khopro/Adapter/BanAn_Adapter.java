@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.media.TimedText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ph32395.khopro.DAO.BanAnDAO;
-import com.ph32395.khopro.DAO.DanhMucDAO;
 import com.ph32395.khopro.Model.BanAn;
-import com.ph32395.khopro.Model.DanhMucMonAn;
 import com.ph32395.khopro.R;
 
 import java.util.ArrayList;
@@ -29,8 +24,6 @@ import java.util.ArrayList;
 public class BanAn_Adapter extends RecyclerView.Adapter<BanAn_Adapter.ViewHolder>{
     Context context;
     ArrayList<BanAn> list;
-
-    DanhMucDAO danhMucDAO;
 
     public BanAn_Adapter(Context context, ArrayList<BanAn> list) {
         this.context = context;
@@ -48,7 +41,6 @@ public class BanAn_Adapter extends RecyclerView.Adapter<BanAn_Adapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tv_banAn.setText(String.valueOf(list.get(position).getSoBan()));
-        holder.tv_trangThai.setText(String.valueOf(list.get(position).getTrangThai()));
         holder.img_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +55,7 @@ public class BanAn_Adapter extends RecyclerView.Adapter<BanAn_Adapter.ViewHolder
                 Button btn_sua = view.findViewById(R.id.btn_suaBanAn_update);
                 Button btn_huy = view.findViewById(R.id.btn_huyThemBanAn_update);
 
-
+                ed_tenBanAn.setText(String.valueOf(list.get(position).getSoBan()));
                 btn_sua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -105,16 +97,14 @@ public class BanAn_Adapter extends RecyclerView.Adapter<BanAn_Adapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tv_banAn, tv_trangThai;
+        TextView tv_banAn;
         ImageView img_edit, img_delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_banAn = itemView.findViewById(R.id.tv_banAn);
-            tv_trangThai = itemView.findViewById(R.id.tv_trangThai);
+            tv_banAn = itemView.findViewById(R.id.txtsoBan_Banan);
             img_edit = itemView.findViewById(R.id.img_edit);
             img_delete = itemView.findViewById(R.id.img_delete);
         }
     }
-
 }
