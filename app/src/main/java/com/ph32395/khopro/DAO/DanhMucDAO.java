@@ -21,7 +21,7 @@ public class DanhMucDAO {
     public ArrayList<DanhMucMonAn> getListDanhMuc(){
         ArrayList<DanhMucMonAn> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from tb_DanhMuc", null);
+        Cursor cursor = db.rawQuery("select * from DanhMuc", null);
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do{
@@ -35,20 +35,20 @@ public class DanhMucDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("id_DanhMuc", danhMuc.getId_DanhMuc());
-        values.put("ten_DanhMuc", danhMuc.getTenDanhMuc());
-        return db.insert("tb_DanhMuc", null, values);
+        values.put("tenDanhMuc", danhMuc.getTenDanhMuc());
+        return db.insert("DanhMuc", null, values);
     }
 
     public long delete(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        return db.delete("tb_DanhMuc","id_DanhMuc = ?",new String[]{String.valueOf(id)});
+        return db.delete("DanhMuc","id_DanhMuc = ?",new String[]{String.valueOf(id)});
 
     }
 
     public long update(DanhMucMonAn danhMuc){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("ten_DanhMuc", danhMuc.getTenDanhMuc());
-        return db.update("tb_DanhMuc",values,"id_DanhMuc = ?",new String[]{String.valueOf(danhMuc.getId_DanhMuc())});
+        values.put("tenDanhMuc", danhMuc.getTenDanhMuc());
+        return db.update("DanhMuc",values,"id_DanhMuc = ?",new String[]{String.valueOf(danhMuc.getId_DanhMuc())});
     }
 }
