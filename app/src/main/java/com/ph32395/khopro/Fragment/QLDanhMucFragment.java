@@ -1,10 +1,11 @@
 package com.ph32395.khopro.Fragment;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ public class QLDanhMucFragment extends Fragment {
     ArrayList<DanhMucMonAn> list;
     DanhMuc_Adapter danhMucAdapter;
 
-    EditText ed_maDanhMuc, ed_tenDanhMuc;
+    EditText ed_tenDanhMuc;
 
     Button btn_themDanhMuc, btn_huyThemDanhMuc;
     @Override
@@ -40,65 +41,66 @@ public class QLDanhMucFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_q_l_danh_muc, container, false);
         rc_danhMuc = view.findViewById(R.id.rc_quanLyDanhMuc);
         img_add_DanhMuc = view.findViewById(R.id.img_add_DanhMuc);
-        list = new ArrayList<>();
         danhMucDAO = new DanhMucDAO(getContext());
 
-        list = danhMucDAO.getListDanhMuc();
-        danhMucAdapter = new DanhMuc_Adapter(getContext(), list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        rc_danhMuc.setLayoutManager(layoutManager);
+
+        list = (ArrayList<DanhMucMonAn>) danhMucDAO.getAll();
+        danhMucAdapter = new DanhMuc_Adapter(getActivity(), this, list);
         rc_danhMuc.setAdapter(danhMucAdapter);
 
         img_add_DanhMuc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DanhMucMonAn danhMucMonAn = new DanhMucMonAn();
-                Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.add_danhmuc);
-
-                ed_maDanhMuc = view.findViewById(R.id.ed_maDanhMuc);
-                ed_tenDanhMuc = view.findViewById(R.id.ed_tenDanhMuc);
-                btn_themDanhMuc = view.findViewById(R.id.btn_themDanhMuc);
-                btn_huyThemDanhMuc = view.findViewById(R.id.btn_huyThemDanhMuc);
-
-                btn_themDanhMuc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (validate()>0){
-                            danhMucMonAn.setId_DanhMuc(Integer.parseInt(ed_maDanhMuc.getText().toString()));
-                            danhMucMonAn.setTenDanhMuc(ed_tenDanhMuc.getText().toString());
-                            if (danhMucDAO.insert(danhMucMonAn)>0){
-                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                                list = danhMucDAO.getListDanhMuc();
-                                danhMucAdapter = new DanhMuc_Adapter(getContext(), list);
-                                rc_danhMuc.setAdapter(danhMucAdapter);
-                                dialog.dismiss();
-                            }else {
-                                Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                });
-
-                btn_huyThemDanhMuc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
-
-                dialog.show();
+                dialogAddDanhMuc();
             }
         });
 
         return view;
     }
 
-    public  int validate(){
-        int check = 1;
-        if(ed_maDanhMuc.getText().length() == 0 || ed_tenDanhMuc.getText().length() == 0){
-            Toast.makeText(getContext(), "Không bỏ trống", Toast.LENGTH_SHORT).show();
-            check = -1;
-        }
-        return check;
+    private void dialogAddDanhMuc() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.add_danhmuc, null);
+        builder.setView(v);
+        Dialog dialog = builder.create();
+        dialog.show();
+
+        ed_tenDanhMuc = v.findViewById(R.id.ed_tenDanhMuc);
+        btn_themDanhMuc = v.findViewById(R.id.btn_themDanhMuc);
+        btn_huyThemDanhMuc = v.findViewById(R.id.btn_huyThemDanhMuc);
+
+        btn_themDanhMuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tenDanhMuc = ed_tenDanhMuc.getText().toString().trim();
+                if (!tenDanhMuc.isEmpty()){
+                    DanhMucMonAn danhMucMonAn = new DanhMucMonAn();
+                    danhMucMonAn.setTenDanhMuc(tenDanhMuc);
+                    danhMucDAO.insert(danhMucMonAn);
+                    capNhatList();
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        btn_huyThemDanhMuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+    void capNhatList() {
+        list.clear();
+        list.addAll(danhMucDAO.getAll());
+        danhMucAdapter.notifyDataSetChanged();
     }
 }

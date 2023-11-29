@@ -107,7 +107,7 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
             holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                dialogXoaMonAn(monAn1);
+                dialogXoaMonAn(monAn1);
             }
         });
 
@@ -121,39 +121,39 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
         });
     }
 
-//    private void dialogXoaMonAn(MonAn monAn) {
-//        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
-//        builder.setIcon(android.R.drawable.ic_delete);
-//        builder.setTitle("Thông báo");
-//        builder.setMessage("Bạn có muốn xóa không?");
-//        builder.setCancelable(false);
-//        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                monAnDAO = new MonAnDAO(context);
-//                int kq = monAnDAO.Delete(monAn);
-//                if(kq>0){
-//                    Toast.makeText(context, "xóa thành công", Toast.LENGTH_SHORT).show();
-//                    list.clear();
-//                    list.addAll(monAnDAO.getAll());
-//                    notifyDataSetChanged();
-//                    dialog.dismiss();
-//                }else {
-//                    Toast.makeText(context, "xóa không thành công", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(context, "hủy xóa", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//
-//
-//    }
+    private void dialogXoaMonAn(MonAn monAn) {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+        builder.setIcon(android.R.drawable.ic_delete);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Bạn có muốn xóa không?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                monAnDAO = new MonAnDAO(context);
+                int kq = monAnDAO.Delete(monAn);
+                if(kq>0){
+                    Toast.makeText(context, "xóa thành công", Toast.LENGTH_SHORT).show();
+                    list.clear();
+                    list.addAll(monAnDAO.getAll());
+                    notifyDataSetChanged();
+                    dialog.dismiss();
+                }else {
+                    Toast.makeText(context, "xóa không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(context, "hủy xóa", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+    }
 
 //    private void dialogSuaMonAn(MonAn monAn) {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(context);

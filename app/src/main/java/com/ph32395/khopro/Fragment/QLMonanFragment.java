@@ -138,7 +138,6 @@ public class QLMonanFragment extends Fragment {
 
                 Button btnThem = dialog.findViewById(R.id.btn_themMonAn);
                 Button btnHuy = dialog.findViewById(R.id.btn_huyThemMonAn);
-
                 btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -186,11 +185,9 @@ public class QLMonanFragment extends Fragment {
                 dialog.show();
             }
 
-    });
+        });
 
         return v;
     }
 
 }
-
-
