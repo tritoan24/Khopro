@@ -14,8 +14,9 @@ public class DataSql {
 
     public static final String INSERT_TB_MONAN = "INSERT INTO MonAn(tenMonAn, id_DanhMuc, id_GiamGia, giaTien) VALUES" +
             "('Bún Chả Băm', 1, 1, 50000.0)," +
-            "('Nem Hải Sản', 2, 2, 25000.0)," +
-            "('Bún Chả Chan', 1, NULL, 60000.0)";
+            "('Nem Hải Sản', 2, 2, 100000.0)," +
+            "('Bún Chả Chan', 1, NULL, 60000.0),"+
+            "('Coca cola',3,4,15000.0)";
 
     public static final String INSERT_TB_BANAN = "INSERT INTO BanAn(soBan) VALUES" +
             "(1)," +
@@ -29,6 +30,7 @@ public class DataSql {
     public static final String INSERT_TB_GIAMGIA = "INSERT INTO GiamGia(maGiamGia, phanTramGiam) VALUES" +
             "('GG1', 10)," +
             "('GG2', 20)," +
-            "('GG3', 15)";
+            "('GG3', 15),"+
+            "('GG4',33)";
 }
 

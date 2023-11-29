@@ -44,10 +44,16 @@ public class GiamGiaDAO {
         return getData(sql);
     }
 
-    public GiamGia getID(String id){
+    public GiamGia getID(String id) {
         String sql = "SELECT * FROM GiamGia WHERE id_GiamGia=?";
-        List<GiamGia> list = getData(sql,id);
-        return list.get(0);
+        List<GiamGia> list = getData(sql, id);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        } else {
+            // Trả về null hoặc xử lý theo ý bạn.
+            return null;
+        }
     }
     public List<GiamGia> getData(String sql , String...selectionArgs){
         List<GiamGia> list = new ArrayList<>();
