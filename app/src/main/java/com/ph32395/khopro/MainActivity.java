@@ -85,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
 //        edUser.setText("Chào mừng "+username+" đến với LibraPro!");
 
         // Đặt Fragment PhieuMuon là màn hình mặc định
-        setTitle("Quản Lý Phiếu Mượn");
-        Fragment fragment = new QLMonanFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.flContent, fragment); // R.id.flContent là ID của layout container cho fragment
-        fragmentTransaction.commit();
+//        setTitle("Quản Lý Phiếu Mượn");
+//        Fragment fragment = new QLMonanFragment();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.flContent, fragment); // R.id.flContent là ID của layout container cho fragment
+//        fragmentTransaction.commit();
 
 
 //        sharedPreferences = getSharedPreferences("THONGTIN", MODE_PRIVATE);

@@ -12,16 +12,6 @@
         android:text="Sửa món ăn"
         android:textSize="32dp" />
 
-    <EditText
-        android:id="@+id/ed_maMonAn_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/custom_edt_banan"
-        android:elevation="5dp"
-        android:hint="Mã món ăn: "
-        android:paddingVertical="20dp"
-        android:paddingLeft="15dp" />
 
     <EditText
         android:id="@+id/ed_tenMonAn_update"
@@ -34,27 +24,29 @@
         android:paddingVertical="20dp"
         android:paddingLeft="15dp" />
 
-    <EditText
-        android:id="@+id/ed_tenDanhMuc_MonAn_update"
+    <Spinner
+        android:id="@+id/spndanhmuc_addmonan"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_edt_banan"
         android:elevation="5dp"
-        android:hint="Tên danh mục: "
-        android:paddingVertical="20dp"
-        android:paddingLeft="15dp" />
+        android:gravity="center_horizontal"
+        android:paddingLeft="10dp"
 
-    <EditText
-        android:id="@+id/ed_maGiamGia_MonAn_update"
+        />
+
+    <Spinner
+        android:id="@+id/spngiamgia_addmonan"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_edt_banan"
         android:elevation="5dp"
-        android:hint="Mã giảm giá: "
-        android:paddingVertical="20dp"
-        android:paddingLeft="15dp" />
+        android:gravity="center_horizontal"
+        android:paddingLeft="10dp"
+
+        />
 
     <EditText
         android:id="@+id/ed_giaMon_update"
@@ -70,7 +62,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="40dp">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_themMonAn_update"
