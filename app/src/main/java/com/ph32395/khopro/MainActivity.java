@@ -18,14 +18,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.ph32395.khopro.Adapter.MonAnOrder_Adapter;
 import com.ph32395.khopro.Fragment.DoiMatKhauFragment;
 import com.ph32395.khopro.Fragment.HomeFragment;
+import com.ph32395.khopro.Fragment.MonAnOrderFragment;
 import com.ph32395.khopro.Fragment.ProfileFragment;
 import com.ph32395.khopro.Fragment.QLBanAnFragment;
 import com.ph32395.khopro.Fragment.QLDanhMucFragment;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     View mHeaderView;
     TextView edUser;
+    Button check;
 
     SharedPreferences sharedPreferences;
 
@@ -115,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
                 String title = "";
-
 
                 if (item.getItemId() == NAV_QLMONAN) {
                     setTitle("Quản Lý Món Ăn");
