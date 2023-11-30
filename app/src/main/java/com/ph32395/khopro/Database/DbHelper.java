@@ -51,6 +51,13 @@ public class DbHelper extends SQLiteOpenHelper {
             "phanTramGiam INTEGER" +
             ")";
 
+    static final String CREATE_TABLE_CHITIETHOADON = "CREATE TABLE ChiTietHoaDon (" +
+            " id_ChiTietHoaDon INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            " id_HoaDon INTEGER NOT NULL REFERENCES HoaDon (id_HoaDon), " +
+            " id_MonAn INTEGER NOT NULL REFERENCES MonAn (id_MonAn), " +
+            " soLuong INTEGER NOT NULL," +
+            " tongTien INTEGER NOT NULL)";
+
     public DbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -63,12 +70,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_BANAN);
         db.execSQL(CREATE_TABLE_HOADON);
         db.execSQL(CREATE_TABLE_GIAMGIA);
+        db.execSQL(CREATE_TABLE_CHITIETHOADON);
         db.execSQL(DataSql.INSERT_TB_NHANVIEN);
         db.execSQL(DataSql.INSERT_TB_BANAN);
         db.execSQL(DataSql.INSERT_TB_DANHMUC);
         db.execSQL(DataSql.INSERT_TB_MONAN);
         db.execSQL(DataSql.INSERT_TB_GIAMGIA);
         db.execSQL(DataSql.INSERT_TB_HOADON);
+        db.execSQL(DataSql.INSERT_TB_CHITIETHOADON);
     }
 
     @Override
