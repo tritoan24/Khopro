@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,14 +22,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.ph32395.khopro.Fragment.DoiMatKhauFragment;
+import com.ph32395.khopro.Fragment.HomeFragment;
+import com.ph32395.khopro.Fragment.ProfileFragment;
 import com.ph32395.khopro.Fragment.QLBanAnFragment;
 import com.ph32395.khopro.Fragment.QLDanhMucFragment;
 import com.ph32395.khopro.Fragment.QLHoaDonFragment;
 import com.ph32395.khopro.Fragment.QLMaGiamGiaFragment;
 import com.ph32395.khopro.Fragment.QLMonanFragment;
 import com.ph32395.khopro.Fragment.QLNhanVienFragment;
+import com.ph32395.khopro.Fragment.ThongBaoFragment;
 import com.ph32395.khopro.Fragment.ThongKeFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int NAV_DOIMATKHAU = R.id.nav_DoiMatKhau;
     private static final int NAV_DANGXUAT = R.id.nav_DangXuat;
 
+    private static final int BT_HOME = R.id.home01;
+    private static final int BT_THONGBAO = R.id.chat;
+    private static final int BT_PROFILE = R.id.contact;
+
 
     DrawerLayout drawer;
     Toolbar toolbar;
@@ -51,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,13 +89,12 @@ public class MainActivity extends AppCompatActivity {
 //        String username = thuThu.getHoTen();
 //        edUser.setText("Chào mừng "+username+" đến với LibraPro!");
 
-        // Đặt Fragment PhieuMuon là màn hình mặc định
-//        setTitle("Quản Lý Phiếu Mượn");
-//        Fragment fragment = new QLMonanFragment();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.flContent, fragment); // R.id.flContent là ID của layout container cho fragment
-//        fragmentTransaction.commit();
+        setTitle("Trang Chủ");
+        Fragment fragment = new HomeFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flContent, fragment); // R.id.flContent là ID của layout container cho fragment
+        fragmentTransaction.commit();
 
 
 //        sharedPreferences = getSharedPreferences("THONGTIN", MODE_PRIVATE);
@@ -148,6 +157,33 @@ public class MainActivity extends AppCompatActivity {
                 drawer.closeDrawers();
                 return false;
             }
+        });
+
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        // Xử lý sự kiện khi một mục được chọn
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+
+           if (item.getItemId()==BT_HOME){
+                    selectedFragment = new HomeFragment();
+                    setTitle("Trang Chủ");
+                    }
+                else if (item.getItemId()==BT_THONGBAO) {
+               selectedFragment = new ThongBaoFragment();
+                    setTitle("Thông Báo");
+                }else if (item.getItemId()==BT_PROFILE) {
+                    setTitle("Thông Tin Cá Nhân");
+               selectedFragment = new ProfileFragment();
+           }
+
+            // Thay thế Fragment hiện tại bằng Fragment được chọn
+            getSupportFragmentManager().beginTransaction().replace(R.id.flContent,
+                    selectedFragment).commit();
+
+            return true;
         });
     }
 
