@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="310dp"
     android:orientation="vertical"
     android:layout_marginBottom="20dp"
     >
@@ -109,6 +109,23 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:padding="5dp"
+                    android:text="Số lượng : "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/tv_soLuong"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:padding="5dp"
                     android:text="Thời gian tạo : "/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -175,19 +192,13 @@
                     android:id="@+id/tv_trangThai"/>
             </LinearLayout>
         </LinearLayout>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="120dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/icon_edit"
-            android:id="@+id/img_edit_monAn"/>
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="121dp"
             android:layout_marginLeft="15dp"
             android:src="@drawable/icon_delete"
-            android:id="@+id/img_delete_monAn"/>
+            android:id="@+id/img_delete_hoaDon"/>
     </LinearLayout>
 </LinearLayout>
