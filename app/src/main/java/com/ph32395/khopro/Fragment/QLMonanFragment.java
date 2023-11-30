@@ -78,7 +78,6 @@ public class QLMonanFragment extends Fragment {
             public void onClick(View view) {
                 openDialog(getContext(), 0);
             }
-
             public int validate() {
                 int check = 1;
                 if ( ed_tenMonAn.getText().length() == 0
@@ -88,7 +87,6 @@ public class QLMonanFragment extends Fragment {
                 }
                 return check;
             }
-
             protected void openDialog(final Context context, final int type) {
                 dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_monan);
@@ -177,14 +175,10 @@ public class QLMonanFragment extends Fragment {
                     }
                 });
 
-
-
                 dialog.setCancelable(false);
                 dialog.show();
             }
-
         });
-
         return v;
     }
 

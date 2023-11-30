@@ -13,7 +13,9 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/custom_item"
         android:orientation="horizontal"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:padding="5dp"
+        >
 
         <LinearLayout
             android:layout_width="300dp"
@@ -44,23 +46,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:padding="5dp"
-                    android:text="Mã món ăn : "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="123"
-                    android:id="@+id/tv_maMonAn"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:padding="5dp"
-                    android:text="Mã nhân viên : "/>
+                    android:text="Tên nhân viên : "/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:padding="5dp"
-                    android:text="Mã giảm giá : "/>
+                    android:text="Giảm Giá : "/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:padding="5dp"
-                    android:text="Số lượng : "/>
+                    android:text="Số lượng món ăn : "/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,13 +129,8 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:padding="5dp"
-                    android:text="Giá Tiền : "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="123"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/tv_giaDuocGiam"/>
+                    android:text="Tổng Tiền : "/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -173,23 +154,6 @@
                     android:text="123"
                     android:layout_marginRight="10dp"
                     android:id="@+id/tv_kieuThanhToan"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:padding="5dp"
-                    android:text="Trạng thái : "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="123"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/tv_trangThai"/>
             </LinearLayout>
         </LinearLayout>
 

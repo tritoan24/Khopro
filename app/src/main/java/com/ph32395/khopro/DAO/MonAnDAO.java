@@ -100,4 +100,6 @@ public class MonAnDAO{
         List<MonAn> list = getData(sql,id);
         return list.get(0);
     }
+
+
 }

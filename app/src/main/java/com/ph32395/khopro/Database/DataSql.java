@@ -23,9 +23,9 @@ public class DataSql {
             "(2)," +
             "(3)";
 
-    public static final String INSERT_TB_HOADON = "INSERT INTO HoaDon(id_MonAn, id_NhanVien, id_BanAn, id_GiamGia, soLuong, ngayGio, giaTien, kieuThanhToan, tongTien) VALUES" +
-            "(1, 'nhanvien2', 1, 1, 2, '2023-11-27 10:30:00', 100000, 'Tiền mặt', 180000)," +
-            "(2, 'nhanvien1', 2, 2, 1, '2023-11-27 12:45:00', 75000, 'Chuyển Khoản', 75000)";
+    public static final String INSERT_TB_HOADON = "INSERT INTO HoaDon(id_MonAn, id_NhanVien, id_BanAn, id_GiamGia, soLuong, ngayGio, kieuThanhToan, tongTien) VALUES" +
+            "(1, 'nhanvien2', 1, 1, 2, '2023-11-27 10:30:00', 'Tiền mặt',  50000.0)," +
+            "(2, 'nhanvien1', 2, 2, 1, '2023-11-27 12:45:00', 'Chuyển Khoản',  90000.0)";
 
     public static final String INSERT_TB_GIAMGIA = "INSERT INTO GiamGia(maGiamGia, phanTramGiam) VALUES" +
             "('GG1', 10)," +
