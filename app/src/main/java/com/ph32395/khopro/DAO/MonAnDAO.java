@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.ph32395.khopro.Database.DbHelper;
 import com.ph32395.khopro.Model.GiamGia;
@@ -16,9 +17,14 @@ import java.util.List;
 
 public class MonAnDAO{
     private SQLiteDatabase db;
-    public MonAnDAO(Context context){
+    public MonAnDAO(Context context) {
         DbHelper dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
+    }
+    public void close() {
+        if (db != null && db.isOpen()) {
+            db.close();
+        }
     }
 
     public long Insert(MonAn monAn){
@@ -34,19 +40,23 @@ public class MonAnDAO{
             return -1;
         }
     }
-    public  int Update(MonAn monAn){
-        try{
-        ContentValues values = new ContentValues();
-        values.put("tenMonAn", monAn.getTenMonAn());
-        values.put("id_DanhMuc",monAn.getId_DanhMuc());
-        values.put("id_GiamGia",monAn.getId_GiamGia());
-        values.put("giaTien",monAn.getGiaTien());
-        return db.update("MonAn",values,"id_MonAn=?",new String[]{String.valueOf(monAn.getId_MonAn())});
-        }catch (Exception e){
+    public int Update(MonAn monAn) {
+        try {
+            ContentValues values = new ContentValues();
+            values.put("tenMonAn", monAn.getTenMonAn());
+            values.put("id_DanhMuc", monAn.getId_DanhMuc());
+            values.put("id_GiamGia", monAn.getId_GiamGia());
+            values.put("giaTien", monAn.getGiaTien());
+
+            return db.update("MonAn", values, "id_MonAn=?", new String[]{String.valueOf(monAn.getId_MonAn())});
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
     }
+
+
+
     public  int Delete(MonAn monAn){
         try{
         return db.delete("MonAn","id_MonAn=?",new String[]{String.valueOf(monAn.getId_MonAn())});
@@ -75,7 +85,8 @@ public class MonAnDAO{
 
             // Check if giaTien is not null before parsing
             String giaTien = c.getString(c.getColumnIndex("giaTien"));
-            monAn.setGiaTien(giaTien != null ? Integer.parseInt(giaTien) : 0);
+            monAn.setGiaTien(giaTien != null ? Double.parseDouble(giaTien) : 0.0);
+
             list.add(monAn);
         }
         return list;

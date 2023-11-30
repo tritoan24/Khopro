@@ -48,12 +48,10 @@ public class QLMonanFragment extends Fragment {
 
     GiamGia_Spinner_Adapter adapterspinner;
     GiamGiaDAO giamgiadao;
-    GiamGia giamGia;
     ArrayList<GiamGia> listgiamgia;
 
     DanhMucSpinner_Adapter adapterspinner_dm;
     DanhMucDAO danhMucDAO;
-    DanhMucMonAn danhmuc;
     ArrayList<DanhMucMonAn>listdanhmuc;
     boolean userSelectedDiscount = false;
     int indexOfDefaultItem = 0;
