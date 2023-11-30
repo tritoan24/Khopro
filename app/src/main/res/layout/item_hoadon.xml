@@ -185,7 +185,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="121dp"
             android:layout_marginLeft="15dp"
             android:src="@drawable/icon_delete"
             android:id="@+id/img_delete_monAn"/>
