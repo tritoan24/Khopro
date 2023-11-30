@@ -18,12 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ph32395.khopro.DAO.BanAnDAO;
 import com.ph32395.khopro.DAO.GiamGiaDAO;
 import com.ph32395.khopro.DAO.HoaDonDAO;
-import com.ph32395.khopro.DAO.MonAnDAO;
+import com.ph32395.khopro.DAO.NhanVienDAO;
 import com.ph32395.khopro.Fragment.QLHoaDonFragment;
+import com.ph32395.khopro.Model.BanAn;
 import com.ph32395.khopro.Model.GiamGia;
 import com.ph32395.khopro.Model.HoaDon;
+import com.ph32395.khopro.Model.NhanVien;
 import com.ph32395.khopro.R;
 
 import java.text.DecimalFormat;
@@ -34,16 +37,21 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
     private ArrayList<HoaDon> list;
 
     HoaDonDAO hoaDonDAO;
+    HoaDon_Adapter adapter;
 
     GiamGiaDAO giamGiaDAO;
+    NhanVienDAO nhanVienDAO;
+    BanAnDAO banAnDAO;
+
 
     QLHoaDonFragment hoaDonFragment;
 
-    public HoaDon_Adapter(Context context, QLHoaDonFragment hoaDonFragment, ArrayList<HoaDon> list) {
+    public HoaDon_Adapter(Context context, ArrayList<HoaDon> list) {
         this.context = context;
         this.list = list;
         this.hoaDonFragment = hoaDonFragment;
         hoaDonDAO = new HoaDonDAO(context);
+        adapter = this;
     }
 
     @NonNull
@@ -62,39 +70,23 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final HoaDon hoaDon1 = list.get(position);
         holder.tv_maHoaDon.setText(list.get(position).getId_HoaDon()+"");
-        holder.tv_maMonAn.setText(list.get(position).getId_MonAn()+"");
-        holder.tv_maNhanVien.setText(list.get(position).getId_NhanVien());
-        holder.tv_soBan.setText(list.get(position).getId_BanAn());
+
+        nhanVienDAO = new NhanVienDAO(context);
+        NhanVien nv = nhanVienDAO.getID(String.valueOf(hoaDon1.getId_NhanVien()));
+        holder.tvtennhanvien.setText(nv.getHoTen());
+
+        banAnDAO = new BanAnDAO(context);
+        BanAn ba = banAnDAO.getBanAnByID(hoaDon1.getId_BanAn());
+        holder.tv_soBan.setText(String.valueOf(ba.getSoBan()+""));
 
         giamGiaDAO = new GiamGiaDAO(context);
         GiamGia gg = giamGiaDAO.getID(String.valueOf(hoaDon1.getId_GiamGia()));
-        if (gg != null) {
-            holder.tv_maGiamGia.setText(String.valueOf(gg.getPhanTramGiam()) + "%");
+        holder.tvphantramgiamgia.setText(gg.getPhanTramGiam()+"%");
 
-            Integer discountPercentage = gg.getPhanTramGiam();
-            if (discountPercentage != null) {
-                double giaTien = list.get(position).getGiaTien();
-                double discountedPrice = giaTien - (giaTien * discountPercentage / 100);
-
-                // Hiển thị giá tiền gốc với gạch ngang
-                String giaTienStrikethrough = String.valueOf((int) giaTien) + " vnd";
-                Spannable spannable = new SpannableString(giaTienStrikethrough);
-                spannable.setSpan(new StrikethroughSpan(), 0, giaTienStrikethrough.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-                holder.tv_giaGoc.setText(spannable);
-                holder.tv_giaDuocGiam.setText(formatMoney((int) discountedPrice) + " vnd");
-                holder.tv_giaDuocGiam.setTextColor(ContextCompat.getColor(context, R.color.red));
-            } else {
-                holder.tv_maGiamGia.setText("Không có mã giảm giá");
-                holder.tv_giaGoc.setText(formatMoney((int) list.get(position).getGiaTien()) + " vnd");
-                holder.tv_giaDuocGiam.setText("");
-            }
-        } else {
-            holder.tv_maGiamGia.setText("Không có mã giảm giá");
-            holder.tv_giaGoc.setText(formatMoney((int) list.get(position).getGiaTien()) + " vnd");
-            holder.tv_giaDuocGiam.setText("");
-        }
-
+        holder.tv_soLuong.setText(String.valueOf(hoaDon1.getSoLuong()));
+        holder.tv_thoiGianTao.setText(hoaDon1.getNgayGio());
+        holder.tv_kieuThanhToan.setText(hoaDon1.getKieuThanhToan());
+        holder.tvtongtien.setText(String.valueOf( hoaDon1.getTongTien()));
 
 
         holder.img_delete_hoaDon.setOnClickListener(new View.OnClickListener() {
@@ -147,22 +139,19 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_maHoaDon, tv_maMonAn, tv_maNhanVien, tv_soBan, tv_maGiamGia, tv_soLuong, tv_thoiGianTao, tv_giaDuocGiam, tv_giaGoc, tv_kieuThanhToan, tv_trangThai;
+        TextView tv_maHoaDon, tvtennhanvien, tv_soBan, tvphantramgiamgia, tv_soLuong, tv_thoiGianTao, tv_giaDuocGiam, tvtongtien, tv_kieuThanhToan, tv_trangThai;
         ImageView img_edit_hoaDon, img_delete_hoaDon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_maHoaDon = itemView.findViewById(R.id.tv_maHoaDon);
-            tv_maMonAn = itemView.findViewById(R.id.tv_maMonAn);
-            tv_maNhanVien = itemView.findViewById(R.id.tv_maNhanVien);
+            tvtennhanvien = itemView.findViewById(R.id.tv_maNhanVien);
             tv_soBan = itemView.findViewById(R.id.tv_soBan);
-            tv_maGiamGia = itemView.findViewById(R.id.tv_maGiamGia);
+            tvphantramgiamgia = itemView.findViewById(R.id.tv_maGiamGia);
             tv_soLuong = itemView.findViewById(R.id.tv_soLuong);
             tv_thoiGianTao = itemView.findViewById(R.id.tv_thoiGianTao);
-            tv_giaDuocGiam = itemView.findViewById(R.id.tv_giaDuocGiam);
-            tv_giaGoc = itemView.findViewById(R.id.tv_giaGoc);
+            tvtongtien = itemView.findViewById(R.id.tv_giaGoc);
             tv_kieuThanhToan = itemView.findViewById(R.id.tv_kieuThanhToan);
-            tv_trangThai = itemView.findViewById(R.id.tv_trangThai);
             img_delete_hoaDon = itemView.findViewById(R.id.img_delete_hoaDon);
 
         }

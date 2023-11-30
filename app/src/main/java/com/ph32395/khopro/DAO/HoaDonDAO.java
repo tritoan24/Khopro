@@ -1,5 +1,6 @@
 package com.ph32395.khopro.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.ph32395.khopro.Database.DbHelper;
 import com.ph32395.khopro.Model.GiamGia;
 import com.ph32395.khopro.Model.HoaDon;
+import com.ph32395.khopro.Model.MonAn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +25,11 @@ public class HoaDonDAO {
     public long Insert(HoaDon hoaDon){
         ContentValues values = new ContentValues();
         values.put("id_HoaDon", hoaDon.getId_HoaDon() );
-        values.put("id_MonAn", hoaDon.getId_MonAn());
         values.put("id_NhanVien",hoaDon.getId_NhanVien());
         values.put("id_BanAn",hoaDon.getId_BanAn());
         values.put("id_GiamGia",hoaDon.getId_GiamGia());
         values.put("soLuong",hoaDon.getSoLuong());
         values.put("ngayGio",hoaDon.getNgayGio());
-        values.put("giaTien",hoaDon.getGiaTien());
         values.put("kieuThanhToan",hoaDon.getKieuThanhToan());
         values.put("tongTien",hoaDon.getTongTien());
         return db.insert("HoaDon",null,values);
@@ -37,13 +37,11 @@ public class HoaDonDAO {
     public  int Update(HoaDon hoaDon){
         ContentValues values = new ContentValues();
         values.put("id_HoaDon", hoaDon.getId_HoaDon() );
-        values.put("id_MonAn", hoaDon.getId_MonAn());
         values.put("id_NhanVien",hoaDon.getId_NhanVien());
         values.put("id_BanAn",hoaDon.getId_BanAn());
         values.put("id_GiamGia",hoaDon.getId_GiamGia());
         values.put("soLuong",hoaDon.getSoLuong());
         values.put("ngayGio",hoaDon.getNgayGio());
-        values.put("giaTien",hoaDon.getGiaTien());
         values.put("kieuThanhToan",hoaDon.getKieuThanhToan());
         values.put("tongTien",hoaDon.getTongTien());
         String[] dk = new String[]{String.valueOf(hoaDon.getId_HoaDon())};
@@ -63,35 +61,34 @@ public class HoaDonDAO {
         List<HoaDon> list = getData(sql,id);
         return list.get(0);
     }
+
+    @SuppressLint("Range")
     public List<HoaDon> getData(String sql , String...selectionArgs){
         List<HoaDon> list = new ArrayList<>();
         Cursor c = db.rawQuery(sql,selectionArgs);
-        if(c!=null && c.getCount()>0){
-            c.moveToFirst();
-            do {
-                int id_HoaDon = c.getInt(0);
-                int id_MonAn = c.getInt(1);
-                int id_NhanVien = c.getInt(2);
-                int id_banAn = c.getInt(3);
-                int id_GiamGia = c.getInt(4);
-                int soLuong = c.getInt(5);
-                String ngayGio = c.getString(6);
-                int giaTien = c.getInt(7);
-                String kieuThanhToan = c.getString(8);
-                int tongTien = c.getInt(9);
-                HoaDon hoaDon = new HoaDon();
-                hoaDon.setId_HoaDon(id_HoaDon);
-                hoaDon.setId_NhanVien(id_NhanVien);
-                hoaDon.setId_BanAn(id_banAn);
-                hoaDon.setId_GiamGia(id_GiamGia);
-                hoaDon.setSoLuong(soLuong);
-                hoaDon.setNgayGio(ngayGio);
-                hoaDon.setGiaTien(giaTien);
-                hoaDon.setKieuThanhToan(kieuThanhToan);
-                hoaDon.setTongTien(tongTien);
-                hoaDon.setId_MonAn(id_MonAn);
-                list.add(hoaDon);
-            }while (c.moveToNext());
+        while (c.moveToNext()){
+            HoaDon hd = new HoaDon();
+            hd.setId_HoaDon(Integer.parseInt(c.getString(c.getColumnIndex("id_MonAn"))));
+//            monAn.setTenMonAn(c.getString(c.getColumnIndex("tenMonAn")));
+            // Check if id_DanhMuc is not null before parsing
+            hd.setId_NhanVien(c.getString(c.getColumnIndex("id_NhanVien")));
+
+            String baan = c.getString(c.getColumnIndex("id_BanAn"));
+            hd.setId_BanAn(baan!=null?Integer.parseInt(baan):0);
+
+            // Check if id_GiamGia is not null before parsing
+            String idGiamGia = c.getString(c.getColumnIndex("id_GiamGia"));
+            hd.setId_GiamGia(idGiamGia != null ? Integer.parseInt(idGiamGia) : 0);
+
+            hd.setSoLuong(Integer.parseInt(c.getString(c.getColumnIndex("soLuong"))));
+            hd.setNgayGio(c.getString(c.getColumnIndex("ngayGio")));
+
+
+            // Check if giaTien is not null before parsing
+            String tongTien = c.getString(c.getColumnIndex("tongTien"));
+            hd.setTongTien(tongTien != null ? Integer.parseInt((tongTien)) : (int) 0.0);
+            hd.setKieuThanhToan(c.getString(c.getColumnIndex("kieuThanhToan")));
+            list.add(hd);
         }
         return list;
     }

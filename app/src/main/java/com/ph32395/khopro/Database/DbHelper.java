@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     static String DB_NAME = "UngDungDatDoAn";
-    static int DB_VERSION = 3;
+    static int DB_VERSION = 4;
 
     static final String CREATE_TABLE_MONAN = "CREATE TABLE MonAn (" +
             "    id_MonAn   INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -41,7 +41,6 @@ public class DbHelper extends SQLiteOpenHelper {
             " id_GiamGia INTEGER REFERENCES GiamGia(id_GiamGia)," +
             " soLuong INTEGER NOT NULL," +
             " ngayGio TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-            " giaTien INTEGER NOT NULL," +
             " kieuThanhToan TEXT NOT NULL, " +
             " tongTien MONEY)";
 

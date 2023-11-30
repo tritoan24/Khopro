@@ -13,13 +13,4 @@
         android:layout_gravity="center"
         android:padding="16dp"/>
 
-    <ImageView
-        android:id="@+id/img_add_HoaDon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/add"
-        android:layout_gravity="bottom|end"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"/>
-
 </FrameLayout>

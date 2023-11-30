@@ -5,28 +5,24 @@ import java.util.Date;
 
 public class HoaDon {
     private int id_HoaDon;
-    private int id_MonAn;
-    private int id_NhanVien;
+    private String id_NhanVien;
     private Integer id_BanAn; // Sử dụng Integer để cho phép giá trị null
     private Integer id_GiamGia;
     private int soLuong;
     private String ngayGio;
-    private int giaTien;
     private String kieuThanhToan;
     private double tongTien;
 
     public HoaDon() {
     }
 
-    public HoaDon(int id_HoaDon, int id_MonAn, int id_NhanVien, Integer id_BanAn, Integer id_GiamGia, int soLuong, String ngayGio, int giaTien, String kieuThanhToan, double tongTien) {
+    public HoaDon(int id_HoaDon, String id_NhanVien, Integer id_BanAn, Integer id_GiamGia, int soLuong, String ngayGio, String kieuThanhToan, double tongTien) {
         this.id_HoaDon = id_HoaDon;
-        this.id_MonAn = id_MonAn;
         this.id_NhanVien = id_NhanVien;
         this.id_BanAn = id_BanAn;
         this.id_GiamGia = id_GiamGia;
         this.soLuong = soLuong;
         this.ngayGio = ngayGio;
-        this.giaTien = giaTien;
         this.kieuThanhToan = kieuThanhToan;
         this.tongTien = tongTien;
     }
@@ -39,19 +35,11 @@ public class HoaDon {
         this.id_HoaDon = id_HoaDon;
     }
 
-    public int getId_MonAn() {
-        return id_MonAn;
-    }
-
-    public void setId_MonAn(int id_MonAn) {
-        this.id_MonAn = id_MonAn;
-    }
-
-    public int getId_NhanVien() {
+    public String getId_NhanVien() {
         return id_NhanVien;
     }
 
-    public void setId_NhanVien(int id_NhanVien) {
+    public void setId_NhanVien(String id_NhanVien) {
         this.id_NhanVien = id_NhanVien;
     }
 
@@ -85,14 +73,6 @@ public class HoaDon {
 
     public void setNgayGio(String ngayGio) {
         this.ngayGio = ngayGio;
-    }
-
-    public int getGiaTien() {
-        return giaTien;
-    }
-
-    public void setGiaTien(int giaTien) {
-        this.giaTien = giaTien;
     }
 
     public String getKieuThanhToan() {
