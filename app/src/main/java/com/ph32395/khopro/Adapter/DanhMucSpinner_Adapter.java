@@ -25,6 +25,15 @@ public class DanhMucSpinner_Adapter extends ArrayAdapter<DanhMucMonAn> {
         this.context = context;
         this.list = list;
     }
+    public int getPositionById(int id) {
+        for (int i = 0; i < getCount(); i++) {
+            if (getItem(i).getId_DanhMuc() == id) {
+                return i;
+            }
+        }
+        return -1; // Trả về -1 nếu không tìm thấy
+
+}
 
     @NonNull
     @Override

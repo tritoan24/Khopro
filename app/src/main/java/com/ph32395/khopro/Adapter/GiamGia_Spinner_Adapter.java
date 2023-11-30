@@ -24,6 +24,14 @@ public class GiamGia_Spinner_Adapter extends ArrayAdapter<GiamGia> {
         this.context = context;
         this.list = list;
     }
+    public int getPositionById(int id) {
+        for (int i = 0; i < getCount(); i++) {
+            if (getItem(i).getId_GiamGia() == id) {
+                return i;
+            }
+        }
+        return -1; // Trả về -1 nếu không tìm thấy
+    }
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

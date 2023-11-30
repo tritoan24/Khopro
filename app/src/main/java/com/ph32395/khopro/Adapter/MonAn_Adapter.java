@@ -107,7 +107,7 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
             holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogXoaMonAn(monAn1);
+//                dialogXoaMonAn(monAn1);
             }
         });
 
