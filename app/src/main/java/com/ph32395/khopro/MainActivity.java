@@ -56,12 +56,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         drawer = findViewById(R.id.my_drawer_layout);
-
         toolbar = findViewById(R.id.toolbar1);
-
 
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
@@ -69,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
             ab.setHomeAsUpIndicator(R.drawable.menu);
             ab.setDisplayHomeAsUpEnabled(true);
         }
-
 
         NavigationView nv = findViewById(R.id.nvView);
 

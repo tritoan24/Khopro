@@ -83,6 +83,7 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
         if (monAn1 != null) {
             holder.tv_maMonAn.setText(String.valueOf(list.get(position).getId_MonAn()));
             holder.tv_tenMonAn.setText(list.get(position).getTenMonAn());
+
             danhMucDAO = new DanhMucDAO(context);
             DanhMucMonAn dm = danhMucDAO.getID(String.valueOf(monAn1.getId_DanhMuc()));
             holder.tv_loaiMon.setText(dm.getTenDanhMuc());
