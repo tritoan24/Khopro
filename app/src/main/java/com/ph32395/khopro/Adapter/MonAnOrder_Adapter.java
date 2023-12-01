@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,28 +51,34 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
     public void onBindViewHolder(@NonNull MonAnOrder_Adapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final MonAn monAn1 = list.get(position);
         holder.tv_tenMonAnOrder.setText(list.get(position).getTenMonAn());
-        holder.tv_giaMonAnOrder.setText(formatMoney((int) list.get(position).getGiaTien())+"");
+        holder.tv_giaMonAnOrder.setText(formatMoney((int) list.get(position).getGiaTien()) + "");
         final int[] soluong = {0};
+
         holder.btn_themDoAnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soluong[0] = soluong[0] +1;
-                holder.tv_giaMonAnOrder.setText(formatMoney((int)(list.get(position).getGiaTien()* soluong[0]))+"");
-                holder.tv_soLuong.setText(soluong[0] +"");
+                soluong[0] = soluong[0] + 1;
+                holder.tv_giaMonAnOrder.setText(formatMoney((int) (list.get(position).getGiaTien() * soluong[0])) + "");
+                holder.tv_soLuong.setText(soluong[0] + "");
+                Toast.makeText(context, "Số Lượng đang lafL "+soluong[0], Toast.LENGTH_SHORT).show();
             }
         });
+
         holder.btn_giamDoAnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soluong[0] = soluong[0] -1;
-                if (soluong[0] <0){
-                    soluong[0] = soluong[0] +1;
+                soluong[0] = soluong[0] - 1;
+                if (soluong[0] < 0) {
+                    soluong[0] = 0; // Đảm bảo không bao giờ là số âm
                 }
-                holder.tv_giaMonAnOrder.setText(formatMoney((int)(list.get(position).getGiaTien()* soluong[0]))+"");
-                holder.tv_soLuong.setText(soluong[0] +"");
+                holder.tv_giaMonAnOrder.setText(formatMoney((int) (list.get(position).getGiaTien() * soluong[0])) + "");
+                holder.tv_soLuong.setText(soluong[0] + "");
+                Toast.makeText(context, "Số Lượng đang lafL "+soluong[0], Toast.LENGTH_SHORT).show();
+
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

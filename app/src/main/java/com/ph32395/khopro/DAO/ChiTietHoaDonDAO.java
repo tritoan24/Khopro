@@ -27,6 +27,7 @@ public class ChiTietHoaDonDAO {
             values.put("id_HoaDon", chiTietHoaDon.getId_HoaDon());
             values.put("id_MonAn", chiTietHoaDon.getId_MonAn());
             values.put("soLuong", chiTietHoaDon.getSoLuong());
+            values.put("giaTien",chiTietHoaDon.getGiaTien());
             values.put("tongTien", chiTietHoaDon.getTongTien());
             return db.insert("ChiTietHoaDon", null, values);
         }catch (Exception e){
@@ -73,6 +74,7 @@ public class ChiTietHoaDonDAO {
             chiTietHoaDon.setId_MonAn(idMonAn != null ? Integer.parseInt(idMonAn) : 0);
 
             chiTietHoaDon.setSoLuong(Integer.parseInt(c.getString(c.getColumnIndex("soLuong"))));
+            chiTietHoaDon.setGiaTien(Integer.parseInt(c.getString(c.getColumnIndex("giaTien"))));
             chiTietHoaDon.setTongTien(Integer.parseInt(c.getString(c.getColumnIndex("tongTien"))));
             list.add(chiTietHoaDon);
         }

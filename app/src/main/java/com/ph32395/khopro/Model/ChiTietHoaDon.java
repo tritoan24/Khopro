@@ -5,17 +5,19 @@ public class ChiTietHoaDon {
     private int id_HoaDon;
     private int id_MonAn;
     private int soLuong;
+    private int giaTien;
     private int tongTien;
 
-    public ChiTietHoaDon(int id_ChiTietHoaDon, int id_HoaDon, int id_MonAn, int soLuong, int tongTien) {
+    public ChiTietHoaDon() {
+    }
+
+    public ChiTietHoaDon(int id_ChiTietHoaDon, int id_HoaDon, int id_MonAn, int soLuong, int giaTien, int tongTien) {
         this.id_ChiTietHoaDon = id_ChiTietHoaDon;
         this.id_HoaDon = id_HoaDon;
         this.id_MonAn = id_MonAn;
         this.soLuong = soLuong;
+        this.giaTien = giaTien;
         this.tongTien = tongTien;
-    }
-
-    public ChiTietHoaDon() {
     }
 
     public int getId_ChiTietHoaDon() {
@@ -50,6 +52,14 @@ public class ChiTietHoaDon {
         this.soLuong = soLuong;
     }
 
+    public int getGiaTien() {
+        return giaTien;
+    }
+
+    public void setGiaTien(int giaTien) {
+        this.giaTien = giaTien;
+    }
+
     public int getTongTien() {
         return tongTien;
     }
@@ -57,6 +67,4 @@ public class ChiTietHoaDon {
     public void setTongTien(int tongTien) {
         this.tongTien = tongTien;
     }
-
-
 }
