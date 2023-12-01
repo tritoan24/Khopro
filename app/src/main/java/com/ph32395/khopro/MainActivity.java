@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     setTitle("Trang Chủ");
                     }
                 else if (item.getItemId()==BT_THONGBAO) {
-               selectedFragment = new ThongBaoFragment();
+               selectedFragment = new MonAnOrderFragment();
                     setTitle("Thông Báo");
                 }else if (item.getItemId()==BT_PROFILE) {
                     setTitle("Thông Tin Cá Nhân");

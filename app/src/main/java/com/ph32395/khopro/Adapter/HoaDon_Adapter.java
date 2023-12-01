@@ -30,7 +30,10 @@ import com.ph32395.khopro.Model.NhanVien;
 import com.ph32395.khopro.R;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHolder> {
     Context context;
@@ -48,10 +51,10 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
 
     public HoaDon_Adapter(Context context, ArrayList<HoaDon> list) {
         this.context = context;
-        this.list = list;
         this.hoaDonFragment = hoaDonFragment;
         hoaDonDAO = new HoaDonDAO(context);
         adapter = this;
+        this.list = list != null ? list : new ArrayList<>();
     }
 
     @NonNull
@@ -84,7 +87,12 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
         holder.tvphantramgiamgia.setText(gg.getPhanTramGiam()+"%");
 
         holder.tv_soLuong.setText(String.valueOf(hoaDon1.getSoLuong()));
-        holder.tv_thoiGianTao.setText(hoaDon1.getNgayGio());
+
+        String defaultDateTime = hoaDon1.getNgayGio(); // Lấy ngày giờ từ đối tượng HoaDon
+        String customDateTime = formatDateTime(defaultDateTime, "dd/MM/yyyy HH:mm:ss");
+
+        // Đặt giá trị đã chuyển đổi vào TextView
+        holder.tv_thoiGianTao.setText(customDateTime);
         holder.tv_kieuThanhToan.setText(hoaDon1.getKieuThanhToan());
         holder.tvtongtien.setText(String.valueOf( hoaDon1.getTongTien()));
 
@@ -98,6 +106,19 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
 
         });
     }
+    private String formatDateTime(String inputDateTime, String outputFormat) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat outputFormatObj = new SimpleDateFormat(outputFormat, Locale.getDefault());
+
+        try {
+            Date date = inputFormat.parse(inputDateTime);
+            return outputFormatObj.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return inputDateTime; // Trả về giá trị ban đầu nếu có lỗi
+        }
+    }
+
 
     private void dialogXoaHoaDon(HoaDon hoaDon) {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
