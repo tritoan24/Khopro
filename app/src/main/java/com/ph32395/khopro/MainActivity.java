@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.ph32395.khopro.Adapter.MonAnOrder_Adapter;
+import com.ph32395.khopro.Fragment.BanAnOrderFragment;
 import com.ph32395.khopro.Fragment.DoiMatKhauFragment;
 import com.ph32395.khopro.Fragment.HomeFragment;
 import com.ph32395.khopro.Fragment.MonAnOrderFragment;
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     setTitle("Thông Báo");
                 }else if (item.getItemId()==BT_PROFILE) {
                     setTitle("Thông Tin Cá Nhân");
-               selectedFragment = new ProfileFragment();
+               selectedFragment = new BanAnOrderFragment();
            }
 
             // Thay thế Fragment hiện tại bằng Fragment được chọn

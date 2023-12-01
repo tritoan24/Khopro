@@ -32,5 +32,8 @@ public class DataSql {
             "('GG2', 20)," +
             "('GG3', 15),"+
             "('GG4',33)";
+    public static final String INSERT_TB_CHITIETHOADON = "INSERT INTO ChiTietHoaDon (id_HoaDon, id_MonAn, soLuong,giaTien, tongTien) VALUES" +
+            "(1, 1, 2,20000, 80000)," +
+            "(2, 2, 1,10000, 40000)";
 }
 

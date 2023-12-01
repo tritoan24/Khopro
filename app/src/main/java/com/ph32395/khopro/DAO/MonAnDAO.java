@@ -100,6 +100,36 @@ public class MonAnDAO{
         List<MonAn> list = getData(sql,id);
         return list.get(0);
     }
+    public List<MonAn> getMonAnByCategoryId(int categoryId) {
+        List<MonAn> danhSachMonAn = new ArrayList<>();
+
+        // Bạn cần thay thế tên bảng và tên cột bằng tên thật trong cơ sở dữ liệu của bạn
+        String query = "SELECT * FROM MonAn WHERE id_DanhMuc = " + categoryId;
+
+        // Thực hiện truy vấn SQL và lấy kết quả
+        Cursor cursor = db.rawQuery(query, null);
+
+        // Kiểm tra và thêm món ăn vào danh sách
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") int idMonAn = cursor.getInt(cursor.getColumnIndex("id_MonAn"));
+                @SuppressLint("Range") String tenMonAn = cursor.getString(cursor.getColumnIndex("tenMonAn"));
+                @SuppressLint("Range") int giaTien = cursor.getInt(cursor.getColumnIndex("giaTien"));
+
+                // Lấy giá trị id_GiamGia từ cột "id_GiamGia"
+                @SuppressLint("Range") int idGiamGia = cursor.getInt(cursor.getColumnIndex("id_GiamGia"));
+
+                // Tạo đối tượng MonAn và thêm vào danh sách
+                MonAn monAn = new MonAn(idMonAn, tenMonAn, categoryId, idGiamGia, giaTien);
+                danhSachMonAn.add(monAn);
+            }
+            cursor.close();
+        }
+
+        return danhSachMonAn;
+    }
+
+
 
 
 }

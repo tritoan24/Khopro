@@ -35,11 +35,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
     static final String CREATE_TABLE_HOADON = "CREATE TABLE HoaDon (" +
             " id_HoaDon INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            " id_MonAn INTEGER NOT NULL REFERENCES MonAn (id_MonAn), " +
+            " tenMonAn TEXT NOT NULL," +
             " id_NhanVien TEXT NOT NULL REFERENCES NhanVien (maNhanVien), " +
-            " id_BanAn INTEGER  REFERENCES BanAn (id_BanAn), " +
-            " id_GiamGia INTEGER REFERENCES GiamGia(id_GiamGia)," +
             " soLuong INTEGER NOT NULL," +
+            " soBan INTEGER NOT NULL," +
             " ngayGio TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
             " kieuThanhToan TEXT NOT NULL, " +
             " tongTien MONEY)";
@@ -47,8 +46,16 @@ public class DbHelper extends SQLiteOpenHelper {
     static final String CREATE_TABLE_GIAMGIA = "CREATE TABLE GiamGia(" +
             "id_GiamGia INTEGER PRIMARY KEY AUTOINCREMENT," +
             "maGiamGia TEXT NOT NULL," +
-            "phanTramGiam INTEGER" +
+            "phanTramGiam INTEGER," +
+            "soLuotDung INTEGER" +
             ")";
+    static final String CREATE_TABLE_CHITIETHOADON = "CREATE TABLE ChiTietHoaDon (" +
+            " id_ChiTietHoaDon INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            " id_HoaDon INTEGER NOT NULL REFERENCES HoaDon (id_HoaDon), " +
+            " tenMonAn TEXT NOT NULL," +
+            " soLuong INTEGER NOT NULL," +
+            " giaTien MONEY NOT NULL, " +
+            " tongTien INTEGER NOT NULL)";
 
     public DbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -62,12 +69,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_BANAN);
         db.execSQL(CREATE_TABLE_HOADON);
         db.execSQL(CREATE_TABLE_GIAMGIA);
+        db.execSQL(CREATE_TABLE_CHITIETHOADON);
         db.execSQL(DataSql.INSERT_TB_NHANVIEN);
         db.execSQL(DataSql.INSERT_TB_BANAN);
         db.execSQL(DataSql.INSERT_TB_DANHMUC);
         db.execSQL(DataSql.INSERT_TB_MONAN);
         db.execSQL(DataSql.INSERT_TB_GIAMGIA);
         db.execSQL(DataSql.INSERT_TB_HOADON);
+        db.execSQL(DataSql.INSERT_TB_CHITIETHOADON);
     }
 
     @Override
@@ -79,7 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS BanAn");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS HoaDon");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS GiamGia");
-
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS ChiTietHoaDon");
             onCreate(sqLiteDatabase);
         }
     }
