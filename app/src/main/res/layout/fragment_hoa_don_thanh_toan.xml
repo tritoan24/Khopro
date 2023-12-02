@@ -201,8 +201,8 @@
 
         </TableLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_hoaDon_ThanhToan"
+        <ListView
+            android:id="@+id/lv_hoaDon_ThanhToan"
             android:layout_width="match_parent"
             android:layout_height="150dp"/>
 

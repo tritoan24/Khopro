@@ -96,10 +96,10 @@
 
         </TableLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_confirm_order"
+        <ListView
+            android:id="@+id/lv_confirm_order"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="230dp"
             android:layout_marginTop="10dp"/>
 
         <LinearLayout
