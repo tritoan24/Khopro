@@ -3,7 +3,7 @@ package com.ph32395.khopro.Model;
 public class ChiTietHoaDon {
     private int id_ChiTietHoaDon;
     private int id_HoaDon;
-    private int id_MonAn;
+    private String tenMonAn;
     private int soLuong;
     private int giaTien;
     private int tongTien;
@@ -11,10 +11,10 @@ public class ChiTietHoaDon {
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(int id_ChiTietHoaDon, int id_HoaDon, int id_MonAn, int soLuong, int giaTien, int tongTien) {
+    public ChiTietHoaDon(int id_ChiTietHoaDon, int id_HoaDon, String tenMonAn, int soLuong, int giaTien, int tongTien) {
         this.id_ChiTietHoaDon = id_ChiTietHoaDon;
         this.id_HoaDon = id_HoaDon;
-        this.id_MonAn = id_MonAn;
+        this.tenMonAn = tenMonAn;
         this.soLuong = soLuong;
         this.giaTien = giaTien;
         this.tongTien = tongTien;
@@ -36,12 +36,12 @@ public class ChiTietHoaDon {
         this.id_HoaDon = id_HoaDon;
     }
 
-    public int getId_MonAn() {
-        return id_MonAn;
+    public String getTenMonAn() {
+        return tenMonAn;
     }
 
-    public void setId_MonAn(int id_MonAn) {
-        this.id_MonAn = id_MonAn;
+    public void setTenMonAn(String tenMonAn) {
+        this.tenMonAn = tenMonAn;
     }
 
     public int getSoLuong() {

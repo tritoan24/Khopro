@@ -37,7 +37,6 @@ public class DbHelper extends SQLiteOpenHelper {
             " id_HoaDon INTEGER PRIMARY KEY AUTOINCREMENT, " +
             " tenMonAn TEXT NOT NULL," +
             " id_NhanVien TEXT NOT NULL REFERENCES NhanVien (maNhanVien), " +
-            " soLuong INTEGER NOT NULL," +
             " soBan INTEGER NOT NULL," +
             " ngayGio TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
             " kieuThanhToan TEXT NOT NULL, " +
@@ -57,12 +56,6 @@ public class DbHelper extends SQLiteOpenHelper {
             " giaTien MONEY NOT NULL, " +
             " tongTien INTEGER NOT NULL)";
 
-    static final String CREATE_TABLE_CHITIETHOADON = "CREATE TABLE ChiTietHoaDon (" +
-            " id_ChiTietHoaDon INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            " id_HoaDon INTEGER NOT NULL REFERENCES HoaDon (id_HoaDon), " +
-            " id_MonAn INTEGER NOT NULL REFERENCES MonAn (id_MonAn), " +
-            " soLuong INTEGER NOT NULL," +
-            " tongTien INTEGER NOT NULL)";
 
     public DbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);

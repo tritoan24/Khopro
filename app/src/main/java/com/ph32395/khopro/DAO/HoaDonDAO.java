@@ -26,9 +26,8 @@ public class HoaDonDAO {
         ContentValues values = new ContentValues();
         values.put("id_HoaDon", hoaDon.getId_HoaDon() );
         values.put("id_NhanVien",hoaDon.getId_NhanVien());
-        values.put("id_BanAn",hoaDon.getId_BanAn());
-        values.put("id_GiamGia",hoaDon.getId_GiamGia());
-        values.put("soLuong",hoaDon.getSoLuong());
+        values.put("tenMonAn",hoaDon.getTenMonAn());
+        values.put("soBan",hoaDon.getSoBan());
         values.put("ngayGio",hoaDon.getNgayGio());
         values.put("kieuThanhToan",hoaDon.getKieuThanhToan());
         values.put("tongTien",hoaDon.getTongTien());
@@ -38,9 +37,8 @@ public class HoaDonDAO {
         ContentValues values = new ContentValues();
         values.put("id_HoaDon", hoaDon.getId_HoaDon() );
         values.put("id_NhanVien",hoaDon.getId_NhanVien());
-        values.put("id_BanAn",hoaDon.getId_BanAn());
-        values.put("id_GiamGia",hoaDon.getId_GiamGia());
-        values.put("soLuong",hoaDon.getSoLuong());
+        values.put("tenMonAn",hoaDon.getTenMonAn());
+        values.put("soBan",hoaDon.getSoBan());
         values.put("ngayGio",hoaDon.getNgayGio());
         values.put("kieuThanhToan",hoaDon.getKieuThanhToan());
         values.put("tongTien",hoaDon.getTongTien());
@@ -73,14 +71,13 @@ public class HoaDonDAO {
             // Check if id_DanhMuc is not null before parsing
             hd.setId_NhanVien(c.getString(c.getColumnIndex("id_NhanVien")));
 
-            String baan = c.getString(c.getColumnIndex("id_BanAn"));
-            hd.setId_BanAn(baan!=null?Integer.parseInt(baan):0);
+            hd.setTenMonAn(c.getString(c.getColumnIndex("tenMonAn")));
+
+            String baan = c.getString(c.getColumnIndex("soBan"));
+            hd.setSoBan(baan!=null?Integer.parseInt(baan):0);
 
             // Check if id_GiamGia is not null before parsing
-            String idGiamGia = c.getString(c.getColumnIndex("id_GiamGia"));
-            hd.setId_GiamGia(idGiamGia != null ? Integer.parseInt(idGiamGia) : 0);
 
-            hd.setSoLuong(Integer.parseInt(c.getString(c.getColumnIndex("soLuong"))));
             hd.setNgayGio(c.getString(c.getColumnIndex("ngayGio")));
 
 

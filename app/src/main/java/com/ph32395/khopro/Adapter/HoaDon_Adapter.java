@@ -21,11 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ph32395.khopro.DAO.BanAnDAO;
 import com.ph32395.khopro.DAO.GiamGiaDAO;
 import com.ph32395.khopro.DAO.HoaDonDAO;
+import com.ph32395.khopro.DAO.MonAnDAO;
 import com.ph32395.khopro.DAO.NhanVienDAO;
 import com.ph32395.khopro.Fragment.QLHoaDonFragment;
 import com.ph32395.khopro.Model.BanAn;
 import com.ph32395.khopro.Model.GiamGia;
 import com.ph32395.khopro.Model.HoaDon;
+import com.ph32395.khopro.Model.MonAn;
 import com.ph32395.khopro.Model.NhanVien;
 import com.ph32395.khopro.R;
 
@@ -45,6 +47,8 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
     GiamGiaDAO giamGiaDAO;
     NhanVienDAO nhanVienDAO;
     BanAnDAO banAnDAO;
+
+    MonAnDAO monAnDAO;
 
 
     QLHoaDonFragment hoaDonFragment;
@@ -78,15 +82,12 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
         NhanVien nv = nhanVienDAO.getID(String.valueOf(hoaDon1.getId_NhanVien()));
         holder.tvtennhanvien.setText(nv.getHoTen());
 
+        holder.tv_tenMonAn.setText(list.get(position).getTenMonAn());
+
         banAnDAO = new BanAnDAO(context);
-        BanAn ba = banAnDAO.getBanAnByID(hoaDon1.getId_BanAn());
+        BanAn ba = banAnDAO.getBanAnByID(hoaDon1.getSoBan());
         holder.tv_soBan.setText(String.valueOf(ba.getSoBan()+""));
 
-        giamGiaDAO = new GiamGiaDAO(context);
-        GiamGia gg = giamGiaDAO.getID(String.valueOf(hoaDon1.getId_GiamGia()));
-        holder.tvphantramgiamgia.setText(gg.getPhanTramGiam()+"%");
-
-        holder.tv_soLuong.setText(String.valueOf(hoaDon1.getSoLuong()));
 
         String defaultDateTime = hoaDon1.getNgayGio(); // Lấy ngày giờ từ đối tượng HoaDon
         String customDateTime = formatDateTime(defaultDateTime, "dd/MM/yyyy HH:mm:ss");
@@ -160,16 +161,15 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_maHoaDon, tvtennhanvien, tv_soBan, tvphantramgiamgia, tv_soLuong, tv_thoiGianTao, tv_giaDuocGiam, tvtongtien, tv_kieuThanhToan, tv_trangThai;
-        ImageView img_edit_hoaDon, img_delete_hoaDon;
+        TextView tv_maHoaDon, tvtennhanvien, tv_tenMonAn, tv_soBan, tv_thoiGianTao, tvtongtien, tv_kieuThanhToan;
+        ImageView img_delete_hoaDon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_maHoaDon = itemView.findViewById(R.id.tv_maHoaDon);
             tvtennhanvien = itemView.findViewById(R.id.tv_maNhanVien);
             tv_soBan = itemView.findViewById(R.id.tv_soBan);
-            tvphantramgiamgia = itemView.findViewById(R.id.tv_maGiamGia);
-            tv_soLuong = itemView.findViewById(R.id.tv_soLuong);
+            tv_tenMonAn = itemView.findViewById(R.id.tv_tenMonAn_hoaDon);
             tv_thoiGianTao = itemView.findViewById(R.id.tv_thoiGianTao);
             tvtongtien = itemView.findViewById(R.id.tv_giaGoc);
             tv_kieuThanhToan = itemView.findViewById(R.id.tv_kieuThanhToan);

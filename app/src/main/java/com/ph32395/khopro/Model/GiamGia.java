@@ -4,14 +4,9 @@ public class GiamGia {
     private int id_GiamGia;
     private String maGiamGia;
     private int phanTramGiam;
+    private int soLuotDung;
 
     public GiamGia() {
-    }
-
-    public GiamGia(int id_GiamGia, String maGiamGia, int phanTramGiam) {
-        this.id_GiamGia = id_GiamGia;
-        this.maGiamGia = maGiamGia;
-        this.phanTramGiam = phanTramGiam;
     }
 
     public int getId_GiamGia() {
@@ -36,5 +31,20 @@ public class GiamGia {
 
     public void setPhanTramGiam(int phanTramGiam) {
         this.phanTramGiam = phanTramGiam;
+    }
+
+    public int getSoLuotDung() {
+        return soLuotDung;
+    }
+
+    public void setSoLuotDung(int soLuotDung) {
+        this.soLuotDung = soLuotDung;
+    }
+
+    public GiamGia(int id_GiamGia, String maGiamGia, int phanTramGiam, int soLuotDung) {
+        this.id_GiamGia = id_GiamGia;
+        this.maGiamGia = maGiamGia;
+        this.phanTramGiam = phanTramGiam;
+        this.soLuotDung = soLuotDung;
     }
 }

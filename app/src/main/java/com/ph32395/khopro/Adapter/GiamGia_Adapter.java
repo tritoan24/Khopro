@@ -49,6 +49,7 @@ public class GiamGia_Adapter extends RecyclerView.Adapter<GiamGia_Adapter.ViewHo
         holder.txtIDGiamGia.setText(giamGia1.getId_GiamGia()+"");
         holder.txtMaGiamGia.setText(giamGia1.getMaGiamGia());
         holder.txtMucGiamGia.setText(giamGia1.getPhanTramGiam()+"");
+        holder.txtSoLuotDung.setText(giamGia1.getSoLuotDung()+"");
 
         holder.img_edit_GG.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,13 +71,14 @@ public class GiamGia_Adapter extends RecyclerView.Adapter<GiamGia_Adapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtIDGiamGia , txtMaGiamGia,txtMucGiamGia;
+        TextView txtIDGiamGia , txtMaGiamGia,txtMucGiamGia, txtSoLuotDung;
         ImageView img_edit_GG , img_delete_GG;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtIDGiamGia = itemView.findViewById(R.id.txtIDGiamGia);
             txtMaGiamGia = itemView.findViewById(R.id.txtMaGiamGia);
             txtMucGiamGia = itemView.findViewById(R.id.txtMucGiamGia);
+            txtSoLuotDung = itemView.findViewById(R.id.txtSoLuotDung);
             img_edit_GG = itemView.findViewById(R.id.img_edit_GG);
             img_delete_GG = itemView.findViewById(R.id.img_delete_GG);
         }
@@ -125,7 +127,7 @@ public class GiamGia_Adapter extends RecyclerView.Adapter<GiamGia_Adapter.ViewHo
 
         EditText ed_updateMaGiamGia = v.findViewById(R.id.ed_maGG_update);
         EditText ed_updateMucGiamGia = v.findViewById(R.id.ed_MucGiam_update);
-
+        EditText ed_updateSoLuotDung = v.findViewById(R.id.ed_soLuotDung_update);
         Button btn_updateGG = v.findViewById(R.id.btn_SuaGG_update);
         Button btn_huyupdateGG = v.findViewById(R.id.btn_huySuaGG_update);
 
@@ -133,16 +135,19 @@ public class GiamGia_Adapter extends RecyclerView.Adapter<GiamGia_Adapter.ViewHo
         List<GiamGia> list1 = giamGiaDAO1.getAll();
         ed_updateMaGiamGia.setText(giamGia.getMaGiamGia());
         ed_updateMucGiamGia.setText(giamGia.getPhanTramGiam()+"");
+        ed_updateSoLuotDung.setText(giamGia.getSoLuotDung()+"");
 
         btn_updateGG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String magiamgia = ed_updateMaGiamGia.getText().toString();
                 int mucgiamgia = Integer.parseInt(ed_updateMucGiamGia.getText().toString());
+                int soluotdung = Integer.parseInt(ed_updateSoLuotDung.getText().toString());
 
                 giamGiaDAO = new GiamGiaDAO(context);
                 giamGia.setMaGiamGia(magiamgia);
                 giamGia.setPhanTramGiam(mucgiamgia);
+                giamGia.setSoLuotDung(soluotdung);
 
                 int kq = giamGiaDAO.Update(giamGia);
                 if(kq>0){
@@ -152,6 +157,7 @@ public class GiamGia_Adapter extends RecyclerView.Adapter<GiamGia_Adapter.ViewHo
                     notifyDataSetChanged();
                     ed_updateMaGiamGia.setText("");
                     ed_updateMucGiamGia.setText("");
+                    ed_updateSoLuotDung.setText("");
                     dialog.dismiss();
                 }else {
                     Toast.makeText(context, "ko update dc", Toast.LENGTH_SHORT).show();

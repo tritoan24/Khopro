@@ -24,12 +24,14 @@ public class GiamGiaDAO {
         ContentValues values = new ContentValues();
         values.put("maGiamgia", giamGia.getMaGiamGia() );
         values.put("phanTramGiam",giamGia.getPhanTramGiam());
+        values.put("soLuotDung",giamGia.getSoLuotDung());
         return db.insert("GiamGia",null,values);
     }
     public  int Update(GiamGia giamGia){
         ContentValues values = new ContentValues();
         values.put("maGiamgia", giamGia.getMaGiamGia() );
         values.put("phanTramGiam",giamGia.getPhanTramGiam());
+        values.put("soLuotDung",giamGia.getSoLuotDung());
         String[] dk = new String[]{String.valueOf(giamGia.getId_GiamGia())};
         return db.update("GiamGia",values,"id_GiamGia=?",dk);
     }
@@ -64,10 +66,12 @@ public class GiamGiaDAO {
                 int id_GiamGia = c.getInt(0);
                 String maGiamGia = c.getString(1);
                 int PhanTramGiam = c.getInt(2);
+                int SoLuotDung = c.getInt(3);
                 GiamGia giamGia = new GiamGia();
                 giamGia.setId_GiamGia(id_GiamGia);
                 giamGia.setMaGiamGia(maGiamGia);
                 giamGia.setPhanTramGiam(PhanTramGiam);
+                giamGia.setSoLuotDung(SoLuotDung);
                 list.add(giamGia);
             }while (c.moveToNext());
         }

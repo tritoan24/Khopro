@@ -6,9 +6,8 @@ import java.util.Date;
 public class HoaDon {
     private int id_HoaDon;
     private String id_NhanVien;
-    private Integer id_BanAn; // Sử dụng Integer để cho phép giá trị null
-    private Integer id_GiamGia;
-    private int soLuong;
+    private String tenMonAn; // Sử dụng Integer để cho phép giá trị null
+    private int soBan;
     private String ngayGio;
     private String kieuThanhToan;
     private double tongTien;
@@ -16,16 +15,6 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(int id_HoaDon, String id_NhanVien, Integer id_BanAn, Integer id_GiamGia, int soLuong, String ngayGio, String kieuThanhToan, double tongTien) {
-        this.id_HoaDon = id_HoaDon;
-        this.id_NhanVien = id_NhanVien;
-        this.id_BanAn = id_BanAn;
-        this.id_GiamGia = id_GiamGia;
-        this.soLuong = soLuong;
-        this.ngayGio = ngayGio;
-        this.kieuThanhToan = kieuThanhToan;
-        this.tongTien = tongTien;
-    }
 
     public int getId_HoaDon() {
         return id_HoaDon;
@@ -43,28 +32,20 @@ public class HoaDon {
         this.id_NhanVien = id_NhanVien;
     }
 
-    public Integer getId_BanAn() {
-        return id_BanAn;
+    public String getTenMonAn() {
+        return tenMonAn;
     }
 
-    public void setId_BanAn(Integer id_BanAn) {
-        this.id_BanAn = id_BanAn;
+    public void setTenMonAn(String tenMonAn) {
+        this.tenMonAn = tenMonAn;
     }
 
-    public Integer getId_GiamGia() {
-        return id_GiamGia;
+    public int getSoBan() {
+        return soBan;
     }
 
-    public void setId_GiamGia(Integer id_GiamGia) {
-        this.id_GiamGia = id_GiamGia;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setSoBan(int soBan) {
+        this.soBan = soBan;
     }
 
     public String getNgayGio() {
@@ -88,6 +69,16 @@ public class HoaDon {
     }
 
     public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public HoaDon(int id_HoaDon, String id_NhanVien, String tenMonAn, int soBan, String ngayGio, String kieuThanhToan, double tongTien) {
+        this.id_HoaDon = id_HoaDon;
+        this.id_NhanVien = id_NhanVien;
+        this.tenMonAn = tenMonAn;
+        this.soBan = soBan;
+        this.ngayGio = ngayGio;
+        this.kieuThanhToan = kieuThanhToan;
         this.tongTien = tongTien;
     }
 }

@@ -34,6 +34,17 @@
         android:elevation="5dp"
         android:layout_marginTop="20dp"/>
 
+    <EditText
+        android:id="@+id/ed_soLuotDung_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số lượt dùng: "
+        android:background="@drawable/custom_edt_banan"
+        android:paddingVertical="20dp"
+        android:paddingLeft="15dp"
+        android:elevation="5dp"
+        android:layout_marginTop="20dp"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

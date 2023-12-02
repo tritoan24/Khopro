@@ -25,7 +25,7 @@ public class ChiTietHoaDonDAO {
         try {
             ContentValues values = new ContentValues();
             values.put("id_HoaDon", chiTietHoaDon.getId_HoaDon());
-            values.put("id_MonAn", chiTietHoaDon.getId_MonAn());
+            values.put("tenMonAn", chiTietHoaDon.getTenMonAn());
             values.put("soLuong", chiTietHoaDon.getSoLuong());
             values.put("giaTien",chiTietHoaDon.getGiaTien());
             values.put("tongTien", chiTietHoaDon.getTongTien());
@@ -40,7 +40,7 @@ public class ChiTietHoaDonDAO {
         try {
             ContentValues values = new ContentValues();
             values.put("id_HoaDon", chiTietHoaDon.getId_HoaDon());
-            values.put("id_MonAn", chiTietHoaDon.getId_MonAn());
+            values.put("tenMonAn", chiTietHoaDon.getTenMonAn());
             values.put("soLuong", chiTietHoaDon.getSoLuong());
             values.put("tongTien", chiTietHoaDon.getTongTien());
             return db.update("ChiTietHoaDon", values, "id_ChiTietHoaDon=?", new String[]{String.valueOf(chiTietHoaDon.getId_ChiTietHoaDon())});
@@ -70,8 +70,7 @@ public class ChiTietHoaDonDAO {
             String idHoaDon = c.getString(c.getColumnIndex("id_HoaDon"));
             chiTietHoaDon.setId_HoaDon(idHoaDon != null ? Integer.parseInt(idHoaDon) : 0);
 
-            String idMonAn = c.getString(c.getColumnIndex("id_MonAn"));
-            chiTietHoaDon.setId_MonAn(idMonAn != null ? Integer.parseInt(idMonAn) : 0);
+            chiTietHoaDon.setTenMonAn(c.getString(c.getColumnIndex("tenMonAn")));
 
             chiTietHoaDon.setSoLuong(Integer.parseInt(c.getString(c.getColumnIndex("soLuong"))));
             chiTietHoaDon.setGiaTien(Integer.parseInt(c.getString(c.getColumnIndex("giaTien"))));
