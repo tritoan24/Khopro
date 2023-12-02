@@ -176,11 +176,11 @@ public class MainActivity extends AppCompatActivity {
                     setTitle("Trang Chủ");
                     }
                 else if (item.getItemId()==BT_THONGBAO) {
-               selectedFragment = new MonAnOrderFragment();
+               selectedFragment = new BanAnOrderFragment();
                     setTitle("Thông Báo");
                 }else if (item.getItemId()==BT_PROFILE) {
                     setTitle("Thông Tin Cá Nhân");
-               selectedFragment = new BanAnOrderFragment();
+               selectedFragment = new  ProfileFragment();
            }
 
             // Thay thế Fragment hiện tại bằng Fragment được chọn
@@ -189,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         });
+
+
+
+
     }
 
     @Override
