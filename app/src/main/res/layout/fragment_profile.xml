@@ -6,21 +6,40 @@
     tools:context=".Fragment.ProfileFragment"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:src="@drawable/nguoidung"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:id="@+id/img_daiDien"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:src="@drawable/nguoidung"
+            android:layout_marginTop="20dp"
+            android:id="@+id/img_daiDien"
+            android:layout_marginStart="115dp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_updateProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sửa"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="70dp"/>
+    </LinearLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp"
         android:background="@drawable/custom_item"
-        android:backgroundTint="#E3DADA"
-        >
+        android:backgroundTint="#E3DADA">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,18 +47,17 @@
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
-            android:id="@+id/ed_hoTenNhanVienTT"
-            >
-        </TextView>
+            android:id="@+id/ed_hoTenNhanVienTT"></TextView>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp"
         android:background="@drawable/custom_item"
-        android:backgroundTint="#E3DADA"
-        >
+        android:backgroundTint="#E3DADA">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,18 +65,17 @@
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
-            android:id="@+id/ed_tuoiNhanVienTT"
-            >
-        </TextView>
+            android:id="@+id/ed_tuoiNhanVienTT"></TextView>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp"
         android:background="@drawable/custom_item"
-        android:backgroundTint="#E3DADA"
-        >
+        android:backgroundTint="#E3DADA">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,18 +83,17 @@
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
-            android:id="@+id/ed_gioiTinhNhanVienTT"
-            >
-        </TextView>
+            android:id="@+id/ed_gioiTinhNhanVienTT"></TextView>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp"
         android:background="@drawable/custom_item"
-        android:backgroundTint="#E3DADA"
-        >
+        android:backgroundTint="#E3DADA">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,10 +101,9 @@
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
-            android:id="@+id/ed_sdtNhanVienTT"
-            >
-        </TextView>
+            android:id="@+id/ed_sdtNhanVienTT"></TextView>
     </LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,8 +113,8 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:backgroundTint="#DF3A3A"
-        android:id="@+id/btn_doiMatKhau">
-    </Button>
+        android:id="@+id/btn_doiMatKhau"></Button>
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,9 +122,7 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/img_logout"
         android:backgroundTint="@color/white"
-        android:id="@+id/img_logOut"
-        >
-    </ImageButton>
+        android:id="@+id/img_logOut"></ImageButton>
 
 
 </LinearLayout>

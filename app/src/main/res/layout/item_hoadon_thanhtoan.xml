@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:stretchColumns="1,2,3,4">
+
+    <TableRow>
+        <TextView
+            android:id="@+id/tv_tenMonAn_hd"
+            android:text="Phở bò tái lăn"
+            android:layout_width="0dp"
+            android:layout_weight="3"/>
+        <TextView
+            android:id="@+id/tv_soLuong_hd"
+            android:text="3"
+            android:layout_width="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/tv_donGia_hd"
+            android:text="40,000"
+            android:layout_width="0dp"
+            android:layout_weight="2"/>
+        <TextView
+            android:id="@+id/tv_thanhTien_hd"
+            android:text="120,000"
+            android:layout_width="0dp"
+            android:layout_weight="2"/>
+    </TableRow>
+
+</TableLayout>
