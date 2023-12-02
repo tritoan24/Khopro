@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ph32395.khopro.R;
@@ -18,7 +19,7 @@ public class XacNhanOrderFragment extends Fragment {
 
     ImageView img_back_cfOrder;
     TextView tv_soBan_cfOrder, tv_thanhTien, tv_giamGia_cfOrder, tv_truTien, tv_tongTien;
-    RecyclerView rc_confirm_order;
+    ListView lv_confirm_order;
     Button btn_confirm_order,btn_confirm_order_print;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,9 +32,10 @@ public class XacNhanOrderFragment extends Fragment {
         tv_giamGia_cfOrder = v.findViewById(R.id.tv_giamGia_cfOrder);
         tv_truTien = v.findViewById(R.id.tv_truTien);
         tv_tongTien = v.findViewById(R.id.tv_tongTien);
-        rc_confirm_order = v.findViewById(R.id.rc_confirm_order);
         btn_confirm_order = v.findViewById(R.id.btn_confirm_order);
         btn_confirm_order_print = v.findViewById(R.id.btn_confirm_order_print);
+
+        lv_confirm_order = v.findViewById(R.id.lv_confirm_order);
 
         return v;
     }
