@@ -24,9 +24,7 @@ public class HoaDonDAO {
     }
     public long Insert(HoaDon hoaDon){
         ContentValues values = new ContentValues();
-        values.put("id_HoaDon", hoaDon.getId_HoaDon() );
         values.put("id_NhanVien",hoaDon.getId_NhanVien());
-        values.put("tenMonAn",hoaDon.getTenMonAn());
         values.put("soBan",hoaDon.getSoBan());
         values.put("ngayGio",hoaDon.getNgayGio());
         values.put("kieuThanhToan",hoaDon.getKieuThanhToan());
@@ -37,7 +35,6 @@ public class HoaDonDAO {
         ContentValues values = new ContentValues();
         values.put("id_HoaDon", hoaDon.getId_HoaDon() );
         values.put("id_NhanVien",hoaDon.getId_NhanVien());
-        values.put("tenMonAn",hoaDon.getTenMonAn());
         values.put("soBan",hoaDon.getSoBan());
         values.put("ngayGio",hoaDon.getNgayGio());
         values.put("kieuThanhToan",hoaDon.getKieuThanhToan());
@@ -66,12 +63,9 @@ public class HoaDonDAO {
         Cursor c = db.rawQuery(sql,selectionArgs);
         while (c.moveToNext()){
             HoaDon hd = new HoaDon();
-            hd.setId_HoaDon(Integer.parseInt(c.getString(c.getColumnIndex("id_MonAn"))));
-//            monAn.setTenMonAn(c.getString(c.getColumnIndex("tenMonAn")));
             // Check if id_DanhMuc is not null before parsing
             hd.setId_NhanVien(c.getString(c.getColumnIndex("id_NhanVien")));
 
-            hd.setTenMonAn(c.getString(c.getColumnIndex("tenMonAn")));
 
             String baan = c.getString(c.getColumnIndex("soBan"));
             hd.setSoBan(baan!=null?Integer.parseInt(baan):0);

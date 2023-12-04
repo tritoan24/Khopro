@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Fragment.XacNhanOrderFragment">
 
     <LinearLayout
@@ -10,13 +10,13 @@
         android:layout_height="match_parent"
         android:gravity="start"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="12dp"
         android:background="#EFE9E9">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            >
 
             <ImageView
                 android:id="@+id/img_back_cfOrder"
@@ -37,7 +37,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal">
 
             <TextView
@@ -59,7 +59,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:text="Món đã chọn"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -68,7 +68,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:stretchColumns="1,2,3">
+            android:stretchColumns="1,2,3"
+            >
 
             <TableRow>
 
@@ -77,21 +78,26 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:text="Tên món"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:gravity="center"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:text="Số lượng"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:text="Thành tiền"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    />
             </TableRow>
 
         </TableLayout>
@@ -102,103 +108,28 @@
             android:layout_height="230dp"
             android:layout_marginTop="10dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="Thành tiền:"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/tv_thanhTien"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="1.000.000"
-                android:textSize="18dp" />
-        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="---------------------------------------------------------------------------------------------------" />
+            android:gravity="center"
+            android:text="---------------------------------------------------------------------------------" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="Giảm giá:"
-                android:textSize="18dp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_giamGia_cfOrder"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-
-                    android:gravity="end"
-                    android:text="0"
-                    android:textSize="18dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="%"
-                    android:textSize="18dp" />
-            </LinearLayout>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="25dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Trừ tiền:"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/tv_truTien"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="0"
-                android:textSize="18dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="Trừ tiền:"
+                android:text="Tổng tiền:"
                 android:textSize="18dp" />
 
             <TextView
@@ -213,12 +144,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="20dp">
+            android:layout_height="75dp"
+            android:layout_marginTop="40dp">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_confirm_order"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
                 android:text="Xác nhận"
                 android:textColor="@color/white"
@@ -226,7 +157,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_confirm_order_print"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/white"

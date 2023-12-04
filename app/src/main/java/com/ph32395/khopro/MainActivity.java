@@ -16,20 +16,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.ph32395.khopro.Adapter.MonAnOrder_Adapter;
 import com.ph32395.khopro.Fragment.BanAnOrderFragment;
 import com.ph32395.khopro.Fragment.DoiMatKhauFragment;
-import com.ph32395.khopro.Fragment.HomeFragment;
-import com.ph32395.khopro.Fragment.MonAnOrderFragment;
+import com.ph32395.khopro.Fragment.DanhMucOrderFragment;
 import com.ph32395.khopro.Fragment.ProfileFragment;
 import com.ph32395.khopro.Fragment.QLBanAnFragment;
 import com.ph32395.khopro.Fragment.QLDanhMucFragment;
@@ -95,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 //        edUser.setText("Chào mừng "+username+" đến với LibraPro!");
 
         setTitle("Trang Chủ");
-        Fragment fragment = new HomeFragment();
+        Fragment fragment = new BanAnOrderFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.flContent, fragment); // R.id.flContent là ID của layout container cho fragment
@@ -172,11 +166,11 @@ public class MainActivity extends AppCompatActivity {
             Fragment selectedFragment = null;
 
            if (item.getItemId()==BT_HOME){
-                    selectedFragment = new HomeFragment();
+                    selectedFragment = new BanAnOrderFragment();
                     setTitle("Trang Chủ");
                     }
                 else if (item.getItemId()==BT_THONGBAO) {
-               selectedFragment = new BanAnOrderFragment();
+               selectedFragment = new ThongBaoFragment();
                     setTitle("Thông Báo");
                 }else if (item.getItemId()==BT_PROFILE) {
                     setTitle("Thông Tin Cá Nhân");

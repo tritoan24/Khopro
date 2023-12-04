@@ -1,5 +1,7 @@
 package com.ph32395.khopro.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -50,15 +52,12 @@ public class BanAnOrderFragment extends Fragment implements OnBanAnClickListener
             @Override
             public void onClick(View v) {
                 int soBan = 0;
+                saveSoBanToSharedPreferences(soBan);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                 // Tạo một Fragment mới và chuyển dữ liệu số bàn qua
-                HomeFragment anotherFragment = new HomeFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("SoBan", soBan);
-                anotherFragment.setArguments(bundle);
-
+                DanhMucOrderFragment anotherFragment = new DanhMucOrderFragment();
                 fragmentTransaction.replace(R.id.flContent, anotherFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
@@ -70,20 +69,26 @@ public class BanAnOrderFragment extends Fragment implements OnBanAnClickListener
     @Override
     public void onBanAnClick(int soBan) {
         Log.d("BanAnOrderFragment", "Clicked on BanAn: " + soBan);
+        saveSoBanToSharedPreferences(soBan);
 
         // Xử lý khi người dùng nhấn vào item, ví dụ: chuyển sang Fragment khác
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        // Tạo một Fragment mới và chuyển dữ liệu số bàn qua
-        HomeFragment anotherFragment = new HomeFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("SoBan", soBan);
-        anotherFragment.setArguments(bundle);
+        DanhMucOrderFragment anotherFragment = new DanhMucOrderFragment();
 
         fragmentTransaction.replace(R.id.flContent, anotherFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+    private void saveSoBanToSharedPreferences(int soBan) {
+        // Sử dụng tên SharedPreferences là "MyPrefs" (bạn có thể đặt tên khác)
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("SoBanSave", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Lưu giá trị số bàn vào SharedPreferences
+        editor.putInt("SoBan", soBan);
+        editor.apply();
     }
 
 }

@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ph32395.khopro.DAO.BoNhoTamThoiDAO;
 import com.ph32395.khopro.DAO.MonAnDAO;
+import com.ph32395.khopro.Model.BoNhoTamThoi;
 import com.ph32395.khopro.Model.MonAn;
 import com.ph32395.khopro.R;
 
@@ -25,13 +27,15 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
     ArrayList<MonAn> list;
     MonAnDAO monAnDAO;
     MonAn monAn;
+    BoNhoTamThoiDAO boNhoTamThoiDAO;
+    public int soLuong = 0;
 
-
-
+    private ArrayList<BoNhoTamThoi> danhSachTamThoi = new ArrayList<BoNhoTamThoi>();
     public MonAnOrder_Adapter(Context context , ArrayList<MonAn> list){
         this.context = context;
         this.list = list;
         monAnDAO = new MonAnDAO(context);
+        boNhoTamThoiDAO = new BoNhoTamThoiDAO(context);
     }
 
 
@@ -52,32 +56,44 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
         final MonAn monAn1 = list.get(position);
         holder.tv_tenMonAnOrder.setText(list.get(position).getTenMonAn());
         holder.tv_giaMonAnOrder.setText(formatMoney((int) list.get(position).getGiaTien()) + "");
-        final int[] soluong = {0};
+
+        BoNhoTamThoi temporaryItem = findItemInTemporaryList(list.get(position).getTenMonAn());
+        String ma = list.get(position).getTenMonAn();
+        if (temporaryItem == null) {
+            // Kiểm tra xem mục có tồn tại trong cơ sở dữ liệu hay không
+            BoNhoTamThoi existingItem = boNhoTamThoiDAO.getByName(ma);
+
+            if (existingItem != null) {
+                // Nếu đã tồn tại, set số lượng từ cơ sở dữ liệu lên TextView
+                monAn1.setSoLuong(existingItem.getSoLuong());
+                holder.tv_soLuong.setText(String.valueOf(monAn1.getSoLuong()));
+            } else {
+                monAn1.setSoLuong(0);
+                holder.tv_soLuong.setText(String.valueOf(monAn1.getSoLuong()));
+
+            }
+        }
 
         holder.btn_themDoAnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soluong[0] = soluong[0] + 1;
-                holder.tv_giaMonAnOrder.setText(formatMoney((int) (list.get(position).getGiaTien() * soluong[0])) + "");
-                holder.tv_soLuong.setText(soluong[0] + "");
-                Toast.makeText(context, "Số Lượng đang lafL "+soluong[0], Toast.LENGTH_SHORT).show();
+                monAn1.setSoLuong(monAn1.getSoLuong() + 1);
+                holder.tv_soLuong.setText(String.valueOf(monAn1.getSoLuong()));
+                updateTemporaryList(position, monAn1.getSoLuong());
             }
         });
 
         holder.btn_giamDoAnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soluong[0] = soluong[0] - 1;
-                if (soluong[0] < 0) {
-                    soluong[0] = 0; // Đảm bảo không bao giờ là số âm
-                }
-                holder.tv_giaMonAnOrder.setText(formatMoney((int) (list.get(position).getGiaTien() * soluong[0])) + "");
-                holder.tv_soLuong.setText(soluong[0] + "");
-                Toast.makeText(context, "Số Lượng đang lafL "+soluong[0], Toast.LENGTH_SHORT).show();
-
+                monAn1.setSoLuong(Math.max(0, monAn1.getSoLuong() - 1));
+                holder.tv_soLuong.setText(String.valueOf(monAn1.getSoLuong()));
+                updateTemporaryList(position, monAn1.getSoLuong());
             }
         });
     }
+
+
 
 
     @Override
@@ -98,4 +114,75 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
             btn_giamDoAnOrder = itemView.findViewById(R.id.btn_giamDoAnOrder);
         }
     }
+
+    private BoNhoTamThoi findItemInTemporaryList(String tenMonAn) {
+        for (BoNhoTamThoi boNhoTamThoi : danhSachTamThoi) {
+            if (boNhoTamThoi.getTenMonAn().equals(tenMonAn)) {
+                return boNhoTamThoi;
+            }
+        }
+        return null;
+    }
+
+    private void updateTemporaryList(int position, int quantity) {
+        MonAn selectedMonAn = list.get(position);
+
+        // Tìm kiếm xem món ăn đã tồn tại trong danh sách hay chưa
+        BoNhoTamThoi existingItem = findItemInTemporaryList(selectedMonAn.getTenMonAn());
+
+        if (existingItem != null) {
+            // Nếu đã tồn tại, cập nhật thông tin nếu số lượng khác 0
+            if (quantity > 0) {
+                existingItem.setSoLuong(quantity);
+                existingItem.setThanhTien((int) (selectedMonAn.getGiaTien() * quantity));
+            } else {
+                // Nếu số lượng là 0, xóa khỏi danh sách
+                danhSachTamThoi.remove(existingItem);
+            }
+        } else if (quantity > 0) {
+            // Nếu chưa tồn tại và số lượng khác 0, thêm mới vào danh sách
+            BoNhoTamThoi boNhoTamThoi = new BoNhoTamThoi();
+            boNhoTamThoi.setTenMonAn(selectedMonAn.getTenMonAn());
+            boNhoTamThoi.setSoLuong(quantity);
+            boNhoTamThoi.setThanhTien((int) (selectedMonAn.getGiaTien() * quantity));
+
+            danhSachTamThoi.add(boNhoTamThoi);
+        }
+
+    }
+    public void saveTemporaryListToDatabase() {
+        if (danhSachTamThoi.isEmpty()) {
+            Toast.makeText(context, "Bạn chưa thêm gì cả", Toast.LENGTH_SHORT).show();
+        } else {
+            // Danh sách có dữ liệu, kiểm tra xem các mục trong danh sách đã tồn tại trong cơ sở dữ liệu hay chưa
+            for (BoNhoTamThoi boNhoTamThoi : danhSachTamThoi) {
+                // Kiểm tra xem mục có tồn tại trong cơ sở dữ liệu hay không
+                BoNhoTamThoi existingItem = boNhoTamThoiDAO.getByName(boNhoTamThoi.getTenMonAn());
+
+                if (existingItem != null) {
+                    // Nếu đã tồn tại, thực hiện cập nhật thông tin
+                    try {
+                        existingItem.setSoLuong(boNhoTamThoi.getSoLuong());
+                        existingItem.setThanhTien( boNhoTamThoi.getThanhTien());
+                        boNhoTamThoiDAO.updateBoNhoTamThoi(existingItem);
+                        Toast.makeText(context, "Đã cập nhật dữ liệu trong cơ sở dữ liệu", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Nếu không tồn tại, thực hiện thêm mới vào cơ sở dữ liệu
+                    try {
+                        boNhoTamThoiDAO.Insert(boNhoTamThoi);
+                        Toast.makeText(context, "Đã thêm mới dữ liệu vào cơ sở dữ liệu", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
 }

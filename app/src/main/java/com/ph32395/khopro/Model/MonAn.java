@@ -6,6 +6,7 @@ public class MonAn {
     private int id_DanhMuc;
     private Integer id_GiamGia; // Sử dụng Integer để cho phép giá trị null
     private double giaTien;
+    private int soLuong;
 
     public MonAn() {
     }
@@ -56,5 +57,12 @@ public class MonAn {
 
     public void setGiaTien(double giaTien) {
         this.giaTien = giaTien;
+    }
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 }

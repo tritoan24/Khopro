@@ -10,7 +10,6 @@
         android:text="Thanh toán"
         android:textStyle="bold"
         android:textSize="30dp"
-        android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         android:orientation="horizontal"
         android:gravity="center_horizontal">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="Tiền mặt"
@@ -27,7 +26,7 @@
             android:textColor="@color/black"
             android:id="@+id/btn_thanhToanTienMat"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="Chuyển khoản"
@@ -41,10 +40,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="27dp"
             android:text="Thẻ ngân hàng"
             android:background="@drawable/button_custom"
             app:backgroundTint = "@null"
@@ -59,12 +57,14 @@
         android:layout_marginLeft="20dp"
         android:textSize="20dp"
         android:textStyle="bold"/>
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="10dp"
         android:background="@drawable/textview_custom"
-        android:id="@+id/tv_maGiamGiaThanhToan"/>
+        android:id="@+id/ed_maGiamGiaThanhToan"
+        android:paddingLeft="20dp"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,12 +73,15 @@
         android:layout_marginLeft="20dp"
         android:textSize="20dp"
         android:textStyle="bold"/>
-    <TextView
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:layout_margin="10dp"
         android:background="@drawable/textview_custom"
-        android:id="@+id/tv_giChu"/>
+        android:id="@+id/ed_giChu"
+        android:gravity="top"
+        android:padding="10dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

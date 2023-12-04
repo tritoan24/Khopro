@@ -1,7 +1,6 @@
 package com.ph32395.khopro;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,8 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ph32395.khopro.DAO.NhanVienDAO;
-import com.ph32395.khopro.Fragment.HomeFragment;
-import com.ph32395.khopro.Fragment.ProfileFragment;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;

@@ -1,9 +1,11 @@
 package com.ph32395.khopro.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.ph32395.khopro.Database.DbHelper;
 import com.ph32395.khopro.Model.GiamGia;
@@ -77,4 +79,80 @@ public class GiamGiaDAO {
         }
         return list;
     }
+    public boolean kiemTraMaGiamGiaTonTai(String maGiamGia) {
+        String[] columns = { "maGiamGia" };
+        String selection = "maGiamGia=?";
+        String[] selectionArgs = { maGiamGia };
+
+        Cursor cursor = db.query("GiamGia", columns, selection, selectionArgs, null, null, null);
+
+        boolean tonTai = cursor.moveToFirst();
+
+        cursor.close();
+
+        return tonTai;
+    }
+
+    @SuppressLint("Range")
+    public int layPhanTramGiamTuMaGiamGia(String maGiamGia) {
+        String[] columns = { "phanTramGiam" };
+        String selection = "maGiamGia=?";
+        String[] selectionArgs = { maGiamGia };
+
+        Cursor cursor = db.query("GiamGia", columns, selection, selectionArgs, null, null, null);
+
+        int phanTramGiam = 0;
+        if (cursor.moveToFirst()) {
+            phanTramGiam = cursor.getInt(cursor.getColumnIndex("phanTramGiam"));
+        }
+
+        cursor.close();
+
+        return phanTramGiam;
+    }
+    public void giamSoLuotDung(String maGiamGia) {
+        SQLiteDatabase db = DbHelper.getWritableDatabase();
+
+        // Lấy số lượt dùng hiện tại
+        int soLuotDungHienTai = laySoLuotDungTuMaGiamGia(maGiamGia);
+
+        // Kiểm tra nếu số lượt dùng đã là 0 thì xóa dòng
+        if (soLuotDungHienTai > 0) {
+            // Giảm số lượt dùng đi 1
+            int soLuotDungMoi = soLuotDungHienTai - 1;
+
+            // Cập nhật số lượt dùng mới vào cơ sở dữ liệu
+            ContentValues values = new ContentValues();
+            values.put("soLuotDung", soLuotDungMoi);
+            String whereClause = "maGiamGia=?";
+            String[] whereArgs = {maGiamGia};
+            db.update("GiamGia", values, whereClause, whereArgs);
+        } if(soLuotDungHienTai==0) {
+            // Nếu số lượt dùng là 0, xóa dòng từ bảng
+            String whereClause = "maGiamGia=?";
+            String[] whereArgs = {maGiamGia};
+            db.delete("GiamGia", whereClause, whereArgs);
+        }
+
+    }
+
+
+    @SuppressLint("Range")
+    public int laySoLuotDungTuMaGiamGia(String maGiamGia) {
+        String[] columns = { "soLuotDung" };
+        String selection = "maGiamGia=?";
+        String[] selectionArgs = { maGiamGia };
+
+        Cursor cursor = db.query("GiamGia", columns, selection, selectionArgs, null, null, null);
+
+        int soLuotDung = 0;
+        if (cursor.moveToFirst()) {
+            soLuotDung = cursor.getInt(cursor.getColumnIndex("soLuotDung"));
+        }
+
+        return soLuotDung;
+    }
+
+
+
 }

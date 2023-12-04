@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +83,6 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
         NhanVien nv = nhanVienDAO.getID(String.valueOf(hoaDon1.getId_NhanVien()));
         holder.tvtennhanvien.setText(nv.getHoTen());
 
-        holder.tv_tenMonAn.setText(list.get(position).getTenMonAn());
 
         banAnDAO = new BanAnDAO(context);
         BanAn ba = banAnDAO.getBanAnByID(hoaDon1.getSoBan());

@@ -76,6 +76,7 @@ public class QLMaGiamGiaFragment extends Fragment {
 
         EditText ed_Magiamgia= v.findViewById(R.id.ed_Magiamgia);
         EditText ed_Mucgiamgia= v.findViewById(R.id.ed_Mucgiamgia);
+        EditText edLuotGiamGia = v.findViewById(R.id.ed_soLuotDung_add);
         Button btn_themGG = v.findViewById(R.id.btn_themGG);
         Button btn_huythemGG = v.findViewById(R.id.btn_huyThemGG);
 
@@ -86,11 +87,13 @@ public class QLMaGiamGiaFragment extends Fragment {
             public void onClick(View v) {
                 String magiamgia = ed_Magiamgia.getText().toString();
                 int mucgiamgia = Integer.parseInt(ed_Mucgiamgia.getText().toString());
+                int soluotdung = Integer.parseInt(edLuotGiamGia.getText().toString());
 
                 giamGiaDAO = new GiamGiaDAO(getContext());
                 GiamGia giamGia = new GiamGia();
                 giamGia.setPhanTramGiam(mucgiamgia);
                 giamGia.setMaGiamGia(magiamgia);
+                giamGia.setSoLuotDung(soluotdung);
 
                 long kq = giamGiaDAO.Insert(giamGia);
                 if(kq>0){

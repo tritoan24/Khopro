@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ph32395.khopro.DAO.DanhMucDAO;
-import com.ph32395.khopro.Fragment.HomeFragment;
+import com.ph32395.khopro.Fragment.DanhMucOrderFragment;
 import com.ph32395.khopro.Fragment.MonAnOrderFragment;
 import com.ph32395.khopro.Model.DanhMucMonAn;
 import com.ph32395.khopro.R;
@@ -28,9 +28,9 @@ public class HomeOderAdapter  extends RecyclerView.Adapter<HomeOderAdapter.ViewH
     ArrayList<DanhMucMonAn> listDM;
     static DanhMucDAO danhMucDAO;
 
-    HomeFragment fragment;
+    DanhMucOrderFragment fragment;
 
-    public HomeOderAdapter(Context context, HomeFragment fragment, ArrayList<DanhMucMonAn> listDM) {
+    public HomeOderAdapter(Context context, DanhMucOrderFragment fragment, ArrayList<DanhMucMonAn> listDM) {
         this.context = context;
         this.listDM = listDM;
         this.fragment = fragment;

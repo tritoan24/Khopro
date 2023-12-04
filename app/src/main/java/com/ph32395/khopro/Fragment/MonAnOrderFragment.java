@@ -1,33 +1,50 @@
 package com.ph32395.khopro.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ph32395.khopro.Adapter.MonAnOrder_Adapter;
 import com.ph32395.khopro.Adapter.MonAn_Adapter;
+import com.ph32395.khopro.DAO.BoNhoTamThoiDAO;
 import com.ph32395.khopro.DAO.MonAnDAO;
+import com.ph32395.khopro.Model.BoNhoTamThoi;
 import com.ph32395.khopro.Model.MonAn;
 import com.ph32395.khopro.R;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MonAnOrderFragment extends Fragment {
-    MonAnDAO monAnDAO;
-    ArrayList<MonAn> list;
-    MonAnOrder_Adapter monAnOrder_adapter;
-    RecyclerView rc_monAnOrder;
-    Button checkBill;
+
+    private MonAnDAO monAnDAO;
+    private ArrayList<MonAn> list;
+    private MonAnOrder_Adapter monAnOrder_adapter;
+    private RecyclerView rc_monAnOrder;
+    private Button checkBill;
+    private ArrayList<BoNhoTamThoi> selectedItems = new ArrayList<>();
+    private int check = 0; // Mặc định là 0
+
+    public void setCheckValue(int value) {
+        this.check = value;
+    }
 
     @Nullable
     @Override
@@ -46,6 +63,11 @@ public class MonAnOrderFragment extends Fragment {
         monAnOrder_adapter = new MonAnOrder_Adapter(getActivity(), list);
         rc_monAnOrder.setAdapter(monAnOrder_adapter);
 
+
+
+
+
+
         int categoryId = getArguments().getInt("CategoryId", -1);
 
         if (categoryId != -1) {
@@ -61,17 +83,48 @@ public class MonAnOrderFragment extends Fragment {
             }
         }
 
+
+
+        checkBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                XacNhanOrderFragment fragment2 = new XacNhanOrderFragment();
+//                ((XacNhanOrderFragment) fragment2).setCheckValue(1);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContent, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                monAnOrder_adapter.saveTemporaryListToDatabase();
+
+            }
+        });
+
         return v;
     }
 
     @Override
     public void onDestroy() {
-        // Giải phóng đối tượng MonAnDAO khi Fragment bị hủy
         if (monAnDAO != null) {
             monAnDAO.close();
         }
         super.onDestroy();
     }
 
+    public void handleBackButton(int backValue) {
+        Log.d("MonAnOrderFragment", "Received backValue: " + backValue);
+
+        // Ví dụ: Hiển thị Toast
+        Toast.makeText(getContext(), "Received backValue: " + backValue, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        handleBackButton(check);
+    }
+
 }
+
 

@@ -6,7 +6,6 @@ import java.util.Date;
 public class HoaDon {
     private int id_HoaDon;
     private String id_NhanVien;
-    private String tenMonAn; // Sử dụng Integer để cho phép giá trị null
     private int soBan;
     private String ngayGio;
     private String kieuThanhToan;
@@ -32,13 +31,6 @@ public class HoaDon {
         this.id_NhanVien = id_NhanVien;
     }
 
-    public String getTenMonAn() {
-        return tenMonAn;
-    }
-
-    public void setTenMonAn(String tenMonAn) {
-        this.tenMonAn = tenMonAn;
-    }
 
     public int getSoBan() {
         return soBan;
@@ -72,10 +64,9 @@ public class HoaDon {
         this.tongTien = tongTien;
     }
 
-    public HoaDon(int id_HoaDon, String id_NhanVien, String tenMonAn, int soBan, String ngayGio, String kieuThanhToan, double tongTien) {
+    public HoaDon(int id_HoaDon, String id_NhanVien, int soBan, String ngayGio, String kieuThanhToan, double tongTien) {
         this.id_HoaDon = id_HoaDon;
         this.id_NhanVien = id_NhanVien;
-        this.tenMonAn = tenMonAn;
         this.soBan = soBan;
         this.ngayGio = ngayGio;
         this.kieuThanhToan = kieuThanhToan;

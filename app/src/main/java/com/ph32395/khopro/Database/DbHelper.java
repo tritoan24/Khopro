@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     static String DB_NAME = "UngDungDatDoAn";
-    static int DB_VERSION = 4;
+    static int DB_VERSION = 5;
 
     static final String CREATE_TABLE_MONAN = "CREATE TABLE MonAn (" +
             "    id_MonAn   INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -35,7 +35,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
     static final String CREATE_TABLE_HOADON = "CREATE TABLE HoaDon (" +
             " id_HoaDon INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            " tenMonAn TEXT NOT NULL," +
             " id_NhanVien TEXT NOT NULL REFERENCES NhanVien (maNhanVien), " +
             " soBan INTEGER NOT NULL," +
             " ngayGio TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
@@ -55,6 +54,11 @@ public class DbHelper extends SQLiteOpenHelper {
             " soLuong INTEGER NOT NULL," +
             " giaTien MONEY NOT NULL, " +
             " tongTien INTEGER NOT NULL)";
+    static final String CREATE_TABLE_BONHOTAMTHOI = "CREATE TABLE BoNhoTamThoi (" +
+            " id_BoNho INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            " tenMonAn TEXT NOT NULL," +
+            " soLuong INTEGER NOT NULL," +
+            " thanhTien MONEY NOT NULL)";
 
 
     public DbHelper(Context context) {
@@ -70,6 +74,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_HOADON);
         db.execSQL(CREATE_TABLE_GIAMGIA);
         db.execSQL(CREATE_TABLE_CHITIETHOADON);
+        db.execSQL(CREATE_TABLE_BONHOTAMTHOI);
         db.execSQL(DataSql.INSERT_TB_NHANVIEN);
         db.execSQL(DataSql.INSERT_TB_BANAN);
         db.execSQL(DataSql.INSERT_TB_DANHMUC);
@@ -89,6 +94,7 @@ public class DbHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS HoaDon");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS GiamGia");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS ChiTietHoaDon");
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS BoNhoTamThoi");
             onCreate(sqLiteDatabase);
         }
     }
