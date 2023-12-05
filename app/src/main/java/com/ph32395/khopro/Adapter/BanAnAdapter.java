@@ -67,19 +67,40 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
                 btn_sua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        try {
-                            int soBanMoi = Integer.parseInt(ed_tenBanAn.getText().toString());
-                            BanAn banAn = list.get(position);
-                            banAn.setSoBan(soBanMoi);
-                            int result = dao.update(banAn);
-                            if (result > 0) {
-                                list.set(position, banAn);
-                                notifyDataSetChanged();
-                                dialog.dismiss();
-                            } else {
+                       if (TextUtils.isEmpty(tenBA)) {
+                            // Chuỗi rỗng
+                            ed_tenBanAn.setError("Số bàn ăn đang trống");
+                        } else {
+                            try {
+                                // Chuyển đổi chuỗi thành số
+                                double number = Double.parseDouble(tenBA);
+
+                                // Kiểm tra xem số có là số âm không
+                                if (number < 0) {
+                                    ed_tenBanAn.setError("Số bàn ăn đang là số âm");
+                                } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (NumberFormatException e) {
+                                // Nếu có ngoại lệ, đây không phải là số
+                                ed_tenBanAn.setError("Số bàn ăn đang không là số");
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        }
+                        if (!tenBA.isEmpty()){
+                            try {
+                                int soBanMoi = Integer.parseInt(ed_tenBanAn.getText().toString());
+                                BanAn banAn = list.get(position);
+                                banAn.setSoBan(soBanMoi);
+                                int result = dao.update(banAn);
+                                if (result > 0) {
+                                    list.set(position, banAn);
+                                    notifyDataSetChanged();
+                                    dialog.dismiss();
+                                } else {
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 });

@@ -75,6 +75,25 @@ public class QLBanAnFragment extends Fragment {
             public void onClick(View view) {
                 // Xử lý thêm bàn ăn vào database
                 String tenBanAn = ed_banAn.getText().toString().trim();
+                if (TextUtils.isEmpty(tenBanAn)) {
+                    // Chuỗi rỗng
+                    ed_banAn.setError("Số bàn ăn đang trống");
+                } else {
+                    try {
+                        // Chuyển đổi chuỗi thành số
+                        double number = Double.parseDouble(tenBanAn);
+
+                        // Kiểm tra xem số có là số âm không
+                        if (number < 0) {
+                            ed_banAn.setError("Số bàn ăn đang là số âm");
+                        } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (NumberFormatException e) {
+                        // Nếu có ngoại lệ, đây không phải là số
+                        ed_banAn.setError("Số bàn ăn đang không là số");
+                    }
+                }
                 if (!tenBanAn.isEmpty()) {
                     BanAn banAn = new BanAn();
                     banAn.setSoBan(Integer.parseInt(tenBanAn)); // Giả sử bạn đang lưu số bàn ăn vào trường soBan

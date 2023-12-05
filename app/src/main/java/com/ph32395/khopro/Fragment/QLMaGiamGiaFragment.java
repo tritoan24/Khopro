@@ -86,15 +86,59 @@ public class QLMaGiamGiaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String magiamgia = ed_Magiamgia.getText().toString();
-                int mucgiamgia = Integer.parseInt(ed_Mucgiamgia.getText().toString());
-                int soluotdung = Integer.parseInt(edLuotGiamGia.getText().toString());
+                String mucgiamgia = (ed_Mucgiamgia.getText().toString());
+                String soluotdung = (edLuotGiamGia.getText().toString());
+                
+                if(magiamgia.isEmpty()){
+                    ed_Magiamgia.setError("Mã giảm giá đang trống");
+                }
+                if (TextUtils.isEmpty(mucgiamgia)) {
+                    // Chuỗi rỗng
+                    ed_Mucgiamgia.setError("Mức đang trống");
+                } else {
+                    try {
+                        // Chuyển đổi chuỗi thành số
+                        double number = Double.parseDouble(mucgiamgia);
+
+                        // Kiểm tra xem số có là số âm không
+                        if (number < 0) {
+                            ed_Mucgiamgia.setError("Tuổi đang là số âm");
+                        } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (NumberFormatException e) {
+                        // Nếu có ngoại lệ, đây không phải là số
+                        ed_Mucgiamgia.setError("Tuổi đang không là số");
+                    }
+                }
+                if (TextUtils.isEmpty(soluotdung)) {
+                    // Chuỗi rỗng
+                    edLuotGiamGia.setError("Lượt dùng đang trống");
+                } else {
+                    try {
+                        // Chuyển đổi chuỗi thành số
+                        double number = Double.parseDouble(soluotdung);
+
+                        // Kiểm tra xem số có là số âm không
+                        if (number < 0) {
+                            edLuotGiamGia.setError("Lượt đang là số âm");
+                        } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (NumberFormatException e) {
+                        // Nếu có ngoại lệ, đây không phải là số
+                        edLuotGiamGia.setError("Lượt dùng đang không là số");
+                    }
+                }
+                int mucgiamgia2 = Integer.parseInt(ed_Mucgiamgia.getText().toString());
+                int soluotdung2 = Integer.parseInt(edLuotGiamGia.getText().toString());
 
                 giamGiaDAO = new GiamGiaDAO(getContext());
                 GiamGia giamGia = new GiamGia();
-                giamGia.setPhanTramGiam(mucgiamgia);
+                giamGia.setPhanTramGiam(mucgiamgia2);
                 giamGia.setMaGiamGia(magiamgia);
-                giamGia.setSoLuotDung(soluotdung);
-
+                giamGia.setSoLuotDung(soluotdung2);
+                
                 long kq = giamGiaDAO.Insert(giamGia);
                 if(kq>0){
                     Toast.makeText(getContext(), "Thêm thành công ", Toast.LENGTH_SHORT).show();

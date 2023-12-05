@@ -2,10 +2,10 @@ package com.ph32395.khopro.Database;
 
 public class DataSql {
     public static final String INSERT_TB_NHANVIEN = "INSERT INTO NhanVien(maNhanVien, hoTen,tuoi,gioiTinh,soDienThoai, matKhau, loaiTaiKhoan) VALUES" +
-            "('admin', 'Nguyen Toan',18,'Nam','0862613348', 'admin', 'Admin')," +
-            "('nhanvien1', 'NguyenTriToan',18,'Nữ','0862613348', '12345678', 'Admin')," +
-            "('nhanvien2', 'Toan',18,'Nữ','0862613348', '12345678', 'NhanVien'),"+
-            "('a','a',18,'Nam','0862613348','a','a')";
+            "('admin', 'Nguyen Toan',18,'Nam','0862613348', '123456789', 'Admin')," +
+            "('nhanvien1', 'NguyenTriToan',18,'Nữ','0862613348', '123456789', 'Admin')," +
+            "('nhanvien2', 'Toan',18,'Nữ','0862613348', '123456789', 'NhanVien'),"+
+            "('a','a',18,'Nam','0862613348','123456789','a')";
 
     public static final String INSERT_TB_DANHMUC = "INSERT INTO DanhMuc(tenDanhMuc) VALUES" +
             "('Món Chính')," +

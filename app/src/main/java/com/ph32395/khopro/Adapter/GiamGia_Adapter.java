@@ -141,13 +141,55 @@ public class GiamGia_Adapter extends RecyclerView.Adapter<GiamGia_Adapter.ViewHo
             @Override
             public void onClick(View v) {
                 String magiamgia = ed_updateMaGiamGia.getText().toString();
-                int mucgiamgia = Integer.parseInt(ed_updateMucGiamGia.getText().toString());
-                int soluotdung = Integer.parseInt(ed_updateSoLuotDung.getText().toString());
+                String mucgiamgia = ed_updateMucGiamGia.getText().toString();
+                String soluotdung = ed_updateSoLuotDung.getText().toString();
+
+                if (TextUtils.isEmpty(mucgiamgia)) {
+                    // Chuỗi rỗng
+                    ed_updateMucGiamGia.setError("Mức đang trống");
+                } else {
+                    try {
+                        // Chuyển đổi chuỗi thành số
+                        double number = Double.parseDouble(mucgiamgia);
+
+                        // Kiểm tra xem số có là số âm không
+                        if (number < 0) {
+                            ed_updateMucGiamGia.setError("Tuổi đang là số âm");
+                        } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (NumberFormatException e) {
+                        // Nếu có ngoại lệ, đây không phải là số
+                        ed_updateMucGiamGia.setError("Tuổi đang không là số");
+                    }
+                }
+                if (TextUtils.isEmpty(soluotdung)) {
+                    // Chuỗi rỗng
+                    ed_updateSoLuotDung.setError("Lượt dùng đang trống");
+                } else {
+                    try {
+                        // Chuyển đổi chuỗi thành số
+                        double number = Double.parseDouble(soluotdung);
+
+                        // Kiểm tra xem số có là số âm không
+                        if (number < 0) {
+                            ed_updateSoLuotDung.setError("Lượt đang là số âm");
+                        } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (NumberFormatException e) {
+                        // Nếu có ngoại lệ, đây không phải là số
+                        ed_updateSoLuotDung.setError("Lượt dùng đang không là số");
+                    }
+                }
+                
+                int mucgiamgia2 = Integer.parseInt(ed_updateMucGiamGia.getText().toString());
+                int soluotdung2 = Integer.parseInt(ed_updateSoLuotDung.getText().toString());
 
                 giamGiaDAO = new GiamGiaDAO(context);
                 giamGia.setMaGiamGia(magiamgia);
-                giamGia.setPhanTramGiam(mucgiamgia);
-                giamGia.setSoLuotDung(soluotdung);
+                giamGia.setPhanTramGiam(mucgiamgia2);
+                giamGia.setSoLuotDung(soluotdung2);
 
                 int kq = giamGiaDAO.Update(giamGia);
                 if(kq>0){
