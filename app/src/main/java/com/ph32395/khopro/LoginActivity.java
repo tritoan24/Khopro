@@ -69,10 +69,11 @@ public class LoginActivity extends AppCompatActivity {
     public void checkLogin() {
         strmanv = edmaNhanVien.getText().toString();
         strPass = edmatKhau.getText().toString();
-
         if (strmanv.isEmpty() || strPass.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Mã người dùng và mật khẩu không được bỏ trống", Toast.LENGTH_SHORT).show();
-        } else {
+        } if(strPass.length()<8){
+            edmatKhau.setError("Mật khẩu không đủ 8 ký tự");
+        }else {
             if (dao.checkLogin(strmanv, strPass) > 0) {
                 Toast.makeText(getApplicationContext(), "Login thành công", Toast.LENGTH_SHORT).show();
                 rememberUser(strmanv, strPass, chk_forgotPass.isChecked());
