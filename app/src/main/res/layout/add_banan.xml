@@ -16,7 +16,7 @@
         android:id="@+id/ed_tenBanAn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên bàn: "
+        android:hint="Số bàn: "
         android:background="@drawable/custom_edt_banan"
         android:paddingVertical="20dp"
         android:paddingLeft="15dp"

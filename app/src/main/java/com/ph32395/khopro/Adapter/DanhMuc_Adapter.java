@@ -150,7 +150,7 @@ public class DanhMuc_Adapter extends RecyclerView.Adapter<DanhMuc_Adapter.ViewHo
 
     public int validate() {
         int check = 1;
-        if (ed_maDanhMuc_update.getText().length() == 0 || ed_tenDanhMuc_update.getText().length() == 0) {
+        if (ed_tenDanhMuc_update.getText().length() == 0) {
             Toast.makeText(context, "Không bỏ trống", Toast.LENGTH_SHORT).show();
             check = -1;
         }
