@@ -21,6 +21,14 @@ public class NhanVien {
         this.matKhau = matKhau;
     }
 
+    public NhanVien(String hoTen, int tuoi, String gioiTinh, String soDienThoai) {
+        this.hoTen = hoTen;
+        this.tuoi = tuoi;
+        this.gioiTinh = gioiTinh;
+        this.soDienThoai = soDienThoai;
+    }
+
+
     public String getMaNhanVien() {
         return maNhanVien;
     }

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,6 @@ public class ProfileFragment extends Fragment {
     Button btn_doiMatKhau;
     ImageView gioiTinh;
     ImageButton img_logOut;
-
     NhanVien nhanVien;
     NhanVienDAO nhanVienDAO;
     Context context;
@@ -61,6 +61,7 @@ public class ProfileFragment extends Fragment {
         mma = readMmaFromSharedPreferences();
         nhanVienDAO = new NhanVienDAO(getContext());
         nhanVien = nhanVienDAO.getID(mma);
+
 
         ed_hoTenNhanVienTT.setText(String.valueOf(nhanVien.getHoTen()));
         ed_tuoiNhanVienTT.setText(String.valueOf(nhanVien.getTuoi()));
@@ -96,10 +97,10 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    public void dialogUpdateProfile(){
+    public void dialogUpdateProfile() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        LayoutInflater inflater = ((Activity)getContext()).getLayoutInflater();
-        View v = inflater.inflate(R.layout.update_profile,null);
+        LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
+        View v = inflater.inflate(R.layout.update_profile, null);
         builder.setView(v);
         builder.setCancelable(false);
         AlertDialog dialog = builder.create();
@@ -110,6 +111,7 @@ public class ProfileFragment extends Fragment {
         EditText ed_sdtNhanVienTT_update = v.findViewById(R.id.ed_sdtNhanVienTT_update);
         Button btn_updateProfile = v.findViewById(R.id.btn_update_profile);
         Button btn_cancelUpdate = v.findViewById(R.id.btn_update_profile_cancel);
+
 
         ed_hoTenNhanVienTT_update.setText(ed_hoTenNhanVienTT.getText().toString());
         ed_tuoiNhanVienTT_update.setText(ed_tuoiNhanVienTT.getText().toString());
@@ -124,13 +126,35 @@ public class ProfileFragment extends Fragment {
                 String gioiTinhNV = ed_gioiTinhNhanVienTT_update.getText().toString();
                 String sdtNV = ed_sdtNhanVienTT_update.getText().toString();
 
-//                nhanVienDAO = new NhanVienDAO(context);
-//                NhanVien nhanVienUpdate = new NhanVien(tenNV, tuoiNV, gioiTinhNV, sdtNV);
-//                nhanVienUpdate.setHoTen(tenNV);
-//                nhanVienUpdate.setTuoi(Integer.valueOf(tuoiNV));
-//                nhanVienUpdate.setGioiTinh(gioiTinhNV);
-//                nhanVienUpdate.setSoDienThoai(sdtNV);
-//                nhanVienDAO.update_nv(nhanVienUpdate);
+                if (tenNV.isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng nhập họ tên", Toast.LENGTH_SHORT).show();
+                } else if (tuoiNV <= 0) {
+                    Toast.makeText(getContext(), "Tuổi phải là số dương", Toast.LENGTH_SHORT).show();
+                } else if (!gioiTinhNV.equalsIgnoreCase("Nam") && !gioiTinhNV.equalsIgnoreCase("Nữ")) {
+                    Toast.makeText(getContext(), "Giới tính phải là nam hoặc nữ", Toast.LENGTH_SHORT).show();
+                } else if (sdtNV.isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
+                }
+                try {
+                    String manv = readMmaFromSharedPreferences();
+                    // Tạo đối tượng NhanVien mới với thông tin mới
+                    NhanVien newNhanVien = new NhanVien();
+                    newNhanVien.setMaNhanVien(manv);
+                    newNhanVien.setHoTen(tenNV);
+                    newNhanVien.setTuoi(tuoiNV);
+                    newNhanVien.setGioiTinh(gioiTinhNV);
+                    newNhanVien.setSoDienThoai(sdtNV);
+
+                    int updateResult = nhanVienDAO.update_Profile(newNhanVien);
+
+                    if (updateResult > 0) {
+                        Toast.makeText(getContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Cập nhật thông tin thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    throw e;
+                }
                 dialog.dismiss();
             }
         });
@@ -139,6 +163,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+
             }
         });
 
@@ -147,9 +172,30 @@ public class ProfileFragment extends Fragment {
     }
 
 
-
     private String readMmaFromSharedPreferences() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString("mma", "");
     }
+
+//    public void reloadDAO() {
+//        // Gọi phương thức refresh() trong DAO
+//        nhanVienDAO.refresh();
+//
+//        // Lấy danh sách dữ liệu mới từ DAO
+//        NhanVien newNhanVien = nhanVienDAO.getID(mma);
+//
+//        // Cập nhật lại thông tin hiển thị trên fragment
+//        ed_hoTenNhanVienTT.setText(newNhanVien.getHoTen());
+//        ed_tuoiNhanVienTT.setText(String.valueOf(newNhanVien.getTuoi()));
+//        if ("Nam".equals(newNhanVien.getGioiTinh())) {
+//            gioiTinh.setImageResource(R.drawable.nguoidung);
+//        } else {
+//            gioiTinh.setImageResource(R.drawable.woman);
+//        }
+//        ed_gioiTinhNhanVienTT.setText(newNhanVien.getGioiTinh());
+//        ed_sdtNhanVienTT.setText(newNhanVien.getSoDienThoai());
+//
+//        // Cập nhật lại đối tượng `nhanVien`
+//        nhanVien = newNhanVien;
+//    }
 }
