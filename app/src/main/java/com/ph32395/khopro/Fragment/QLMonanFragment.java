@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,11 @@ public class QLMonanFragment extends Fragment {
                 if ( ed_tenMonAn.getText().length() == 0
                         || ed_giaMon.getText().length() == 0) {
                     Toast.makeText(getContext(), "Không bỏ trống", Toast.LENGTH_SHORT).show();
+                    check = -1;
+                }
+                if (TextUtils.isDigitsOnly(ed_tenMonAn.getText().toString())) {
+                    // Chuỗi là số
+                    ed_tenMonAn.setError("tên món ăn không thể là số");
                     check = -1;
                 }
                 if (ed_giaMon.getText().length() == 0){
