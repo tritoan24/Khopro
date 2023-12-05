@@ -70,6 +70,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button_banan"
             android:elevation="5dp"
+            android:layout_marginBottom="10dp"
             android:paddingHorizontal="60dp"
             android:text="Sửa"
             android:textColor="@color/white" />
@@ -79,6 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/custom_button_huy"
             android:elevation="5dp"
             android:paddingHorizontal="60dp"

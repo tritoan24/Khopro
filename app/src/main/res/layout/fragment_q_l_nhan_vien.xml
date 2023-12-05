@@ -10,7 +10,8 @@
         android:id="@+id/rc_quanLyNhanVien"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:padding="16dp"/>
 
     <ImageView
         android:id="@+id/img_add_nhanVien"

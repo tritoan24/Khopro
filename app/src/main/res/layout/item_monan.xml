@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="20dp"
     >
 
     <LinearLayout
@@ -11,13 +10,15 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_item"
         android:orientation="horizontal"
         android:elevation="5dp">
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,19 +107,25 @@
                     android:id="@+id/tv_giaTienMon"/>
             </LinearLayout>
         </LinearLayout>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/icon_edit"
-            android:id="@+id/img_edit_monAn"/>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/icon_delete"
-            android:id="@+id/img_delete_monAn"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/icon_edit"
+                android:id="@+id/img_edit_monAn"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/icon_delete"
+                android:id="@+id/img_delete_monAn"/>
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

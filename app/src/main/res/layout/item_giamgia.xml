@@ -9,13 +9,16 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_item"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:elevation="5dp">
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="2.3">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:padding="10dp"
-                    android:text="Mức giảm giá :  "
+                    android:text="Mức giảm giá: "
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/txtMucGiamGia"
@@ -78,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:padding="10dp"
-                    android:text="Số lượt dùng :  "
+                    android:text="Số lượt dùng: "
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/txtSoLuotDung"
@@ -88,18 +91,24 @@
                     android:text="2" />
             </LinearLayout>
         </LinearLayout>
-        <ImageView
-            android:id="@+id/img_edit_GG"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/icon_edit" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/img_edit_GG"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/icon_edit" />
 
-        <ImageView
-            android:id="@+id/img_delete_GG"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/icon_delete" />
+            <ImageView
+                android:id="@+id/img_delete_GG"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/icon_delete" />
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".Fragment.XacNhanOrderFragment">
 
     <LinearLayout
@@ -15,8 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/img_back_cfOrder"
@@ -37,7 +36,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:gravity="center_horizontal">
 
             <TextView
@@ -59,7 +58,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:text="Món đã chọn"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -68,10 +67,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:stretchColumns="1,2,3"
-            >
+            android:stretchColumns="1,2,3">
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,7 +78,7 @@
                     android:layout_column="1"
                     android:text="Tên món"
                     android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:gravity="center" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -87,8 +86,7 @@
                     android:layout_column="1"
                     android:text="Số lượng"
                     android:textStyle="bold"
-                    android:gravity="center"
-                    />
+                    android:gravity="center" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -96,8 +94,7 @@
                     android:layout_column="1"
                     android:text="Thành tiền"
                     android:textStyle="bold"
-                    android:gravity="center"
-                    />
+                    android:gravity="center" />
             </TableRow>
 
         </TableLayout>
@@ -106,17 +103,15 @@
             android:id="@+id/lv_confirm_order"
             android:layout_width="match_parent"
             android:layout_height="230dp"
-            android:layout_marginTop="10dp"/>
-
+            android:layout_marginTop="10dp" />
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="20dp"
             android:text="---------------------------------------------------------------------------------" />
-
-
 
 
         <LinearLayout
@@ -146,8 +141,8 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginTop="40dp"
-            android:gravity="center"
-            >
+            android:gravity="center">
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_confirm_order_print"
                 android:layout_width="0dp"
@@ -157,7 +152,7 @@
                 android:textColor="@color/white"
                 android:elevation="5dp"
                 android:text="Xác nhận"
-                android:background="@drawable/custom_button_huy"/>
+                android:background="@drawable/custom_button_huy" />
         </LinearLayout>
     </LinearLayout>
 

@@ -110,7 +110,7 @@
             android:text="Thay đổi"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:backgroundTint="#DF3A3A"
+            android:backgroundTint="#44E24A"
             android:id="@+id/btn_update_profile"></Button>
 
         <Button

@@ -30,6 +30,7 @@
             android:text="Chọn Mục Khác"
             android:layout_gravity="bottom|end"
             android:textStyle="bold"
+            android:textColor="@color/white"
             android:background="@drawable/custom_button_huy"
             android:id="@+id/btn_backDanhMuc"/>
         <androidx.appcompat.widget.AppCompatButton
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tiếp Tục"
+            android:textColor="@color/white"
             android:layout_gravity="bottom|end"
             android:background="@drawable/custom_button_banan"
             android:textStyle="bold"

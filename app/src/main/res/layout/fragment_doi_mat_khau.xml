@@ -147,7 +147,7 @@
                         android:id="@+id/btn_confirm_changPass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#F71B33"
+                        android:backgroundTint="#44E24A"
                         android:text="Xác nhận"
                         app:cardCornerRadius="10dp"
                         android:layout_marginLeft="20dp"

@@ -27,7 +27,7 @@
         android:paddingLeft="10dp"
         />
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="36dp"
         android:layout_height="36dp"
         android:id="@+id/btn_giamDoAnOrder"
         android:background="@drawable/giam"
@@ -48,7 +48,7 @@
       >
     </TextView>
     <ImageButton
-        android:layout_width="wrap_content"
+        android:layout_width="36dp"
         android:layout_height="36dp"
         android:id="@+id/btn_themDoAnOrder"
         android:background="@drawable/tang"

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="20dp"
     >
 
     <LinearLayout
@@ -11,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_item"
         android:orientation="horizontal"
         android:elevation="5dp"
@@ -18,8 +18,9 @@
         >
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -124,13 +125,20 @@
                     android:id="@+id/tv_kieuThanhToan"/>
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/icon_delete"
-            android:id="@+id/img_delete_hoaDon"/>
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/icon_delete"
+                android:id="@+id/img_delete_hoaDon"/>
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>
