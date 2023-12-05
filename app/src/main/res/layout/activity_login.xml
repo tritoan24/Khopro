@@ -105,6 +105,7 @@
                     android:hint="Mật khẩu"
                     android:textColor="#000000"
                     android:textColorHint="#DDD5D5"
+                    android:inputType="textPassword"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
