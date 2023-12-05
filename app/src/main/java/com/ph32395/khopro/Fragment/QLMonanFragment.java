@@ -85,6 +85,27 @@ public class QLMonanFragment extends Fragment {
                     Toast.makeText(getContext(), "Không bỏ trống", Toast.LENGTH_SHORT).show();
                     check = -1;
                 }
+                if (ed_giaMon.getText().length() == 0){
+                    ed_giaMon.setError("Giá món ăn đang trống");
+                    check = -1;
+                }else {
+                    try {
+                        // Chuyển đổi chuỗi thành số
+                        double number = Double.parseDouble(ed_giaMon.getText().toString());
+
+                        // Kiểm tra xem số có là số âm không
+                        if (number < 0) {
+                            ed_giaMon.setError("Giá đang là số âm");
+                            check = -1;
+                        } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (NumberFormatException e) {
+                        // Nếu có ngoại lệ, đây không phải là số
+                        ed_giaMon.setError("Giá đang không là số");
+                        check = -1;
+                    }
+                }
                 return check;
             }
             protected void openDialog(final Context context, final int type) {
