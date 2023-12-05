@@ -20,6 +20,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_edt_banan"
         android:elevation="5dp"
+        android:inputType="text"
         android:hint="Tên món ăn: "
         android:paddingVertical="20dp"
         android:paddingLeft="15dp" />
@@ -56,6 +57,7 @@
         android:background="@drawable/custom_edt_banan"
         android:elevation="5dp"
         android:hint="Giá tiền: "
+        android:inputType="number"
         android:paddingVertical="20dp"
         android:paddingLeft="15dp" />
 
