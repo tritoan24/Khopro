@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.ph32395.khopro.DAO.BoNhoTamThoiDAO;
+import com.ph32395.khopro.Fragment.XacNhanOrderFragment;
 import com.ph32395.khopro.Model.BoNhoTamThoi;
 import com.ph32395.khopro.R;
 
@@ -23,12 +24,22 @@ import java.util.List;
 public class BoNhoTamThoiAdapter extends ArrayAdapter<BoNhoTamThoi> {
     private Context context;
     private int resource;
+    private OnItemDeletedListener itemDeletedListener;
+    private XacNhanOrderFragment xacNhanOrderFragment;
 
-    public BoNhoTamThoiAdapter(Context context, int resource, List<BoNhoTamThoi> objects) {
+    public BoNhoTamThoiAdapter(Context context, int resource, List<BoNhoTamThoi> objects, XacNhanOrderFragment fragment) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
+        this.xacNhanOrderFragment = fragment; // Thêm dòng này
     }
+    public void setOnItemDeletedListener(OnItemDeletedListener listener) {
+        this.itemDeletedListener = listener;
+    }
+    public interface OnItemDeletedListener {
+        void onItemDeleted();
+    }
+
 
     @NonNull
     @Override
@@ -62,14 +73,15 @@ public class BoNhoTamThoiAdapter extends ArrayAdapter<BoNhoTamThoi> {
                 BoNhoTamThoi boNhoTamThoi = getItem(position);
 
                 if (boNhoTamThoi != null) {
-                    // Gọi phương thức xóa trong DAO
                     dao.delete(boNhoTamThoi.getId_BoNho());
-
-                    // Xóa mục trong danh sách
                     remove(boNhoTamThoi);
-
-                    // Thông báo sự kiện đã xóa mục tại vị trí position
                     notifyDataSetChanged();
+                    if (itemDeletedListener != null) {
+                        itemDeletedListener.onItemDeleted();
+                    }
+                    if (xacNhanOrderFragment != null) {
+                        xacNhanOrderFragment.onItemDeleted(); // Gọi phương thức ở đây
+                    }
                 }
 
                 return true;
@@ -82,20 +94,7 @@ public class BoNhoTamThoiAdapter extends ArrayAdapter<BoNhoTamThoi> {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         return decimalFormat.format(money);
     }
-    private void deleteItem(int position) {
-        // Xử lý xóa mục từ cơ sở dữ liệu
-        BoNhoTamThoi boNhoTamThoi = getItem(position);
-        if (boNhoTamThoi != null) {
-            // Xóa mục từ cơ sở dữ liệu ở đây (thay thế bằng logic thích hợp)
-            // dbHelper.deleteItem(boNhoTamThoi.getId());
 
-            // Xóa mục trong danh sách
-            remove(boNhoTamThoi);
-
-            // Thông báo sự kiện đã xóa mục tại vị trí position
-            notifyDataSetChanged();
-        }
-    }
 
 }
 

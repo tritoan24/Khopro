@@ -169,7 +169,6 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
             tv_maHoaDon = itemView.findViewById(R.id.tv_maHoaDon);
             tvtennhanvien = itemView.findViewById(R.id.tv_maNhanVien);
             tv_soBan = itemView.findViewById(R.id.tv_soBan);
-            tv_tenMonAn = itemView.findViewById(R.id.tv_tenMonAn_hoaDon);
             tv_thoiGianTao = itemView.findViewById(R.id.tv_thoiGianTao);
             tvtongtien = itemView.findViewById(R.id.tv_giaGoc);
             tv_kieuThanhToan = itemView.findViewById(R.id.tv_kieuThanhToan);

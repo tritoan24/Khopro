@@ -38,7 +38,7 @@ public class MonAnOrderFragment extends Fragment {
     private ArrayList<MonAn> list;
     private MonAnOrder_Adapter monAnOrder_adapter;
     private RecyclerView rc_monAnOrder;
-    private Button checkBill;
+    private Button checkBill,backDM;
     private ArrayList<BoNhoTamThoi> selectedItems = new ArrayList<>();
     private int check = 0; // Mặc định là 0
 
@@ -53,6 +53,7 @@ public class MonAnOrderFragment extends Fragment {
 
         rc_monAnOrder = v.findViewById(R.id.rc_monAnOrder);
         checkBill = v.findViewById(R.id.btn_checkBill);
+        backDM = v.findViewById(R.id.btn_backDanhMuc);
 
         monAnDAO = new MonAnDAO(getContext());
 
@@ -99,6 +100,19 @@ public class MonAnOrderFragment extends Fragment {
                 fragmentTransaction.commit();
                 monAnOrder_adapter.saveTemporaryListToDatabase();
 
+            }
+        });
+        backDM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DanhMucOrderFragment fragment2 = new DanhMucOrderFragment();
+//                ((XacNhanOrderFragment) fragment2).setCheckValue(1);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContent, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                monAnOrder_adapter.saveTemporaryListToDatabase();
             }
         });
 

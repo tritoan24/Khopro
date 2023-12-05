@@ -98,7 +98,6 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
                     double giaTien = list.get(position).getGiaTien();
                     double discountedPrice = giaTien - (giaTien * discountPercentage / 100);
 
-                    // Hiển thị giá tiền gốc với gạch ngang
                     String giaTienStrikethrough = String.valueOf((int) giaTien) + " vnd";
                     Spannable spannable = new SpannableString(giaTienStrikethrough);
                     spannable.setSpan(new StrikethroughSpan(), 0, giaTienStrikethrough.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

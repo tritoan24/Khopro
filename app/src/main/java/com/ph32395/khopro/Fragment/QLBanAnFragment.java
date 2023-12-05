@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,6 +46,7 @@ public class QLBanAnFragment extends Fragment {
         list = (ArrayList<BanAn>) banAnDAO.getAll();
         adapter = new BanAnAdapter(getActivity(), this, list);
         rc_qlba.setAdapter(adapter);
+//        rc_qlba.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
         img_addBanAn.setOnClickListener(new View.OnClickListener() {
             @Override

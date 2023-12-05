@@ -145,25 +145,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:layout_marginTop="40dp">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_confirm_order"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:text="Xác nhận"
-                android:textColor="@color/white"
-                android:background="@drawable/custom_button_huy"/>
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            >
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_confirm_order_print"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/white"
                 android:elevation="5dp"
-                android:text="Xác nhận và in hoá đơn"
-                android:background="@drawable/custom_button_banan"/>
+                android:text="Xác nhận"
+                android:background="@drawable/custom_button_huy"/>
         </LinearLayout>
     </LinearLayout>
 

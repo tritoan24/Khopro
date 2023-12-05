@@ -80,8 +80,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataSql.INSERT_TB_DANHMUC);
         db.execSQL(DataSql.INSERT_TB_MONAN);
         db.execSQL(DataSql.INSERT_TB_GIAMGIA);
-        db.execSQL(DataSql.INSERT_TB_HOADON);
-        db.execSQL(DataSql.INSERT_TB_CHITIETHOADON);
+
     }
 
     @Override

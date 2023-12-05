@@ -137,4 +137,29 @@ public class BoNhoTamThoiDAO {
     public long delete(int id){
         return db.delete("BoNhoTamThoi","id_BoNho = ?",new String[]{String.valueOf(id)});
     }
+    @SuppressLint("Range")
+    public List<BoNhoTamThoi> layDanhSachBoNhoTamThoi() {
+        List<BoNhoTamThoi> listBoNhoTamThoi = new ArrayList<>();
+
+        String query = "SELECT * FROM BoNhoTamThoi";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                BoNhoTamThoi boNhoTamThoi = new BoNhoTamThoi();
+                boNhoTamThoi.setId_BoNho(cursor.getInt(cursor.getColumnIndex("id_BoNho")));
+                boNhoTamThoi.setTenMonAn(cursor.getString(cursor.getColumnIndex("tenMonAn")));
+                boNhoTamThoi.setSoLuong(cursor.getInt(cursor.getColumnIndex("soLuong")));
+                boNhoTamThoi.setThanhTien((int) cursor.getDouble(cursor.getColumnIndex("thanhTien")));
+
+                listBoNhoTamThoi.add(boNhoTamThoi);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return listBoNhoTamThoi;
+    }
+
+
 }

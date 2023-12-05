@@ -39,7 +39,13 @@ public class XacNhanOrderFragment extends Fragment {
     Button btn_confirm_order, btn_confirm_order_print;
     private ArrayList<BoNhoTamThoi> dn;
     int backValue = 1; // Đặt giá trị backValue thành 1
-
+    public void onItemDeleted() {
+        BoNhoTamThoiDAO boNhoTamThoiDAO = new BoNhoTamThoiDAO(getContext());
+        // Xử lý sự kiện khi một mục được xóa
+        double tongTien = calculateTotalAmount(boNhoTamThoiDAO.getAll());
+        tv_tongTien.setText(String.valueOf(formatMoney((int) tongTien)));
+        saveTongTienToSharedPreferences((int) tongTien);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +56,6 @@ public class XacNhanOrderFragment extends Fragment {
         tv_soBan_cfOrder = v.findViewById(R.id.tv_soBan_cfOrder);
         tv_tongTien = v.findViewById(R.id.tv_tongTien);
 
-        btn_confirm_order = v.findViewById(R.id.btn_confirm_order);
         btn_confirm_order_print = v.findViewById(R.id.btn_confirm_order_print);
 
         lv_confirm_order = v.findViewById(R.id.lv_confirm_order);
@@ -59,7 +64,9 @@ public class XacNhanOrderFragment extends Fragment {
         List<BoNhoTamThoi> danhSachBoNhoTamThoi = boNhoTamThoiDAO.getAll();
 
         // Tạo adapter và gán cho ListView
-        BoNhoTamThoiAdapter adapter = new BoNhoTamThoiAdapter(getContext(), R.layout.row_bonhotamthoi, danhSachBoNhoTamThoi);
+        // Trong XacNhanOrderFragment
+        BoNhoTamThoiAdapter adapter = new BoNhoTamThoiAdapter(getContext(), R.layout.row_bonhotamthoi, danhSachBoNhoTamThoi, this);
+
         lv_confirm_order.setAdapter(adapter);
         int soBan = getSoBanFromSharedPreferences();
         if (soBan!=0) {
@@ -70,10 +77,6 @@ public class XacNhanOrderFragment extends Fragment {
         double tongTien = calculateTotalAmount(danhSachBoNhoTamThoi);
         tv_tongTien.setText(String.valueOf(formatMoney((int) tongTien)));
         saveTongTienToSharedPreferences((int) tongTien);
-
-
-
-
 
 
 
@@ -97,13 +100,7 @@ public class XacNhanOrderFragment extends Fragment {
                         .commit();
             }
         });
-        btn_confirm_order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-            }
-        });
         btn_confirm_order_print.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +141,9 @@ public class XacNhanOrderFragment extends Fragment {
         editor.putInt("TongTien", TongTien);
         editor.apply();
     }
+
+
+
 
 
 

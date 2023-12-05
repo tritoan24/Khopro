@@ -10,12 +10,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ph32395.khopro.DAO.BoNhoTamThoiDAO;
+import com.ph32395.khopro.DAO.GiamGiaDAO;
 import com.ph32395.khopro.DAO.MonAnDAO;
 import com.ph32395.khopro.Model.BoNhoTamThoi;
+import com.ph32395.khopro.Model.GiamGia;
 import com.ph32395.khopro.Model.MonAn;
 import com.ph32395.khopro.R;
 
@@ -55,7 +59,18 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
     public void onBindViewHolder(@NonNull MonAnOrder_Adapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final MonAn monAn1 = list.get(position);
         holder.tv_tenMonAnOrder.setText(list.get(position).getTenMonAn());
-        holder.tv_giaMonAnOrder.setText(formatMoney((int) list.get(position).getGiaTien()) + "");
+        GiamGiaDAO giamGiaDAO = new GiamGiaDAO(context);
+        GiamGia gg = giamGiaDAO.getID(String.valueOf(monAn1.getId_GiamGia()));
+        if (gg!=null){
+            Integer discountPercentage = gg.getPhanTramGiam();
+            int discountedPrice = (int) (list.get(position).getGiaTien() - (list.get(position).getGiaTien() * discountPercentage / 100));
+            holder.tv_giaMonAnOrder.setText(String.valueOf(formatMoney(discountedPrice)+"đ"));
+            holder.tv_giaMonAnOrder.setTextColor(ContextCompat.getColor(context, R.color.red));
+
+
+        }else {
+            holder.tv_giaMonAnOrder.setText(formatMoney((int) list.get(position).getGiaTien())+"đ");
+        }
 
         BoNhoTamThoi temporaryItem = findItemInTemporaryList(list.get(position).getTenMonAn());
         String ma = list.get(position).getTenMonAn();
@@ -134,7 +149,15 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
             // Nếu đã tồn tại, cập nhật thông tin nếu số lượng khác 0
             if (quantity > 0) {
                 existingItem.setSoLuong(quantity);
-                existingItem.setThanhTien((int) (selectedMonAn.getGiaTien() * quantity));
+                GiamGiaDAO giamGiaDAO = new GiamGiaDAO(context);
+                GiamGia gg = giamGiaDAO.getID(String.valueOf(selectedMonAn.getId_GiamGia()));
+                if (gg != null) {
+                    Integer discountPercentage = gg.getPhanTramGiam();
+                    int discountedPrice = (int) (selectedMonAn.getGiaTien() - (selectedMonAn.getGiaTien() * discountPercentage / 100));
+                    existingItem.setThanhTien(discountedPrice * quantity);
+                } else {
+                    existingItem.setThanhTien((int) (selectedMonAn.getGiaTien() * quantity));
+                }
             } else {
                 // Nếu số lượng là 0, xóa khỏi danh sách
                 danhSachTamThoi.remove(existingItem);
@@ -144,7 +167,16 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
             BoNhoTamThoi boNhoTamThoi = new BoNhoTamThoi();
             boNhoTamThoi.setTenMonAn(selectedMonAn.getTenMonAn());
             boNhoTamThoi.setSoLuong(quantity);
-            boNhoTamThoi.setThanhTien((int) (selectedMonAn.getGiaTien() * quantity));
+            GiamGiaDAO giamGiaDAO = new GiamGiaDAO(context);
+            GiamGia gg = giamGiaDAO.getID(String.valueOf(selectedMonAn.getId_GiamGia()));
+            if (gg != null) {
+                Integer discountPercentage = gg.getPhanTramGiam();
+                int discountedPrice = (int) (selectedMonAn.getGiaTien() - (selectedMonAn.getGiaTien() * discountPercentage / 100));
+                boNhoTamThoi.setThanhTien(discountedPrice * quantity);
+            } else {
+                boNhoTamThoi.setThanhTien((int) (selectedMonAn.getGiaTien() * quantity));
+            }
+
 
             danhSachTamThoi.add(boNhoTamThoi);
         }

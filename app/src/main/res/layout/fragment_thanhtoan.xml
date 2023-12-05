@@ -3,50 +3,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp"
+    >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Thanh toán"
         android:textStyle="bold"
         android:textSize="30dp"
-        android:layout_marginLeft="20dp"/>
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal">
         <Button
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_weight="1"
             android:text="Tiền mặt"
             android:background="@drawable/button_custom"
             app:backgroundTint = "@null"
             android:textColor="@color/black"
             android:id="@+id/btn_thanhToanTienMat"/>
         <Button
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_weight="1"
             android:text="Chuyển khoản"
             android:background="@drawable/button_custom"
             app:backgroundTint = "@null"
             android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
             android:id="@+id/btn_thanhToanChuyenKhoan"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="27dp"
+            android:layout_weight="1"
             android:text="Thẻ ngân hàng"
             android:background="@drawable/button_custom"
             app:backgroundTint = "@null"
             android:textColor="@color/black"
+            android:layout_marginTop="20dp"
             android:id="@+id/btn_thanhToanTheNganHang"/>
     </LinearLayout>
     <TextView
@@ -54,13 +62,11 @@
         android:layout_height="wrap_content"
         android:text="Nhập mã giảm giá"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
         android:textSize="20dp"
         android:textStyle="bold"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
         android:background="@drawable/textview_custom"
         android:id="@+id/ed_maGiamGiaThanhToan"
         android:paddingLeft="20dp"
@@ -69,14 +75,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ghi chú cho nhà bếp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:textSize="20dp"
         android:textStyle="bold"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:layout_margin="10dp"
         android:background="@drawable/textview_custom"
         android:id="@+id/ed_giChu"
         android:gravity="top"
@@ -86,24 +90,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        >
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Quay lại món ăn"
-            android:background="@drawable/button_custom2"
-            app:backgroundTint = "@null"
-            android:textColor="@color/black"
-            android:id="@+id/btn_quayLaiMonAn"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Tiếp tục"
+            android:layout_weight="1"
+            android:text="In Hóa Đơn"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/button_custom3"
             app:backgroundTint = "@null"
             android:textColor="@color/black"
-            android:id="@+id/btn_tiepTuc"/>
+            android:id="@+id/btn_tiepTuc"
+
+            />
     </LinearLayout>
 </LinearLayout>

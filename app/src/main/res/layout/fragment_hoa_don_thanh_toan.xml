@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<FrameLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -177,7 +182,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="1,2,3,4"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
             <TableRow>
 
@@ -188,7 +194,9 @@
                 <TextView android:text="SL"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    />
                 <TextView android:text="Đơn giá"
                     android:layout_width="0dp"
                     android:layout_weight="2"
@@ -204,7 +212,7 @@
         <ListView
             android:id="@+id/lv_hoaDon_ThanhToan"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="210dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -232,7 +240,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="---------------------------------------------------------------------------------------------------" />
+            android:gravity="center"
+            android:text="-----------------------------------------------------------------------" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -302,7 +312,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Trừ tiền:"
+                android:text="Tổng:"
                 android:textSize="18dp" />
 
             <TextView
@@ -319,7 +329,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="---------------------------------------------------------------------------------------------------" />
+            android:gravity="center"
+            android:text="-----------------------------------------------------------------" />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -332,3 +344,4 @@
 
 
 </FrameLayout>
+</androidx.core.widget.NestedScrollView>

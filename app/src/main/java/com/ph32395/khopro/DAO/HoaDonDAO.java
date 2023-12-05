@@ -84,5 +84,30 @@ public class HoaDonDAO {
         return list;
     }
 
+    @SuppressLint("Range")
+    public int getIdHoaDonByRowId(long rowId) {
+        int idHoaDon = -1; // Giá trị mặc định nếu không tìm thấy
+
+        Cursor cursor = null;
+
+        try {
+            String[] columns = {"id_HoaDon"};
+            String selection = "ROWID = ?";
+            String[] selectionArgs = {String.valueOf(rowId)};
+
+            cursor = db.query("HoaDon", columns, selection, selectionArgs, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                idHoaDon = cursor.getInt(cursor.getColumnIndex("id_HoaDon"));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return idHoaDon;
+    }
 
 }
