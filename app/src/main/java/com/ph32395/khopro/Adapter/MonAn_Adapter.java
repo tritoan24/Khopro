@@ -234,11 +234,19 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
                     Log.d("DEBUG", "idgiamgia: " + idgiamgia);
 
                     String giamon = ed_giaMon_update.getText().toString();
+                    
                     Double giamondb = Double.parseDouble(giamon);
                     Integer idgg = Integer.parseInt(idgiamgia);
                     Integer iddm = Integer.parseInt(idDanhMuc);
+                    int check = 1;
+                    if (TextUtils.isDigitsOnly(tenMonan)) {
+                        // Chuỗi là số
+                        ed_tenMonAn_update.setError("tên món ăn không thể là số");
+                        check = -1;
+                    }
                     if (giamon.isEmpty()){
                         ed_giaMon_update.setError("Giá món ăn đang trống");
+                        check = -1;
                     }else {
                         try {
                             // Chuyển đổi chuỗi thành số
@@ -247,12 +255,14 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
                             // Kiểm tra xem số có là số âm không
                             if (number < 0) {
                                 ed_giaMon_update.setError("Giá đang là số âm");
+                                check = -1;
                             } else {
 //                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
                             }
                         } catch (NumberFormatException e) {
                             // Nếu có ngoại lệ, đây không phải là số
                             ed_giaMon_update.setError("Giá đang không là số");
+                            check = -1;
                         }
                     }
                     monAn.setTenMonAn(tenMonan);
@@ -266,21 +276,22 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
 
 
 
-                    long result = monAnDAO.Update(monAn);
-
-                    // Kiểm tra kết quả cập nhật
-                    if (result > 0) {
-                        // Nếu cập nhật thành công, thông báo và làm mới danh sách
-                        Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                        list.clear();
-                        list.addAll(monAnDAO.getAll());
-                        if (monAnAdapter != null) {
-                            monAnAdapter.notifyDataSetChanged();
+                    if(check ==1){
+                        long result = monAnDAO.Update(monAn);
+                        // Kiểm tra kết quả cập nhật
+                        if (result > 0) {
+                            // Nếu cập nhật thành công, thông báo và làm mới danh sách
+                            Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                            list.clear();
+                            list.addAll(monAnDAO.getAll());
+                            if (monAnAdapter != null) {
+                                monAnAdapter.notifyDataSetChanged();
+                            }
+                            dialog.dismiss();
+                        } else {
+                            // Nếu cập nhật thất bại, thông báo lỗi
+                            Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                         }
-                        dialog.dismiss();
-                    } else {
-                        // Nếu cập nhật thất bại, thông báo lỗi
-                        Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
