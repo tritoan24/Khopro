@@ -77,7 +77,7 @@ public class DoiMatKhauFragment extends Fragment {
 
         if(newPass.length()<8){
             ed_mkMoi.setError("Mật khẩu không đủ 8 ký tự");
-        }if (ma.isEmpty() || oldPass.isEmpty() || newPass.isEmpty()) {
+        }if (ma.isEmpty() || oldPass.isEmpty() || newPass.isEmpty() || newPass.length()<8 ) {
             Toast.makeText(getContext(), "Mã người dùng và mật khẩu không được bỏ trống", Toast.LENGTH_SHORT).show();
         } else {
             if (mk.equals(oldPass)) {
