@@ -237,7 +237,24 @@ public class MonAn_Adapter extends RecyclerView.Adapter<MonAn_Adapter.ViewHolder
                     Double giamondb = Double.parseDouble(giamon);
                     Integer idgg = Integer.parseInt(idgiamgia);
                     Integer iddm = Integer.parseInt(idDanhMuc);
+                    if (giamon.isEmpty()){
+                        ed_giaMon_update.setError("Giá món ăn đang trống");
+                    }else {
+                        try {
+                            // Chuyển đổi chuỗi thành số
+                            double number = Double.parseDouble(giamon);
 
+                            // Kiểm tra xem số có là số âm không
+                            if (number < 0) {
+                                ed_giaMon_update.setError("Giá đang là số âm");
+                            } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (NumberFormatException e) {
+                            // Nếu có ngoại lệ, đây không phải là số
+                            ed_giaMon_update.setError("Giá đang không là số");
+                        }
+                    }
                     monAn.setTenMonAn(tenMonan);
                     monAn.setId_DanhMuc(iddm);
                     if (idgg!=1) {
