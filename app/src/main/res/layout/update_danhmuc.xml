@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tên danh mục: "
+        android:inputType="text"
         android:background="@drawable/custom_edt_banan"
         android:paddingVertical="20dp"
         android:paddingLeft="15dp"
