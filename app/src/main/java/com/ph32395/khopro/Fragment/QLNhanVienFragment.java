@@ -106,7 +106,10 @@ public class QLNhanVienFragment extends Fragment {
                    edmaNV.setError("Mã nhân viên không được để trống");
                }  if (hoTen.isEmpty()) {
                    edtHoTen.setError("Họ tên không được để trống");
-               } if (TextUtils.isEmpty(tuoi)) {
+               }if (TextUtils.isDigitsOnly(hoTen)) {
+                   edtHoTen.setError("Sai họ tên");
+               }
+               if (TextUtils.isEmpty(tuoi)) {
                    // Chuỗi rỗng
                    edTuoi.setError("Tuổi đang trống");
                } else {
@@ -128,7 +131,7 @@ public class QLNhanVienFragment extends Fragment {
                    // Đặt lỗi cho RadioButton hoặc xử lý theo cách khác tùy thuộc vào ý định của bạn
                }  if (sodienthoai.isEmpty()) {
                    edsoDienThoai.setError("Số điện thoại không được để trống");
-               }  if (sodienthoai.length()<10){
+               } if (sodienthoai.length()<10){
                    edsoDienThoai.setError("Số điện thoại không đủ 10 số");
                }if (matkhau.isEmpty()) {
                    edmatKhau.setError("Mật khẩu không được để trống");
