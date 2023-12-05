@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,7 +15,8 @@ import com.ph32395.khopro.DAO.NhanVienDAO;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
-    EditText edmaNhanVien,edmatKhau;
+    EditText edmaNhanVien, edmatKhau;
+    CheckBox chk_forgotPass;
     String strmanv, strPass;
     NhanVienDAO dao;
 
@@ -23,11 +25,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        chk_forgotPass = findViewById(R.id.chk_forgotPass);
         btnLogin = findViewById(R.id.btndangnhap_login);
         edmaNhanVien = findViewById(R.id.ed_manguoidung_login);
         edmatKhau = findViewById(R.id.ed_password_login);
         dao = new NhanVienDAO(this);
 
+        SharedPreferences pref = getSharedPreferences("USER_FILE",MODE_PRIVATE);
+        String user = pref.getString("USERNAME","");
+        String pas = pref.getString("PASSWORD","");
+        Boolean rem = pref.getBoolean("REMEMBER",false);
+
+        edmaNhanVien.setText(user);
+        edmatKhau.setText(pas);
+        chk_forgotPass.setChecked(rem);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,8 +47,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
+    public void rememberUser(String u, String p, boolean status) {
+        SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        SharedPreferences.Editor edit = pref.edit();
+        if (!status) {
+            //xóa tình trạng lưu trữ trước đó
+            edit.clear();
+        } else {
+            //lưu dữ liệu
+            edit.putString("USERNAME", u);
+            edit.putString("PASSWORD", p);
+            edit.putBoolean("REMEMBER", status);
+            edit.apply();
+        }
+        //lưu lại toàn bộ
+        edit.commit();
+    }
+
     public void checkLogin() {
         strmanv = edmaNhanVien.getText().toString();
         strPass = edmatKhau.getText().toString();
@@ -47,9 +75,9 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             if (dao.checkLogin(strmanv, strPass) > 0) {
                 Toast.makeText(getApplicationContext(), "Login thành công", Toast.LENGTH_SHORT).show();
-//                rememberUser(srtUser,strPass,ckRemenberPass.isChecked());
+                rememberUser(strmanv, strPass, chk_forgotPass.isChecked());
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
-//                i.putExtra("user",srtUser);
+                i.putExtra("user",strmanv);
                 saveMmaToSharedPreferences(strmanv);
                 startActivity(i);
                 finish();
@@ -58,12 +86,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+
     private void saveMmaToSharedPreferences(String mma) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("mma", mma);
         editor.apply();
     }
+
 
 
 }
