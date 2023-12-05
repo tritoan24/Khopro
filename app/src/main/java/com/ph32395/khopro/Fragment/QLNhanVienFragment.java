@@ -106,15 +106,36 @@ public class QLNhanVienFragment extends Fragment {
                    edmaNV.setError("Mã nhân viên không được để trống");
                }  if (hoTen.isEmpty()) {
                    edtHoTen.setError("Họ tên không được để trống");
-               } if (tuoi.isEmpty()) {
-                   edTuoi.setError("Tuổi không được để trống");
+               } if (TextUtils.isEmpty(tuoi)) {
+                   // Chuỗi rỗng
+                   edTuoi.setError("Tuổi đang trống");
+               } else {
+                   try {
+                       // Chuyển đổi chuỗi thành số
+                       double number = Double.parseDouble(tuoi);
+
+                       // Kiểm tra xem số có là số âm không
+                       if (number < 0) {
+                           edTuoi.setError("Tuổi đang là số âm");
+                       } else {
+//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
+                       }
+                   } catch (NumberFormatException e) {
+                       // Nếu có ngoại lệ, đây không phải là số
+                       edTuoi.setError("Tuổi đang không là số");
+                   }
                } if (gioiTinh.isEmpty()) {
                    // Đặt lỗi cho RadioButton hoặc xử lý theo cách khác tùy thuộc vào ý định của bạn
                }  if (sodienthoai.isEmpty()) {
                    edsoDienThoai.setError("Số điện thoại không được để trống");
-               }  if (matkhau.isEmpty()) {
+               }  if (sodienthoai.length()<10){
+                   edsoDienThoai.setError("Số điện thoại không đủ 10 số");
+               }if (matkhau.isEmpty()) {
                    edmatKhau.setError("Mật khẩu không được để trống");
-               } else {
+               } if (matkhau.length() < 8) {
+                   // Chuỗi có đủ 8 ký tự
+                   edmatKhau.setError("Mật khẩu không đủ 8 ký tự");
+               }else {
                    Integer tuoiint = Integer.parseInt(tuoi);
                    NhanVien nhanVien = new NhanVien(maNhanVien, hoTen, tuoiint, gioiTinh, sodienthoai, matkhau);
                    long result = dao.insert(nhanVien);
