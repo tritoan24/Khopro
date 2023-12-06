@@ -39,6 +39,7 @@ public class ThanhToanFragment extends Fragment {
     Button btn_thanhToanTienMat , btn_thanhToanChuyenKhoan , btn_thanhToanTheNganHang,btn_quayLaiMonAn , btn_tiepTuc;
     EditText ed_maGiamGiaThanhToan , ed_ghiChu;
     String phuongThuc = "";
+    int phanTramGiam;
 
     @Nullable
     @Override
@@ -96,25 +97,29 @@ public class ThanhToanFragment extends Fragment {
                     int soBan = getSoBanFromSharedPreferences();
 
                     String NgayGio = getNgayGio();
+                    String ngay = getNgay();
+                    String thang = getThang();
 
                     saveGhiChuToSharedPreferences(ghiChu);
 
                     GiamGiaDAO ggDao = new GiamGiaDAO(getContext());
                     boolean maGGTonTai = ggDao.kiemTraMaGiamGiaTonTai(maGG);
+                    int tongTien = getTongTienToShareFrence();
+                    int TongTienafter = 0;
+
 
                     if (maGGTonTai||maGG.equals("")) {
-                        int phanTramGiam = ggDao.layPhanTramGiamTuMaGiamGia(maGG);
-                        Toast.makeText(getContext(), "Mã Giảm giá hợp lệ. Phần trăm giảm: " + phanTramGiam + "%", Toast.LENGTH_SHORT).show();
+                         phanTramGiam  = ggDao.layPhanTramGiamTuMaGiamGia(maGG);
                         ggDao.giamSoLuotDung(maGG);
-                        int soLuotDung = ggDao.laySoLuotDungTuMaGiamGia(maGG);
-                        savePhantramggToSharedPreferences(phanTramGiam);
+                         TongTienafter=tongTien- (tongTien * phanTramGiam) / 100;
+
 
                     }else {
-                        Toast.makeText(getContext(), "không tồn tại", Toast.LENGTH_SHORT).show();
+
+                        ed_maGiamGiaThanhToan.setError("Mã Giảm Giá Không Đúng!");
                         return;
                     }
 
-                    int tongTien = getTongTienToShareFrence();
 
 
                     HoaDon hoaDon = new HoaDon();
@@ -122,7 +127,7 @@ public class ThanhToanFragment extends Fragment {
                     hoaDon.setSoBan(soBan);
                     hoaDon.setNgayGio(NgayGio);
                     hoaDon.setKieuThanhToan(phuongThuc);
-                    hoaDon.setTongTien(tongTien);
+                    hoaDon.setTongTien(TongTienafter);
 
                     // Insert HoaDon into the database
                     HoaDonDAO hoaDonDAO = new HoaDonDAO(getContext());
@@ -136,24 +141,22 @@ public class ThanhToanFragment extends Fragment {
                         // Truy xuất id_HoaDon của bản ghi mới được chèn
                         int idHoaDon = hoaDonDAO.getIdHoaDonByRowId(insertedRowId);
                         ChiTietHoaDonDAO chiTietHoaDonDAO = new ChiTietHoaDonDAO(getContext());
-
                         for (BoNhoTamThoi boNhoTamThoi : listBoNhoTamThoi) {
                             ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
                             chiTietHoaDon.setId_HoaDon(idHoaDon); // Set id_HoaDon
                             chiTietHoaDon.setTenMonAn(boNhoTamThoi.getTenMonAn());
                             chiTietHoaDon.setSoLuong(boNhoTamThoi.getSoLuong());
                             chiTietHoaDon.setGiaTien(boNhoTamThoi.getThanhTien() / boNhoTamThoi.getSoLuong());
-
+                            chiTietHoaDon.setPhanTramGG(phanTramGiam);
+                            chiTietHoaDon.setNgay(ngay);
+                            chiTietHoaDon.setThang(thang);
                             // Insert vào bảng ChiTietHoaDon
                             long insertedChiTiet = chiTietHoaDonDAO.Insert(chiTietHoaDon);
 
                             if (insertedChiTiet != -1) {
-                                Log.d("ThanhToanFragment", "clearAll method called.");
                                 boNhoTamThoiDAO.clearAll();
 
-                                Log.d("ThanhToanFragment", "Data after clear: " + boNhoTamThoi.getTenMonAn());
                                 saveDataToSharedPreferences(getContext(), "maHoaDon", String.valueOf(idHoaDon));
-                                String ngay = getNgay();
                                 String gio = getGio();
                                 saveGioToSharedPreferences(gio);
                                 saveNgayToSharedPreferences(ngay);
@@ -166,7 +169,6 @@ public class ThanhToanFragment extends Fragment {
                                 fragmentTransaction.replace(R.id.flContent, anotherFragment);
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.commit();
-                                List<BoNhoTamThoi> listAfterClear = boNhoTamThoiDAO.layDanhSachBoNhoTamThoi();
 
                             }
                         }
@@ -196,6 +198,13 @@ public class ThanhToanFragment extends Fragment {
         String ngay = dateFormat.format(calendar.getTime());
 
         return ngay ;
+    }
+    private String getThang(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM", Locale.getDefault());
+
+        String thang = dateFormat.format(calendar.getTime());
+        return thang;
     }
     private String getGio(){
         Calendar calendar = Calendar.getInstance();
@@ -243,14 +252,7 @@ public class ThanhToanFragment extends Fragment {
         editor.putString("Gio", gio);
         editor.apply();
     }
-    private boolean isValidData(ChiTietHoaDon chiTietHoaDon) {
-        return chiTietHoaDon != null && chiTietHoaDon.getSoLuong() > 0;
-    }
-    private void savePhantramggToSharedPreferences(int phantram) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("gGsave", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("PhanTram", phantram);
-        editor.apply();
-    }
+
+
 
 }

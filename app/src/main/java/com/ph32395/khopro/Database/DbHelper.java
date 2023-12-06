@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     static String DB_NAME = "UngDungDatDoAn";
-    static int DB_VERSION = 5;
+    static int DB_VERSION = 6;
 
     static final String CREATE_TABLE_MONAN = "CREATE TABLE MonAn (" +
             "    id_MonAn   INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -53,7 +53,10 @@ public class DbHelper extends SQLiteOpenHelper {
             " tenMonAn TEXT NOT NULL," +
             " soLuong INTEGER NOT NULL," +
             " giaTien MONEY NOT NULL, " +
-            " tongTien INTEGER NOT NULL)";
+            " phanTramGG INTEGER NOT NULL, " +
+            " tongTien INTEGER NOT NULL,"+
+            "ngay TEXT NOT NULL,"+
+            "thang TEXT)";
     static final String CREATE_TABLE_BONHOTAMTHOI = "CREATE TABLE BoNhoTamThoi (" +
             " id_BoNho INTEGER PRIMARY KEY AUTOINCREMENT, " +
             " tenMonAn TEXT NOT NULL," +
@@ -80,6 +83,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataSql.INSERT_TB_DANHMUC);
         db.execSQL(DataSql.INSERT_TB_MONAN);
         db.execSQL(DataSql.INSERT_TB_GIAMGIA);
+        db.execSQL(DataSql.INSERT_TB_HOADON);
 
     }
 

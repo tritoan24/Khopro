@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.ph32395.khopro.Adapter.BanAnAdapter;
 import com.ph32395.khopro.DAO.BanAnDAO;
 import com.ph32395.khopro.Model.BanAn;
@@ -64,6 +65,7 @@ public class QLBanAnFragment extends Fragment {
         View v = inflater.inflate(R.layout.add_banan, null);
         builder.setView(v);
         Dialog dialog = builder.create();
+        dialog.setCancelable(false);
         dialog.show();
 
         EditText ed_banAn = v.findViewById(R.id.ed_tenBanAn);
@@ -95,12 +97,24 @@ public class QLBanAnFragment extends Fragment {
                     }
                 }
                 if (!tenBanAn.isEmpty()) {
-                    BanAn banAn = new BanAn();
-                    banAn.setSoBan(Integer.parseInt(tenBanAn)); // Giả sử bạn đang lưu số bàn ăn vào trường soBan
-                    banAnDAO.insert(banAn);
-                    capNhatList();
+                    // Kiểm tra xem số bàn đã tồn tại chưa
+                    boolean isTableNumberExists = isTableNumberExists(Integer.parseInt(tenBanAn));
+
+                    if (isTableNumberExists) {
+                        ed_banAn.setError("Bàn Ăn Này Đã Tồn Tại");
+                    } else {
+                        // Tiếp tục thêm bàn nếu nó chưa tồn tại
+                        BanAn banAn = new BanAn();
+                        banAn.setSoBan(Integer.parseInt(tenBanAn));
+                        banAnDAO.insert(banAn);
+                        capNhatList();
+                        dialog.dismiss();
+                    }
+                } else {
+                    ed_banAn.setError("Không Được Bỏ Trống");
                 }
-                dialog.dismiss();
+
+
             }
         });
 
@@ -116,5 +130,13 @@ public class QLBanAnFragment extends Fragment {
         list.clear();
         list.addAll(banAnDAO.getAll());
         adapter.notifyDataSetChanged();
+    }
+    private boolean isTableNumberExists(int tableNumber) {
+        for (BanAn banAn : list) {
+            if (banAn.getSoBan() == tableNumber) {
+                return true;
+            }
+        }
+        return false;
     }
 }

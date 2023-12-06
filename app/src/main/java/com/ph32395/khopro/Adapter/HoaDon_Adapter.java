@@ -50,11 +50,10 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
     BanAnDAO banAnDAO;
 
     MonAnDAO monAnDAO;
-
-
     QLHoaDonFragment hoaDonFragment;
+    int hoaDonId;
 
-    public HoaDon_Adapter(Context context, ArrayList<HoaDon> list) {
+    public HoaDon_Adapter(Context context, ArrayList<HoaDon> list, QLHoaDonFragment hoaDonFragment) {
         this.context = context;
         this.hoaDonFragment = hoaDonFragment;
         hoaDonDAO = new HoaDonDAO(context);
@@ -62,18 +61,17 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
         this.list = list != null ? list : new ArrayList<>();
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
         View view = inflater.inflate(R.layout.item_hoadon, parent, false);
+
         return new HoaDon_Adapter.ViewHolder(view);
     }
 
-    private String formatMoney(int money) {
-        DecimalFormat decimalFormat = new DecimalFormat("###,###");
-        return decimalFormat.format(money);
-    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final HoaDon hoaDon1 = list.get(position);
@@ -82,6 +80,7 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
         nhanVienDAO = new NhanVienDAO(context);
         NhanVien nv = nhanVienDAO.getID(String.valueOf(hoaDon1.getId_NhanVien()));
         holder.tvtennhanvien.setText(nv.getHoTen());
+        holder.tv_maHoaDon.setText(String.valueOf(hoaDon1.getId_HoaDon()));
 
 
         banAnDAO = new BanAnDAO(context);
@@ -95,7 +94,7 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
         // Đặt giá trị đã chuyển đổi vào TextView
         holder.tv_thoiGianTao.setText(customDateTime);
         holder.tv_kieuThanhToan.setText(hoaDon1.getKieuThanhToan());
-        holder.tvtongtien.setText(String.valueOf( hoaDon1.getTongTien()));
+        holder.tvtongtien.setText(String.valueOf(formatMoney((int) hoaDon1.getTongTien())));
 
 
         holder.img_delete_hoaDon.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +104,19 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
             }
 
 
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                // Lấy đối tượng HoaDon đã nhấp vào
+
+                // Gọi một phương thức trong hoạt động/fragment của bạn để xử lý sự kiện nhấn giữ
+                if (hoaDonFragment != null) {
+                    hoaDonFragment.onHoaDonLongClick(hoaDon1.getId_HoaDon());
+                }
+
+                return true;
+            }
         });
     }
     private String formatDateTime(String inputDateTime, String outputFormat) {
@@ -119,6 +131,8 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
             return inputDateTime; // Trả về giá trị ban đầu nếu có lỗi
         }
     }
+
+
 
 
     private void dialogXoaHoaDon(HoaDon hoaDon) {
@@ -174,6 +188,11 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
             tv_kieuThanhToan = itemView.findViewById(R.id.tv_kieuThanhToan);
             img_delete_hoaDon = itemView.findViewById(R.id.img_delete_hoaDon);
 
+
         }
+    }
+    private String formatMoney(int money) {
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        return decimalFormat.format(money);
     }
 }

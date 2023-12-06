@@ -9,9 +9,13 @@ import android.util.Log;
 
 import com.ph32395.khopro.Database.DbHelper;
 import com.ph32395.khopro.Model.ChiTietHoaDon;
+import com.ph32395.khopro.Model.MonAnDaBan;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class ChiTietHoaDonDAO {
     private static final String TABLE_NAME = "ChiTietHoaDon";
@@ -33,6 +37,9 @@ public class ChiTietHoaDonDAO {
         values.put("soLuong", chiTietHoaDon.getSoLuong());
         values.put("giaTien", chiTietHoaDon.getGiaTien());
         values.put("tongTien", chiTietHoaDon.getTongTien());
+        values.put("phanTramGG", chiTietHoaDon.getPhanTramGG());
+        values.put("ngay",chiTietHoaDon.getNgay());
+        values.put("thang",chiTietHoaDon.getThang());
         // Set giá trị cho các cột trong bảng ChiTietHoaDon
         values.put(COLUMN_HOA_DON_ID, chiTietHoaDon.getId_HoaDon());
         // Thêm các giá trị cho các cột khác của bảng ChiTietHoaDon
@@ -67,18 +74,7 @@ public class ChiTietHoaDonDAO {
         return isSuccess;
     }
 
-    public int Update(ChiTietHoaDon chiTietHoaDon) {
-        try {
-            ContentValues values = new ContentValues();
-            values.put(COLUMN_HOA_DON_ID, chiTietHoaDon.getId_HoaDon());
-            // Thêm các giá trị cho các cột khác của bảng ChiTietHoaDon
 
-            return db.update(TABLE_NAME, values, COLUMN_ID + "=?", new String[]{String.valueOf(chiTietHoaDon.getId_ChiTietHoaDon())});
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
 
     public int Delete(ChiTietHoaDon chiTietHoaDon) {
         try {
@@ -100,9 +96,6 @@ public class ChiTietHoaDonDAO {
             String idHoaDon = c.getString(c.getColumnIndex(COLUMN_HOA_DON_ID));
             chiTietHoaDon.setId_HoaDon(idHoaDon != null ? Integer.parseInt(idHoaDon) : 0);
 
-            // Thêm lấy giá trị cho các cột khác của bảng ChiTietHoaDon
-            // ...
-
             list.add(chiTietHoaDon);
         }
         c.close();
@@ -123,53 +116,99 @@ public class ChiTietHoaDonDAO {
     @SuppressLint("Range")
     public List<ChiTietHoaDon> getIdChiTietHoaDonByRowId(int hoadonid) {
         List<ChiTietHoaDon> danhsach = new ArrayList<>();
-        String query = "SELECT * FROM ChiTietHoaDon WHERE id_HoaDon = "+hoadonid;
+        String query = "SELECT * FROM ChiTietHoaDon WHERE id_HoaDon = " + hoadonid;
 
-        Cursor cursor = db.rawQuery(query,null);
+        Cursor cursor = db.rawQuery(query, null);
 
-        if (cursor!=null) {
+        if (cursor != null) {
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") int id_ChiTietHoaDon = cursor.getInt(cursor.getColumnIndex("id_ChiTietHoaDon"));
                 @SuppressLint("Range") String tenMonAn = cursor.getString(cursor.getColumnIndex("tenMonAn"));
                 @SuppressLint("Range") int soLuong = cursor.getInt(cursor.getColumnIndex("soLuong"));
                 @SuppressLint("Range") int giaTien = cursor.getInt(cursor.getColumnIndex("giaTien"));
                 @SuppressLint("Range") int tongTien = cursor.getInt(cursor.getColumnIndex("tongTien"));
-
+                @SuppressLint("Range") int phanTramGG = cursor.getInt(cursor.getColumnIndex("phanTramGG"));
                 @SuppressLint("Range") int id_HoaDon = cursor.getInt(cursor.getColumnIndex("id_HoaDon"));
+                @SuppressLint("Range") String ngay = cursor.getString(cursor.getColumnIndex("ngay"));
+                @SuppressLint("Range") String thang = cursor.getString(cursor.getColumnIndex("thang"));
 
-                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(id_ChiTietHoaDon, id_HoaDon, tenMonAn, soLuong, giaTien, tongTien);
+
+                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(id_ChiTietHoaDon, id_HoaDon, tenMonAn, soLuong, giaTien, tongTien, phanTramGG,ngay,thang);
                 danhsach.add(chiTietHoaDon);
-
             }
             cursor.close();
         }
 
         return danhsach;
     }
-    @SuppressLint("Range")
-    public List<ChiTietHoaDon> layDanhSachHoaDonChiTietTheoIdHoaDon(int idHoaDon) {
-        List<ChiTietHoaDon> listHoaDonChiTiet = new ArrayList<>();
 
-        String query = "SELECT * FROM ChiTietHoaDon WHERE id_HoaDon = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idHoaDon)});
+    public List<MonAnDaBan> getStatisticsByDate(String date) {
+        List<MonAnDaBan> statisticsList = new ArrayList<>();
 
-        if (cursor.moveToFirst()) {
-            do {
-                ChiTietHoaDon hoaDonChiTiet = new ChiTietHoaDon();
-                hoaDonChiTiet.setId_ChiTietHoaDon(cursor.getInt(cursor.getColumnIndex("id_ChiTietHoaDon")));
-                hoaDonChiTiet.setId_HoaDon(cursor.getInt(cursor.getColumnIndex("id_HoaDon")));
-                hoaDonChiTiet.setTenMonAn(cursor.getString(cursor.getColumnIndex("tenMonAn")));
-                hoaDonChiTiet.setSoLuong(cursor.getInt(cursor.getColumnIndex("soLuong")));
-                hoaDonChiTiet.setGiaTien(cursor.getInt(cursor.getColumnIndex("giaTien")));
-                hoaDonChiTiet.setTongTien(cursor.getInt(cursor.getColumnIndex("tongTien")));
+        // Define the SQL query
+        String query = "SELECT tenMonAn, SUM(soLuong) AS totalQuantity, SUM(tongTien) AS totalRevenue, " +
+                "SUM(giaTien) AS totalAmount " +
+                "FROM " + TABLE_NAME +
+                " WHERE ngay = ? " +
+                "GROUP BY tenMonAn";
 
-                listHoaDonChiTiet.add(hoaDonChiTiet);
-            } while (cursor.moveToNext());
+        // Execute the query
+        Cursor cursor = db.rawQuery(query, new String[]{date});
+
+        // Process the query result
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") String tenMonAn = cursor.getString(cursor.getColumnIndex("tenMonAn"));
+            @SuppressLint("Range") int totalQuantity = cursor.getInt(cursor.getColumnIndex("totalQuantity"));
+            @SuppressLint("Range") int totalRevenue = cursor.getInt(cursor.getColumnIndex("totalRevenue"));
+            @SuppressLint("Range") int totalAmount = cursor.getInt(cursor.getColumnIndex("totalAmount"));
+
+            // Create a MonAnDaBan object to store the statistics
+            MonAnDaBan monAnDaBan = new MonAnDaBan(tenMonAn, totalQuantity, totalRevenue, totalAmount);
+            statisticsList.add(monAnDaBan);
         }
 
+        // Close the cursor
         cursor.close();
-        return listHoaDonChiTiet;
+
+        return statisticsList;
     }
+    public List<MonAnDaBan> getStatisticsByMonth() {
+        List<MonAnDaBan> statisticsList = new ArrayList<>();
+
+        // Lấy tháng hiện tại dưới dạng chuỗi "MM"
+        String currentMonth = getCurrentMonth();
+
+        // Định nghĩa câu truy vấn SQL
+        String query = "SELECT tenMonAn, SUM(soLuong) AS totalQuantity, SUM(tongTien) AS totalRevenue, " +
+                "SUM(giaTien) AS totalAmount " +
+                "FROM " + TABLE_NAME +
+                " WHERE strftime('%m', ngay) = ? " +  // Lọc theo tháng
+                "GROUP BY tenMonAn";
+
+        Cursor cursor = db.rawQuery(query, new String[]{currentMonth});
+
+        // Xử lý kết quả truy vấn
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") String tenMonAn = cursor.getString(cursor.getColumnIndex("tenMonAn"));
+            @SuppressLint("Range") int totalQuantity = cursor.getInt(cursor.getColumnIndex("totalQuantity"));
+            @SuppressLint("Range") int totalRevenue = cursor.getInt(cursor.getColumnIndex("totalRevenue"));
+            @SuppressLint("Range") int totalAmount = cursor.getInt(cursor.getColumnIndex("totalAmount"));
+
+            // Tạo đối tượng MonAnDaBan để lưu trữ thống kê
+            MonAnDaBan monAnDaBan = new MonAnDaBan(tenMonAn, totalQuantity, totalRevenue, totalAmount);
+            statisticsList.add(monAnDaBan);
+        }
+
+
+        return statisticsList;
+    }
+
+    private String getCurrentMonth() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM", Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
+    }
+
 
 
 

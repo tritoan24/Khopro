@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ph32395.khopro.Adapter.HoaDonChiTietAdapter;
+import com.ph32395.khopro.Adapter.ListNhaBepAdapter;
 import com.ph32395.khopro.DAO.ChiTietHoaDonDAO;
 import com.ph32395.khopro.DAO.NhanVienDAO;
 import com.ph32395.khopro.Model.ChiTietHoaDon;
@@ -25,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HoaDonThanhToanFragment extends Fragment {
-    TextView tv_maHoaDon_hoaDon, tv_soBan_hoaDon, tv_gioTao_hoaDon, tv_maNhanVien_hoaDon, tv_ngayTao_hoaDon, tv_thanhTien_hoaDon, tv_giamGia_hoaDon, tv_truTien_hoaDon, tv_tongTien_hoaDon;
+    TextView tv_maHoaDon_hoaDon, tv_soBan_hoaDon, tv_gioTao_hoaDon, tv_maNhanVien_hoaDon, txtghichu,tv_ngayTao_hoaDon,id_hoadonso, tv_thanhTien_hoaDon, tv_giamGia_hoaDon, tv_truTien_hoaDon, tv_tongTien_hoaDon;
 
-    ListView lv_hoaDon_ThanhToan;
+    ListView lv_hoaDon_ThanhToan,lv_hoadonnhabep;
     private ArrayList<ChiTietHoaDon> list;
 
     @Override
@@ -45,6 +46,11 @@ public class HoaDonThanhToanFragment extends Fragment {
         tv_truTien_hoaDon = v.findViewById(R.id.tv_truTien_hoaDon);
         tv_tongTien_hoaDon = v.findViewById(R.id.tv_tongTien_hoaDon);
         lv_hoaDon_ThanhToan = v.findViewById(R.id.lv_hoaDon_ThanhToan);
+        lv_hoadonnhabep = v.findViewById(R.id.lv_hoadonnhabep);
+        id_hoadonso = v.findViewById(R.id.id_hoadonso);
+        txtghichu = v.findViewById(R.id.txt_ghchunhabep);
+
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LuuMaHoaDon", Context.MODE_PRIVATE);
 
         String maHoaDonChiTiet = sharedPreferences.getString("maHoaDon", "-1");
@@ -58,15 +64,20 @@ public class HoaDonThanhToanFragment extends Fragment {
             if (!listHoaDonChiTiet.isEmpty()) {
                 HoaDonChiTietAdapter hoaDonChiTietAdapter = new HoaDonChiTietAdapter(getContext(), listHoaDonChiTiet);
                 lv_hoaDon_ThanhToan.setAdapter(hoaDonChiTietAdapter);
+                ListNhaBepAdapter nhaBepAdapter = new ListNhaBepAdapter(getContext(),listHoaDonChiTiet);
+                lv_hoadonnhabep.setAdapter(nhaBepAdapter);
                 int totalAmount = calculateTotalAmount(listHoaDonChiTiet);
                 tv_thanhTien_hoaDon.setText(String.valueOf(formatMoney(totalAmount)));
-                SharedPreferences getPhanTram = getActivity().getSharedPreferences("gGsave", Context.MODE_PRIVATE);
-                int phantramgg = getPhanTram.getInt("PhanTram",0);
+                int phantramgg=0;
+                for (ChiTietHoaDon chiTietHoaDon : listHoaDonChiTiet) {
+                    phantramgg = chiTietHoaDon.getPhanTramGG();
+                }
                 tv_giamGia_hoaDon.setText(String.valueOf(phantramgg));
                 int tongtien = (totalAmount * phantramgg) / 100;
                 tv_truTien_hoaDon.setText(String.valueOf(formatMoney(tongtien)));
                 int giamtien = totalAmount-tongtien;
                 tv_tongTien_hoaDon.setText(String.valueOf(formatMoney(giamtien)));
+
 
             } else {
                 Toast.makeText(getContext(), "Rỗng", Toast.LENGTH_SHORT).show();
@@ -95,8 +106,12 @@ public class HoaDonThanhToanFragment extends Fragment {
         // Lấy và hiển thị mã hóa đơn
         String maHoaDon = sharedPreferences.getString("maHoaDon", "");
         tv_maHoaDon_hoaDon.setText(maHoaDon);
+        id_hoadonso.setText("Hóa Đơn Số: "+maHoaDon);
+
+
         SharedPreferences svghichu = getActivity().getSharedPreferences("ghiChuSave", Context.MODE_PRIVATE);
         String ghiChu = svghichu.getString("GhiChu", "");
+        txtghichu.setText(ghiChu);
 
         String manv = getNV.getString("mma","");
         NhanVienDAO nvDao = new NhanVienDAO(getContext());

@@ -2,102 +2,152 @@ package com.ph32395.khopro.Fragment;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.TextView;
-
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.ph32395.khopro.Adapter.ThongKeAdapter;
+import com.ph32395.khopro.DAO.ChiTietHoaDonDAO;
+import com.ph32395.khopro.Model.MonAnDaBan;
 import com.ph32395.khopro.R;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 public class ThongKeFragment extends Fragment {
 
-    TextView tv_ngayBatDau, tv_ngayKetThuc, tv_thongDoanhThu;
+    TextView tv_chonngay, tv_thangnay, tv_thongDoanhThu,tv_homnay;
     Button btn_doanhThu;
-    ListView lv_doanhThu;
+    RecyclerView lv_doanhThu;
+    private String selectedDate = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_thong_ke, container, false);
-        tv_ngayBatDau = v.findViewById(R.id.tv_ngayBatDau);
-        tv_ngayKetThuc = v.findViewById(R.id.tv_ngayKetThuc);
+
+        tv_chonngay = v.findViewById(R.id.tv_chonngay);
+        tv_homnay = v.findViewById(R.id.tv_HomNay);
+        tv_thangnay = v.findViewById(R.id.tv_thangnay);
         tv_thongDoanhThu = v.findViewById(R.id.tv_tongDoanhThu);
         btn_doanhThu = v.findViewById(R.id.btn_doanhThu);
         lv_doanhThu = v.findViewById(R.id.lv_doanhThu);
 
+        lv_doanhThu.setLayoutManager(new LinearLayoutManager(getContext()));
+        ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO(getContext());
+
+        // Lấy ngày hiện tại
+        String ngayHomNay = getNgay();
+        List<MonAnDaBan> doanhThuList = dao.getStatisticsByDate(ngayHomNay);
+        ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
+        lv_doanhThu.setAdapter(doanhThuAdapter);
+        int tongDoanhThu = calculateTotalRevenue(doanhThuList);
+
+        // Hiển thị tổng doanh thu trên TextView
+        tv_thongDoanhThu.setText(formatMoney(tongDoanhThu) + " VNĐ");
+
+        // Khởi tạo đối tượng Calendar để sử dụng trong DatePickerDialog
         Calendar calendar = Calendar.getInstance();
-        tv_ngayBatDau.setOnClickListener(new View.OnClickListener() {
+
+        tv_homnay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(
-                        getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        String Ngay = "";
-                        String Thang = "";
-                        if (i2 < 10) {
-                            Ngay = "0" + i2;
-                        } else {
-                            Ngay = String.valueOf(i2);
-                        }
-
-                        if ((i1 + 1) < 10) {
-                            Thang = "0" + (i1 + 1);
-                        } else {
-                            Thang = String.valueOf(i1 + 1);
-                        }
-                        tv_ngayBatDau.setText(i + "/" + Thang + "/" + Ngay);
-                    }
-                },
-                        calendar.get(calendar.YEAR),
-                        calendar.get(calendar.MONTH),
-                        calendar.get(calendar.DAY_OF_MONTH)
-                );
-                dialog.show();
+                tv_homnay.setBackgroundResource(R.drawable.custom_monanoder);
+                tv_chonngay.setBackgroundResource(R.drawable.custtom_khung_lv);
+                tv_thangnay.setBackgroundResource(R.drawable.custtom_khung_lv);
+                String ngayHomNay = getNgay();
+                List<MonAnDaBan> doanhThuList = dao.getStatisticsByDate(ngayHomNay);
+                ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
+                lv_doanhThu.setAdapter(doanhThuAdapter);
             }
         });
 
-        tv_ngayKetThuc.setOnClickListener(new View.OnClickListener() {
+        tv_thangnay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(
-                        getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        String Ngay = "";
-                        String Thang = "";
-                        if(i2 < 10){
-                            Ngay = "0" + i2;
-                        }else{
-                            Ngay = String.valueOf(i2);
-                        }
 
-                        if((i1 + 1) < 10){
-                            Thang = "0" + (i1 + 1);
-                        }else{
-                            Thang = String.valueOf(i1 + 1);
-                        }
-                        tv_ngayKetThuc.setText(i + "/" + Thang + "/" + Ngay);
-                    }
-                },
-                        calendar.get(calendar.YEAR),
-                        calendar.get(calendar.MONTH),
-                        calendar.get(calendar.DAY_OF_MONTH)
-                );
-                dialog.show();
+                tv_homnay.setBackgroundResource(R.drawable.custtom_khung_lv);
+                tv_chonngay.setBackgroundResource(R.drawable.custtom_khung_lv);
+                tv_thangnay.setBackgroundResource(R.drawable.custom_monanoder);
+                List<MonAnDaBan> doanhThuList = dao.getStatisticsByMonth();
+                ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
+                lv_doanhThu.setAdapter(doanhThuAdapter);
+                doanhThuAdapter.notifyDataSetChanged();
             }
         });
 
+        tv_chonngay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                showDatePickerDialog(tv_chonngay, calendar);
+                tv_homnay.setBackgroundResource(R.drawable.custom_monanoder);
+                tv_chonngay.setBackgroundResource(R.drawable.custtom_khung_lv);
+                tv_thangnay.setBackgroundResource(R.drawable.custtom_khung_lv);
+            }
+        });
 
         return v;
     }
+
+
+    private String getNgay() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
+    }
+    private int calculateTotalRevenue(List<MonAnDaBan> doanhThuList) {
+        int totalRevenue = 0;
+        for (MonAnDaBan monAnDaBan : doanhThuList) {
+            totalRevenue += monAnDaBan.getGiaTien() * monAnDaBan.getTongSoLuong();
+        }
+        return totalRevenue;
+    }
+    private String formatMoney(int money) {
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        return decimalFormat.format(money);
+    }
+    private void showDatePickerDialog(TextView textView, Calendar calendar) {
+        DatePickerDialog dialog = new DatePickerDialog(
+                getContext(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String ngay = (dayOfMonth < 10) ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+                        String thang = ((month + 1) < 10) ? "0" + (month + 1) : String.valueOf(month + 1);
+                        String ngayChon = ngay + "/" + thang + "/" + year;
+                        textView.setText(ngayChon);
+
+                        // Gọi lại hàm xử lý khi ngày thay đổi
+                        handleDateSelected(ngayChon);
+                    }
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+        dialog.show();
+    }
+
+    // Thêm phương thức xử lý khi ngày được chọn
+    private void handleDateSelected(String selectedDate) {
+        // Gọi hàm xử lý khi ngày được chọn ở đây, ví dụ: load dữ liệu theo ngày
+        ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO(getContext());
+        List<MonAnDaBan> doanhThuList = dao.getStatisticsByDate(selectedDate);
+        ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
+        lv_doanhThu.setAdapter(doanhThuAdapter);
+        int tongDoanhThu = calculateTotalRevenue(doanhThuList);
+        tv_thongDoanhThu.setText(formatMoney(tongDoanhThu) + " VNĐ");
+    }
+
+
+
 }

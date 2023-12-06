@@ -63,7 +63,7 @@ public class HoaDonDAO {
         Cursor c = db.rawQuery(sql,selectionArgs);
         while (c.moveToNext()){
             HoaDon hd = new HoaDon();
-            // Check if id_DanhMuc is not null before parsing
+            hd.setId_HoaDon(Integer.parseInt(c.getString(c.getColumnIndex("id_HoaDon"))));
             hd.setId_NhanVien(c.getString(c.getColumnIndex("id_NhanVien")));
 
 

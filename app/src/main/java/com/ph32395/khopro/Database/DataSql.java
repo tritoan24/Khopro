@@ -27,6 +27,12 @@ public class DataSql {
             "('GG2', 20, 0)," +
             "('GG3', 15, 1),"+
             "('GG4',33, 2)";
+    public static final String INSERT_TB_HOADON = "INSERT INTO HOADON(id_HoaDon, id_NhanVien, soBan, ngayGio, kieuThanhToan, tongTien) VALUES " +
+            "(1, 'admin', 1, '2023-01-01 12:00:00', 'Cash', 50000.0)," +
+            "(2, 'nhanvien1', 2, '2023-01-02 14:30:00', 'Card', 100000.0)," +
+            "(3, 'nhanvien2', 3, '2023-01-03 18:45:00', 'Cash', 60000.0)," +
+            "(4, 'a', 1, '2023-01-04 20:00:00', 'Card', 15000.0)";
+
 
 }
 

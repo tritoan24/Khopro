@@ -117,7 +117,7 @@ public class GiamGiaDAO {
         int soLuotDungHienTai = laySoLuotDungTuMaGiamGia(maGiamGia);
 
         // Kiểm tra nếu số lượt dùng đã là 0 thì xóa dòng
-        if (soLuotDungHienTai > 0) {
+        if (soLuotDungHienTai > 1) {
             // Giảm số lượt dùng đi 1
             int soLuotDungMoi = soLuotDungHienTai - 1;
 
@@ -127,7 +127,7 @@ public class GiamGiaDAO {
             String whereClause = "maGiamGia=?";
             String[] whereArgs = {maGiamGia};
             db.update("GiamGia", values, whereClause, whereArgs);
-        } if(soLuotDungHienTai==0) {
+        } else  {
             // Nếu số lượt dùng là 0, xóa dòng từ bảng
             String whereClause = "maGiamGia=?";
             String[] whereArgs = {maGiamGia};

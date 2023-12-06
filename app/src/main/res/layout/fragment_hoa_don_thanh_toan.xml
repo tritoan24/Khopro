@@ -8,7 +8,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.HoaDonThanhToanFragment">
+    tools:context=".Fragment.HoaDonThanhToanFragment"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,8 +44,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Địa chỉ: số 1 ngõ 1, đường abc, Cầu Giấy, Hà Nội"
+                    android:text="Địa chỉ: số 7 ngõ 322, đường Nhân Mỹ, Mỹ Đình, Hà Nội"
                     android:textSize="16dp"
+                    android:layout_marginTop="5dp"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="ĐT: 0888888888"
+                    android:textSize="16dp"
+                    android:layout_marginTop="5dp"
 
                     />
             </LinearLayout>
@@ -212,7 +223,7 @@
         <ListView
             android:id="@+id/lv_hoaDon_ThanhToan"
             android:layout_width="match_parent"
-            android:layout_height="210dp"/>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -341,7 +352,86 @@
 
             android:text="Bún chả Yummy xin cảm ơn quý khách !"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:background="@drawable/custtom_khung_lv"
+        android:layout_marginTop="1000dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/id_hoadonso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hóa Đơn Số: "
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/fonth3"
+            ></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="STT"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tên Món Ăn"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="Số Lượng"
+                android:gravity="center"
+                />
 
+        </LinearLayout>
+        <ListView
+            android:id="@+id/lv_hoadonnhabep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            >
+
+        </ListView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginLeft="20dp"
+            android:text="Ghi Chú"
+            android:fontFamily="@font/fonth3"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/txt_ghchunhabep"
+            android:layout_width="match_parent"
+            android:minHeight="130dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custtom_khung_lv"
+            android:text="adsf"
+            android:padding="7dp"
+            android:layout_margin="14dp"
+            />
+
+
+    </LinearLayout>
 
 </FrameLayout>
+
 </androidx.core.widget.NestedScrollView>
