@@ -23,7 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.ph32395.khopro.Fragment.BanAnOrderFragment;
 import com.ph32395.khopro.Fragment.DoiMatKhauFragment;
-import com.ph32395.khopro.Fragment.DanhMucOrderFragment;
+import com.ph32395.khopro.Fragment.HoaDonThanhToanFragment;
 import com.ph32395.khopro.Fragment.ProfileFragment;
 import com.ph32395.khopro.Fragment.QLBanAnFragment;
 import com.ph32395.khopro.Fragment.QLDanhMucFragment;
@@ -31,7 +31,6 @@ import com.ph32395.khopro.Fragment.QLHoaDonFragment;
 import com.ph32395.khopro.Fragment.QLMaGiamGiaFragment;
 import com.ph32395.khopro.Fragment.QLMonanFragment;
 import com.ph32395.khopro.Fragment.QLNhanVienFragment;
-import com.ph32395.khopro.Fragment.ThongBaoFragment;
 import com.ph32395.khopro.Fragment.ThongKeFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,14 +39,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int NAV_QLDANHMUC = R.id.nav_QLDanhMuc;
     private static final int NAV_QLBANAN = R.id.nav_QLBanAn;
     private static final int NAV_QLMAGIAMGIA = R.id.nav_QLMaGiamGia;
-    private static final int NAV_QLHOADON = R.id.nav_QLHoaDon;
     private static final int NAV_QLNHANVIEN = R.id.nav_QLNhanVien;
     private static final int NAV_THONGKE = R.id.nav_ThongKe;
-    private static final int NAV_DOIMATKHAU = R.id.nav_DoiMatKhau;
-    private static final int NAV_DANGXUAT = R.id.nav_DangXuat;
 
     private static final int BT_HOME = R.id.home01;
-    private static final int BT_THONGBAO = R.id.chat;
+    private static final int BT_HOADON = R.id.chat;
     private static final int BT_PROFILE = R.id.contact;
 
 
@@ -127,24 +123,13 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == NAV_QLMAGIAMGIA) {
                     setTitle("Quản Lý Mã Giảm Giá");
                     fragment = new QLMaGiamGiaFragment();
-                } else if (item.getItemId() == NAV_QLHOADON) {
-                    setTitle("Quản Lý Hóa Đơn");
-                    fragment = new QLHoaDonFragment();
                 } else if (item.getItemId() == NAV_QLNHANVIEN) {
                     setTitle("Quản Lý Nhân Viên");
                     fragment = new QLNhanVienFragment();
                 } else if (item.getItemId() == NAV_THONGKE) {
                     setTitle("Thống Kê");
                     fragment = new ThongKeFragment();
-                } else if (item.getItemId() == NAV_DOIMATKHAU) {
-                    setTitle("Đổi Mật Khẩu");
-                    fragment = new DoiMatKhauFragment();
-                } else if (item.getItemId() == NAV_DANGXUAT) {
-                    setTitle("Đăng Xuất");
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    finish();
                 }
-
                 if (fragment != null) {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -169,9 +154,9 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new BanAnOrderFragment();
                     setTitle("Trang Chủ");
                     }
-                else if (item.getItemId()==BT_THONGBAO) {
-               selectedFragment = new ThongBaoFragment();
-                    setTitle("Thông Báo");
+                else if (item.getItemId()==BT_HOADON) {
+               selectedFragment = new QLHoaDonFragment();
+                    setTitle("Hóa Đơn");
                 }else if (item.getItemId()==BT_PROFILE) {
                     setTitle("Thông Tin Cá Nhân");
                selectedFragment = new  ProfileFragment();

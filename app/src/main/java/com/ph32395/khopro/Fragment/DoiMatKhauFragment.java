@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -50,6 +52,14 @@ public class DoiMatKhauFragment extends Fragment {
                 ed_manguoidung_changePass.setText("");
                 ed_mkMoi.setText("");
                 ed_mkCu.setText("");
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                ProfileFragment anotherFragment = new ProfileFragment();
+
+                fragmentTransaction.replace(R.id.flContent, anotherFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

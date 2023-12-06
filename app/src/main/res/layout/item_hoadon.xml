@@ -21,7 +21,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,11 +33,16 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:textStyle="bold"
-                    android:text="Mã hóa đơn : "/>
+                    android:text="Hóa đơn số: "
+                    android:fontFamily="@font/fonth3"
+                    android:textSize="20dp"
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="123"
+                    android:fontFamily="@font/fonth3"
+                    android:textSize="20dp"
                     android:id="@+id/tv_maHoaDon"/>
             </LinearLayout>
             <LinearLayout
@@ -84,7 +91,7 @@
                     android:text="Thời gian tạo : "/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:text="123"
                     android:layout_marginRight="10dp"
                     android:id="@+id/tv_thoiGianTao"/>

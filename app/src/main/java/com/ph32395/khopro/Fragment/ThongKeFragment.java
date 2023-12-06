@@ -48,7 +48,10 @@ public class ThongKeFragment extends Fragment {
         String ngayHomNay = getNgay();
         List<MonAnDaBan> doanhThuList = dao.getStatisticsByDate(ngayHomNay);
         ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
+        doanhThuAdapter.updateList(doanhThuList);
         lv_doanhThu.setAdapter(doanhThuAdapter);
+
+
         int tongDoanhThu = calculateTotalRevenue(doanhThuList);
 
         // Hiển thị tổng doanh thu trên TextView
@@ -67,6 +70,7 @@ public class ThongKeFragment extends Fragment {
                 List<MonAnDaBan> doanhThuList = dao.getStatisticsByDate(ngayHomNay);
                 ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
                 lv_doanhThu.setAdapter(doanhThuAdapter);
+                doanhThuAdapter.updateList(doanhThuList);
             }
         });
 
@@ -81,6 +85,8 @@ public class ThongKeFragment extends Fragment {
                 ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
                 lv_doanhThu.setAdapter(doanhThuAdapter);
                 doanhThuAdapter.notifyDataSetChanged();
+                doanhThuAdapter.updateList(doanhThuList);
+
             }
         });
 
@@ -144,6 +150,7 @@ public class ThongKeFragment extends Fragment {
         List<MonAnDaBan> doanhThuList = dao.getStatisticsByDate(selectedDate);
         ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
         lv_doanhThu.setAdapter(doanhThuAdapter);
+        doanhThuAdapter.updateList(doanhThuList);
         int tongDoanhThu = calculateTotalRevenue(doanhThuList);
         tv_thongDoanhThu.setText(formatMoney(tongDoanhThu) + " VNĐ");
     }

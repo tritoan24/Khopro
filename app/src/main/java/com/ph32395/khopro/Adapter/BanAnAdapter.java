@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,9 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
                 Button btn_huy = view.findViewById(R.id.btn_huyThemBanAn_update);
 
                 ed_tenBanAn.setText(String.valueOf(list.get(position).getSoBan()));
+                String tenBA = ed_tenBanAn.getText().toString();
                 btn_sua.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View view) {
                        if (TextUtils.isEmpty(tenBA)) {
@@ -72,14 +75,11 @@ public class BanAnAdapter extends RecyclerView.Adapter<BanAnAdapter.ViewHolder>{
                             ed_tenBanAn.setError("Số bàn ăn đang trống");
                         } else {
                             try {
-                                // Chuyển đổi chuỗi thành số
                                 double number = Double.parseDouble(tenBA);
 
-                                // Kiểm tra xem số có là số âm không
                                 if (number < 0) {
                                     ed_tenBanAn.setError("Số bàn ăn đang là số âm");
                                 } else {
-//                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (NumberFormatException e) {
                                 // Nếu có ngoại lệ, đây không phải là số

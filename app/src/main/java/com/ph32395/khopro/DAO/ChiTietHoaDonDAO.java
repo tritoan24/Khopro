@@ -182,7 +182,7 @@ public class ChiTietHoaDonDAO {
         String query = "SELECT tenMonAn, SUM(soLuong) AS totalQuantity, SUM(tongTien) AS totalRevenue, " +
                 "SUM(giaTien) AS totalAmount " +
                 "FROM " + TABLE_NAME +
-                " WHERE strftime('%m', ngay) = ? " +  // Lọc theo tháng
+                " WHERE thang = ? " +
                 "GROUP BY tenMonAn";
 
         Cursor cursor = db.rawQuery(query, new String[]{currentMonth});
@@ -199,9 +199,12 @@ public class ChiTietHoaDonDAO {
             statisticsList.add(monAnDaBan);
         }
 
+        // Đóng con trỏ
+        cursor.close();
 
         return statisticsList;
     }
+
 
     private String getCurrentMonth() {
         Calendar calendar = Calendar.getInstance();

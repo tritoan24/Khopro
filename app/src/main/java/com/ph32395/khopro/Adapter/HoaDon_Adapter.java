@@ -20,12 +20,14 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ph32395.khopro.DAO.BanAnDAO;
+import com.ph32395.khopro.DAO.ChiTietHoaDonDAO;
 import com.ph32395.khopro.DAO.GiamGiaDAO;
 import com.ph32395.khopro.DAO.HoaDonDAO;
 import com.ph32395.khopro.DAO.MonAnDAO;
 import com.ph32395.khopro.DAO.NhanVienDAO;
 import com.ph32395.khopro.Fragment.QLHoaDonFragment;
 import com.ph32395.khopro.Model.BanAn;
+import com.ph32395.khopro.Model.ChiTietHoaDon;
 import com.ph32395.khopro.Model.GiamGia;
 import com.ph32395.khopro.Model.HoaDon;
 import com.ph32395.khopro.Model.MonAn;
@@ -36,6 +38,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHolder> {
@@ -144,30 +147,40 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
         builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Lấy danh sách HoaDonChiTiet theo ID cụ thể
+                ChiTietHoaDonDAO chiTietHoaDonDAO = new ChiTietHoaDonDAO(context);
+                List<ChiTietHoaDon> listHoaDonChiTiet = chiTietHoaDonDAO.getIdChiTietHoaDonByRowId(hoaDon.getId_HoaDon());
+
+                // Xóa từng HoaDonChiTiet trong danh sách
+                for (ChiTietHoaDon chiTietHoaDon : listHoaDonChiTiet) {
+                    chiTietHoaDonDAO.Delete(chiTietHoaDon);
+                }
+
+                // Xóa HoaDon sau khi đã xóa HoaDonChiTiet
                 hoaDonDAO = new HoaDonDAO(context);
                 int kq = hoaDonDAO.Delete(hoaDon);
-                if(kq>0){
-                    Toast.makeText(context, "xóa thành công", Toast.LENGTH_SHORT).show();
+
+                if (kq > 0) {
+                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     list.clear();
                     list.addAll(hoaDonDAO.getAll());
                     notifyDataSetChanged();
                     dialog.dismiss();
-                }else {
-                    Toast.makeText(context, "xóa không thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Xóa không thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(context, "hủy xóa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Hủy xóa", Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-
-
     }
+
 
     @Override
     public int getItemCount() {

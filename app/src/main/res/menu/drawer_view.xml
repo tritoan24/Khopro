@@ -22,10 +22,6 @@
             android:title="Quản Lý Nhân Viên"
             android:icon="@drawable/iconnhanvien"
             />
-        <item android:id="@+id/nav_QLHoaDon"
-            android:title="Quản Lý Hóa Đơn"
-            android:icon="@drawable/iconhoadon"
-            />
         <item android:title="Thống Kê">
             <menu>
                 <item android:id="@+id/nav_ThongKe"
@@ -34,15 +30,5 @@
                     />
             </menu>
         </item>
-        <item
-            android:id="@+id/nav_DoiMatKhau"
-            android:title="Đổi Mật Khẩu"
-            android:icon="@drawable/icondoipass"
-            />
-        <item
-            android:id="@+id/nav_DangXuat"
-            android:title="Đăng Xuất"
-            android:icon="@drawable/icondangxuat"
-            />
     </group>
 </menu>

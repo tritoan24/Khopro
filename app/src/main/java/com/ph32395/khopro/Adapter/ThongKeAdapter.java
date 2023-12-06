@@ -12,6 +12,8 @@ import com.ph32395.khopro.Model.ChiTietHoaDon;
 import com.ph32395.khopro.Model.MonAnDaBan;
 import com.ph32395.khopro.R;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ThongKeAdapter extends RecyclerView.Adapter<ThongKeAdapter.ViewHolder> {
@@ -34,6 +36,16 @@ public class ThongKeAdapter extends RecyclerView.Adapter<ThongKeAdapter.ViewHold
         MonAnDaBan monAn = monAnList.get(position);
         holder.txtTenMonAn.setText(monAn.getTenMonAn());
         holder.txtSoLuongDaBan.setText(String.valueOf(monAn.getTongSoLuong()));
+    }
+    public void updateList(List<MonAnDaBan> newList) {
+        // Sắp xếp danh sách theo số lượng đã bán từ lớn đến bé
+        Collections.sort(monAnList, new Comparator<MonAnDaBan>() {
+            @Override
+            public int compare(MonAnDaBan o1, MonAnDaBan o2) {
+                return Integer.compare(o2.getTongSoLuong(), o1.getTongSoLuong());
+            }
+        });
+        notifyDataSetChanged();
     }
 
     @Override
