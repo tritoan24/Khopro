@@ -33,6 +33,8 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
     MonAn monAn;
     BoNhoTamThoiDAO boNhoTamThoiDAO;
     public int soLuong = 0;
+    int i=0;
+
 
     private ArrayList<BoNhoTamThoi> danhSachTamThoi = new ArrayList<BoNhoTamThoi>();
     public MonAnOrder_Adapter(Context context , ArrayList<MonAn> list){
@@ -90,11 +92,12 @@ public class MonAnOrder_Adapter extends RecyclerView.Adapter<MonAnOrder_Adapter.
         }
 
         holder.btn_themDoAnOrder.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 monAn1.setSoLuong(monAn1.getSoLuong() + 1);
-                holder.tv_soLuong.setText(String.valueOf(monAn1.getSoLuong()));
                 updateTemporaryList(position, monAn1.getSoLuong());
+                holder.tv_soLuong.setText(String.valueOf(monAn1.getSoLuong()));
             }
         });
 

@@ -153,6 +153,7 @@ public class ThongKeFragment extends Fragment {
         doanhThuAdapter.updateList(doanhThuList);
         int tongDoanhThu = calculateTotalRevenue(doanhThuList);
         tv_thongDoanhThu.setText(formatMoney(tongDoanhThu) + " VNĐ");
+        doanhThuAdapter.notifyDataSetChanged();
     }
 
 

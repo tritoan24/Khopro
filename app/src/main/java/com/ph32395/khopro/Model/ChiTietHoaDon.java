@@ -98,4 +98,6 @@ public class ChiTietHoaDon {
     public void setThang(String thang) {
         this.thang = thang;
     }
+
+
 }

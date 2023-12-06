@@ -31,12 +31,15 @@ import com.ph32395.khopro.Model.ChiTietHoaDon;
 import com.ph32395.khopro.Model.GiamGia;
 import com.ph32395.khopro.Model.HoaDon;
 import com.ph32395.khopro.Model.MonAn;
+import com.ph32395.khopro.Model.MonAnDaBan;
 import com.ph32395.khopro.Model.NhanVien;
 import com.ph32395.khopro.R;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -134,6 +137,16 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
             return inputDateTime; // Trả về giá trị ban đầu nếu có lỗi
         }
     }
+    public void updateList(List<HoaDon> newList) {
+        // Sắp xếp danh sách theo số lượng đã bán từ lớn đến bé
+        Collections.sort(list, new Comparator<HoaDon>() {
+            @Override
+            public int compare(HoaDon o1, HoaDon o2) {
+                return Integer.compare(o2.getId_HoaDon(), o1.getId_HoaDon());
+            }
+        });
+        notifyDataSetChanged();
+    }
 
 
 
@@ -161,11 +174,11 @@ public class HoaDon_Adapter extends RecyclerView.Adapter<HoaDon_Adapter.ViewHold
                 int kq = hoaDonDAO.Delete(hoaDon);
 
                 if (kq > 0) {
-                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     list.clear();
                     list.addAll(hoaDonDAO.getAll());
                     notifyDataSetChanged();
                     dialog.dismiss();
+                    updateList(list);
                 } else {
                     Toast.makeText(context, "Xóa không thành công", Toast.LENGTH_SHORT).show();
                 }

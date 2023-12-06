@@ -51,6 +51,7 @@ public class QLHoaDonFragment extends Fragment {
         rc_quanLyHoaDon.setLayoutManager(layoutManager);
         list = (ArrayList<HoaDon>) dao.getAll();
         adapter = new HoaDon_Adapter(getContext(), list, this);
+        adapter.updateList(list);
         rc_quanLyHoaDon.setAdapter(adapter);
 
 

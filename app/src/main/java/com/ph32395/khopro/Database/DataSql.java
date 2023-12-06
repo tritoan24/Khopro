@@ -32,6 +32,15 @@ public class DataSql {
             "(2, 'nhanvien1', 2, '2023-01-02 14:30:00', 'Card', 100000.0)," +
             "(3, 'nhanvien2', 3, '2023-01-03 18:45:00', 'Cash', 60000.0)," +
             "(4, 'a', 1, '2023-01-04 20:00:00', 'Card', 15000.0)";
+    public static final String INSERT_TB_CHITIETHOADON = "INSERT INTO ChiTietHoaDon(id_HoaDon, tenMonAn, soLuong, giaTien, phanTramGG, tongTien, ngay, thang) VALUES" +
+            "(1, 'Bún Chả Băm', 2, 50000.0, 10, 90000, '01/12/2023', '12')," +
+            "(2, 'Nem Hải Sản', 1, 100000.0, 20, 120000, '02/12/2023', '12')," +
+            "(3, 'Bún Chả Chan', 3, 60000.0, 0, 180000, '06/11/2023', '11')," +
+            "(3, 'Bún Chả Băm', 3, 60000.0, 0, 180000, '06/11/2023', '11')," +
+            "(5, 'Nem Hải Sản', 3, 60000.0, 0, 180000, '06/11/2023', '11')," +
+            "(3, 'Coca cola', 2, 15000.0, 10, 30000, '06/11/2023', '11')";
+
+
 
 
 }

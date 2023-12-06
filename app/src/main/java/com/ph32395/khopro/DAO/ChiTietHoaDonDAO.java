@@ -133,6 +133,7 @@ public class ChiTietHoaDonDAO {
                 @SuppressLint("Range") String thang = cursor.getString(cursor.getColumnIndex("thang"));
 
 
+
                 ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(id_ChiTietHoaDon, id_HoaDon, tenMonAn, soLuong, giaTien, tongTien, phanTramGG,ngay,thang);
                 danhsach.add(chiTietHoaDon);
             }

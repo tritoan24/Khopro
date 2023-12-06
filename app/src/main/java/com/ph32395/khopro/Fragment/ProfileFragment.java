@@ -158,6 +158,7 @@ public class ProfileFragment extends Fragment {
 
                     if (updateResult > 0) {
                         Toast.makeText(getContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                        onResume();
                     } else {
                         Toast.makeText(getContext(), "Cập nhật thông tin thất bại", Toast.LENGTH_SHORT).show();
                     }
@@ -185,26 +186,20 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString("mma", "");
     }
+    @Override
+    public void onResume() {
+        super.onResume();
 
-//    public void reloadDAO() {
-//        // Gọi phương thức refresh() trong DAO
-//        nhanVienDAO.refresh();
-//
-//        // Lấy danh sách dữ liệu mới từ DAO
-//        NhanVien newNhanVien = nhanVienDAO.getID(mma);
-//
-//        // Cập nhật lại thông tin hiển thị trên fragment
-//        ed_hoTenNhanVienTT.setText(newNhanVien.getHoTen());
-//        ed_tuoiNhanVienTT.setText(String.valueOf(newNhanVien.getTuoi()));
-//        if ("Nam".equals(newNhanVien.getGioiTinh())) {
-//            gioiTinh.setImageResource(R.drawable.nguoidung);
-//        } else {
-//            gioiTinh.setImageResource(R.drawable.woman);
-//        }
-//        ed_gioiTinhNhanVienTT.setText(newNhanVien.getGioiTinh());
-//        ed_sdtNhanVienTT.setText(newNhanVien.getSoDienThoai());
-//
-//        // Cập nhật lại đối tượng `nhanVien`
-//        nhanVien = newNhanVien;
-//    }
+        // Cập nhật dữ liệu mỗi khi Fragment được hiển thị lại
+
+        // Ví dụ: Lấy lại dữ liệu từ cơ sở dữ liệu và cập nhật TextView
+        NhanVienDAO nhanVienDAO = new NhanVienDAO(getContext());
+        NhanVien updatedNhanVien = nhanVienDAO.getID(readMmaFromSharedPreferences());
+
+        ed_hoTenNhanVienTT.setText(updatedNhanVien.getHoTen());
+        ed_tuoiNhanVienTT.setText(String.valueOf(updatedNhanVien.getTuoi()));
+        ed_gioiTinhNhanVienTT.setText(updatedNhanVien.getGioiTinh());
+        ed_sdtNhanVienTT.setText(updatedNhanVien.getSoDienThoai());
+    }
+
 }

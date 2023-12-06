@@ -135,7 +135,6 @@ public class ThanhToanFragment extends Fragment {
 
                     // Check if the insertion was successful
                     if (insertedRowId != -1) {
-                        Toast.makeText(getContext(), "Hóa đơn được tạo thành công", Toast.LENGTH_SHORT).show();
                         BoNhoTamThoiDAO boNhoTamThoiDAO = new BoNhoTamThoiDAO(getContext());
                         List<BoNhoTamThoi> listBoNhoTamThoi = boNhoTamThoiDAO.layDanhSachBoNhoTamThoi();
                         // Truy xuất id_HoaDon của bản ghi mới được chèn
