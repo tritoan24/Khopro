@@ -35,73 +35,109 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_margin="10dp"
         android:background="@drawable/custom_item"
         android:backgroundTint="#E3DADA">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Họ và tên :"
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
-            android:id="@+id/ed_hoTenNhanVienTT"></TextView>
+            ></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:text="a"
+            android:id="@+id/ed_hoTenNhanVienTT"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_margin="10dp"
         android:background="@drawable/custom_button_banan"
         android:backgroundTint="#E3DADA">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tuổi:"
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
-            android:id="@+id/ed_tuoiNhanVienTT"></TextView>
+            ></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:text="a"
+            android:id="@+id/ed_tuoiNhanVienTT"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_margin="10dp"
         android:background="@drawable/custom_item"
         android:backgroundTint="#E3DADA">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Giới tính: "
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
-            android:id="@+id/ed_gioiTinhNhanVienTT"></TextView>
+            ></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:text="a"
+            android:id="@+id/ed_gioiTinhNhanVienTT"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_margin="10dp"
         android:background="@drawable/custom_item"
         android:backgroundTint="#E3DADA">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số điện thoại:"
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
-            android:id="@+id/ed_sdtNhanVienTT"></TextView>
+            ></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            android:text="a"
+            android:id="@+id/ed_sdtNhanVienTT"/>
     </LinearLayout>
 
     <Button
