@@ -18,9 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.ph32395.khopro.DAO.NhanVienDAO;
 import com.ph32395.khopro.Fragment.BanAnOrderFragment;
 import com.ph32395.khopro.Fragment.DoiMatKhauFragment;
 import com.ph32395.khopro.Fragment.HoaDonThanhToanFragment;
@@ -32,6 +34,7 @@ import com.ph32395.khopro.Fragment.QLMaGiamGiaFragment;
 import com.ph32395.khopro.Fragment.QLMonanFragment;
 import com.ph32395.khopro.Fragment.QLNhanVienFragment;
 import com.ph32395.khopro.Fragment.ThongKeFragment;
+import com.ph32395.khopro.Model.NhanVien;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,18 +95,11 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
 
-//        sharedPreferences = getSharedPreferences("THONGTIN", MODE_PRIVATE);
-//        String loaiTaiKhoan = sharedPreferences.getString("loaitaikhoan", "");
-//
-//        if ("Admin".equals(loaiTaiKhoan)) {
-//            Toast.makeText(this, "Bạn Đang Đăng Nhập Trên Tài Khoản ADMIN", Toast.LENGTH_SHORT).show();
-//        } else {
-//            nv.getMenu().findItem(NAV_DOANHTHU).setVisible(false);
-//            nv.getMenu().findItem(NAV_TOP10).setVisible(false);
-//            nv.getMenu().findItem(NAV_THEMTV).setVisible(false);
-//            Toast.makeText(this, "Bạn Đang Đăng Nhập Trên Tài Khoản Thủ Thư", Toast.LENGTH_SHORT).show();
-//
-//        }
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String ma = sharedPreferences.getString("mma", "");
+
+        NhanVienDAO dao = new NhanVienDAO(this);
+        NhanVien nv1 = dao.getID(ma);
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -111,25 +107,47 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 String title = "";
 
-                if (item.getItemId() == NAV_QLMONAN) {
-                    setTitle("Quản Lý Món Ăn");
-                    fragment = new QLMonanFragment();
-                } else if (item.getItemId() == NAV_QLDANHMUC) {
-                    setTitle("Quản Lý Danh Mục");
-                    fragment = new QLDanhMucFragment();
-                } else if (item.getItemId() == NAV_QLBANAN) {
-                    setTitle("Quản Lý Bàn Ăn");
-                    fragment = new QLBanAnFragment();
-                } else if (item.getItemId() == NAV_QLMAGIAMGIA) {
-                    setTitle("Quản Lý Mã Giảm Giá");
-                    fragment = new QLMaGiamGiaFragment();
-                } else if (item.getItemId() == NAV_QLNHANVIEN) {
-                    setTitle("Quản Lý Nhân Viên");
-                    fragment = new QLNhanVienFragment();
-                } else if (item.getItemId() == NAV_THONGKE) {
-                    setTitle("Thống Kê");
-                    fragment = new ThongKeFragment();
+
+                String loaitk = nv1.getLoaiTaiKhoan();
+
+                if (!"Admin".equals(loaitk)) {
+                    if (item.getItemId() == NAV_QLBANAN ||
+                            item.getItemId() == NAV_QLDANHMUC ||
+                            item.getItemId() == NAV_QLMONAN ||
+                            item.getItemId() == NAV_QLMAGIAMGIA ||
+                            item.getItemId() == NAV_QLNHANVIEN) {
+
+                        Toast.makeText(MainActivity.this, "Bạn không có quyền truy cập vào mục này.", Toast.LENGTH_SHORT).show();
+                        drawer.closeDrawers();
+                        return false;
+                    }
+                    else if (item.getItemId() == NAV_THONGKE) {
+                        setTitle("Thống Kê");
+                        fragment = new ThongKeFragment();
+                    }
+                }else {
+                    if (item.getItemId() == NAV_QLMONAN) {
+                        setTitle("Quản Lý Món Ăn");
+                        fragment = new QLMonanFragment();
+                    } else if (item.getItemId() == NAV_QLDANHMUC) {
+                        setTitle("Quản Lý Danh Mục");
+                        fragment = new QLDanhMucFragment();
+                    } else if (item.getItemId() == NAV_QLBANAN) {
+                        setTitle("Quản Lý Bàn Ăn");
+                        fragment = new QLBanAnFragment();
+                    } else if (item.getItemId() == NAV_QLMAGIAMGIA) {
+                        setTitle("Quản Lý Mã Giảm Giá");
+                        fragment = new QLMaGiamGiaFragment();
+                    } else if (item.getItemId() == NAV_QLNHANVIEN) {
+                        setTitle("Quản Lý Nhân Viên");
+                        fragment = new QLNhanVienFragment();
+                    } else if (item.getItemId() == NAV_THONGKE) {
+                        setTitle("Thống Kê");
+                        fragment = new ThongKeFragment();
+                    }
                 }
+//
+
                 if (fragment != null) {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
