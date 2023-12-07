@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HoaDonThanhToanFragment extends Fragment {
-    TextView tv_maHoaDon_hoaDon, tv_soBan_hoaDon, tv_gioTao_hoaDon, tv_maNhanVien_hoaDon, txtghichu,tv_ngayTao_hoaDon,id_hoadonso, tv_thanhTien_hoaDon, tv_giamGia_hoaDon, tv_truTien_hoaDon, tv_tongTien_hoaDon;
+    TextView tv_maHoaDon_hoaDon, tv_soBan_hoaDon, tv_gioTao_hoaDon, tv_maNhanVien_hoaDon, txtghichu,tv_ngayTao_hoaDon,id_hoadonso, tv_thanhTien_hoaDon, tv_giamGia_hoaDon, tv_truTien_hoaDon, tv_tongTien_hoaDon,giotaonhabep,sobannhabep;
 
     ListView lv_hoaDon_ThanhToan,lv_hoadonnhabep;
     private ArrayList<ChiTietHoaDon> list;
@@ -49,6 +49,8 @@ public class HoaDonThanhToanFragment extends Fragment {
         lv_hoadonnhabep = v.findViewById(R.id.lv_hoadonnhabep);
         id_hoadonso = v.findViewById(R.id.id_hoadonso);
         txtghichu = v.findViewById(R.id.txt_ghchunhabep);
+        sobannhabep = v.findViewById(R.id.soBannhabep);
+        giotaonhabep = v.findViewById(R.id.edthoigiamnhabep);
 
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LuuMaHoaDon", Context.MODE_PRIVATE);
@@ -130,6 +132,8 @@ public class HoaDonThanhToanFragment extends Fragment {
         }
         tv_gioTao_hoaDon.setText(gio);
         tv_ngayTao_hoaDon.setText(ngay);
+        sobannhabep.setText("Bàn Số: "+String.valueOf(soBan));
+        giotaonhabep.setText("Thời Gian: "+gio);
 
 
 

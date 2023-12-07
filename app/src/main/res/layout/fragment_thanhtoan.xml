@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Thanh toán"
-        android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="25dp"
+        android:fontFamily="@font/fonth3"
         android:gravity="center"
         android:layout_marginBottom="20dp"
 
@@ -63,6 +63,7 @@
         android:text="Nhập mã giảm giá"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
+        android:layout_marginBottom="10dp"
         android:textStyle="bold"/>
     <EditText
         android:layout_width="match_parent"
@@ -80,7 +81,7 @@
         android:textStyle="bold"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="110dp"
         android:background="@drawable/textview_custom"
         android:id="@+id/ed_giChu"
         android:gravity="top"

@@ -101,6 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Mật khẩu cũ"
+                        android:inputType="textPassword"
                         android:textColor="#000000"
                         android:textColorHint="#DDD5D5" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -124,6 +125,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Mật khẩu mới"
                         android:textColor="#000000"
+                        android:inputType="textPassword"
                         android:textColorHint="#DDD5D5" />
                 </com.google.android.material.textfield.TextInputLayout>
 

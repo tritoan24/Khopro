@@ -62,7 +62,7 @@
             android:paddingLeft="15dp"
             android:text="Giới tính: "
             android:textSize="20dp"
-
+            android:layout_marginRight="20dp"
             />
 
         <RadioGroup
@@ -71,19 +71,19 @@
             android:background="@drawable/custom_edt_banan"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginLeft="50dp"
             >
 
             <RadioButton
                 android:id="@+id/rdo_Nam"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Nam" />
             <RadioButton
                 android:id="@+id/rdo_Nu"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_weight="1"
                 android:text="Nữ" />
         </RadioGroup>
 
@@ -123,8 +123,8 @@
             android:layout_weight="1"
             android:background="@drawable/custom_button_banan"
             android:elevation="5dp"
-            android:paddingHorizontal="50dp"
             android:text="Thêm"
+            android:layout_marginRight="10dp"
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -132,10 +132,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginLeft="30dp"
             android:background="@drawable/custom_button_huy"
             android:elevation="5dp"
-            android:paddingHorizontal="50dp"
             android:text="Huỷ"
             android:textColor="@color/white" />
     </LinearLayout>

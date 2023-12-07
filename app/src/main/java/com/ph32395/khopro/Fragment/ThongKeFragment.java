@@ -38,13 +38,11 @@ public class ThongKeFragment extends Fragment {
         tv_homnay = v.findViewById(R.id.tv_HomNay);
         tv_thangnay = v.findViewById(R.id.tv_thangnay);
         tv_thongDoanhThu = v.findViewById(R.id.tv_tongDoanhThu);
-        btn_doanhThu = v.findViewById(R.id.btn_doanhThu);
         lv_doanhThu = v.findViewById(R.id.lv_doanhThu);
 
         lv_doanhThu.setLayoutManager(new LinearLayoutManager(getContext()));
         ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO(getContext());
 
-        // Lấy ngày hiện tại
         String ngayHomNay = getNgay();
         List<MonAnDaBan> doanhThuList = dao.getStatisticsByDate(ngayHomNay);
         ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
@@ -54,10 +52,8 @@ public class ThongKeFragment extends Fragment {
 
         int tongDoanhThu = calculateTotalRevenue(doanhThuList);
 
-        // Hiển thị tổng doanh thu trên TextView
         tv_thongDoanhThu.setText(formatMoney(tongDoanhThu) + " VNĐ");
 
-        // Khởi tạo đối tượng Calendar để sử dụng trong DatePickerDialog
         Calendar calendar = Calendar.getInstance();
 
         tv_homnay.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +67,7 @@ public class ThongKeFragment extends Fragment {
                 ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
                 lv_doanhThu.setAdapter(doanhThuAdapter);
                 doanhThuAdapter.updateList(doanhThuList);
+                updateTotalRevenueAndAdapter(doanhThuList);
             }
         });
 
@@ -86,6 +83,7 @@ public class ThongKeFragment extends Fragment {
                 lv_doanhThu.setAdapter(doanhThuAdapter);
                 doanhThuAdapter.notifyDataSetChanged();
                 doanhThuAdapter.updateList(doanhThuList);
+                updateTotalRevenueAndAdapter(doanhThuList);
 
             }
         });
@@ -98,6 +96,8 @@ public class ThongKeFragment extends Fragment {
                 tv_homnay.setBackgroundResource(R.drawable.custom_monanoder);
                 tv_chonngay.setBackgroundResource(R.drawable.custtom_khung_lv);
                 tv_thangnay.setBackgroundResource(R.drawable.custtom_khung_lv);
+                updateTotalRevenueAndAdapter(doanhThuList);
+
             }
         });
 
@@ -143,9 +143,7 @@ public class ThongKeFragment extends Fragment {
         dialog.show();
     }
 
-    // Thêm phương thức xử lý khi ngày được chọn
     private void handleDateSelected(String selectedDate) {
-        // Gọi hàm xử lý khi ngày được chọn ở đây, ví dụ: load dữ liệu theo ngày
         ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO(getContext());
         List<MonAnDaBan> doanhThuList = dao.getStatisticsByDate(selectedDate);
         ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
@@ -153,6 +151,15 @@ public class ThongKeFragment extends Fragment {
         doanhThuAdapter.updateList(doanhThuList);
         int tongDoanhThu = calculateTotalRevenue(doanhThuList);
         tv_thongDoanhThu.setText(formatMoney(tongDoanhThu) + " VNĐ");
+        doanhThuAdapter.notifyDataSetChanged();
+    }
+    private void updateTotalRevenueAndAdapter(List<MonAnDaBan> doanhThuList) {
+        int tongDoanhThu = calculateTotalRevenue(doanhThuList);
+        tv_thongDoanhThu.setText(formatMoney(tongDoanhThu) + " VNĐ");
+
+        ThongKeAdapter doanhThuAdapter = new ThongKeAdapter(doanhThuList);
+        lv_doanhThu.setAdapter(doanhThuAdapter);
+        doanhThuAdapter.updateList(doanhThuList);
         doanhThuAdapter.notifyDataSetChanged();
     }
 

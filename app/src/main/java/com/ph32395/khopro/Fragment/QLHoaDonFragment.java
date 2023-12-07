@@ -1,5 +1,6 @@
 package com.ph32395.khopro.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +56,7 @@ public class QLHoaDonFragment extends Fragment {
         adapter = new HoaDon_Adapter(getContext(), list, this);
         adapter.updateList(list);
         rc_quanLyHoaDon.setAdapter(adapter);
+
 
 
         return v;

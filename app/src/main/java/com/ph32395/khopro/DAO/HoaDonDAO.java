@@ -66,16 +66,9 @@ public class HoaDonDAO {
             hd.setId_HoaDon(Integer.parseInt(c.getString(c.getColumnIndex("id_HoaDon"))));
             hd.setId_NhanVien(c.getString(c.getColumnIndex("id_NhanVien")));
 
-
             String baan = c.getString(c.getColumnIndex("soBan"));
             hd.setSoBan(baan!=null?Integer.parseInt(baan):0);
-
-            // Check if id_GiamGia is not null before parsing
-
             hd.setNgayGio(c.getString(c.getColumnIndex("ngayGio")));
-
-
-            // Check if giaTien is not null before parsing
             String tongTien = c.getString(c.getColumnIndex("tongTien"));
             hd.setTongTien(tongTien != null ? Integer.parseInt((tongTien)) : (int) 0.0);
             hd.setKieuThanhToan(c.getString(c.getColumnIndex("kieuThanhToan")));

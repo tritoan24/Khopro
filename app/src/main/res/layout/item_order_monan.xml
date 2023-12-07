@@ -12,7 +12,6 @@
         android:gravity="center"
         android:background="@drawable/custom_monanoder"
         android:elevation="5dp"
-
         >
 
     <TextView
@@ -21,7 +20,8 @@
         android:layout_weight="2.9"
         android:textStyle="bold"
         android:text=" Bún chả chấm"
-        android:textSize="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
         android:id="@+id/tv_tenMonAnOrder"
         android:fontFamily="@font/fonth3"
         android:paddingLeft="10dp"

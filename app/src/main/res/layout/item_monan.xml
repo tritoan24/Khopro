@@ -80,7 +80,7 @@
                     android:text="Giảm giá: "/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:text="ABC"
                     android:id="@+id/tv_giamGiaMon"/>
             </LinearLayout>
@@ -102,7 +102,7 @@
                     android:id="@+id/tv_giaTienduocgg"/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:text="ABC"
                     android:id="@+id/tv_giaTienMon"/>
             </LinearLayout>

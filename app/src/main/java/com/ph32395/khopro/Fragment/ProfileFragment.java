@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -116,7 +117,8 @@ public class ProfileFragment extends Fragment {
 
         EditText ed_hoTenNhanVienTT_update = v.findViewById(R.id.ed_hoTenNhanVienTT_update);
         EditText ed_tuoiNhanVienTT_update = v.findViewById(R.id.ed_tuoiNhanVienTT_update);
-        EditText ed_gioiTinhNhanVienTT_update = v.findViewById(R.id.ed_gioiTinhNhanVienTT_update);
+        RadioButton rdoNam = v.findViewById(R.id.rdo_Nam_pr);
+        RadioButton rdoNu = v.findViewById(R.id.rdo_Nu_pr);
         EditText ed_sdtNhanVienTT_update = v.findViewById(R.id.ed_sdtNhanVienTT_update);
         Button btn_updateProfile = v.findViewById(R.id.btn_update_profile);
         Button btn_cancelUpdate = v.findViewById(R.id.btn_update_profile_cancel);
@@ -124,23 +126,24 @@ public class ProfileFragment extends Fragment {
 
         ed_hoTenNhanVienTT_update.setText(ed_hoTenNhanVienTT.getText().toString());
         ed_tuoiNhanVienTT_update.setText(ed_tuoiNhanVienTT.getText().toString());
-        ed_gioiTinhNhanVienTT_update.setText(ed_gioiTinhNhanVienTT.getText().toString());
         ed_sdtNhanVienTT_update.setText(ed_sdtNhanVienTT.getText().toString());
+        String gioiTinh = nhanVien.getGioiTinh();
+        rdoNam.setChecked(gioiTinh.equals("Nam"));
+        rdoNu.setChecked(gioiTinh.equals("Nữ"));
+
 
         btn_updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String tenNV = ed_hoTenNhanVienTT_update.getText().toString();
                 int tuoiNV = Integer.parseInt(ed_tuoiNhanVienTT_update.getText().toString());
-                String gioiTinhNV = ed_gioiTinhNhanVienTT_update.getText().toString();
+                String gioiTinh = rdoNam.isChecked() ? "Nam" : (rdoNu.isChecked() ? "Nữ" : "");
                 String sdtNV = ed_sdtNhanVienTT_update.getText().toString();
 
                 if (tenNV.isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng nhập họ tên", Toast.LENGTH_SHORT).show();
                 } else if (tuoiNV <= 0) {
                     Toast.makeText(getContext(), "Tuổi phải là số dương", Toast.LENGTH_SHORT).show();
-                } else if (!gioiTinhNV.equalsIgnoreCase("Nam") && !gioiTinhNV.equalsIgnoreCase("Nữ")) {
-                    Toast.makeText(getContext(), "Giới tính phải là nam hoặc nữ", Toast.LENGTH_SHORT).show();
                 } else if (sdtNV.isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
                 }
@@ -151,7 +154,7 @@ public class ProfileFragment extends Fragment {
                     newNhanVien.setMaNhanVien(manv);
                     newNhanVien.setHoTen(tenNV);
                     newNhanVien.setTuoi(tuoiNV);
-                    newNhanVien.setGioiTinh(gioiTinhNV);
+                    newNhanVien.setGioiTinh(gioiTinh);
                     newNhanVien.setSoDienThoai(sdtNV);
 
                     int updateResult = nhanVienDAO.update_Profile(newNhanVien);

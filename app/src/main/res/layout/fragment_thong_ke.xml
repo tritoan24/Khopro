@@ -91,30 +91,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tổng doanh thu: "
-            android:textSize="20dp"
+            android:textSize="17dp"
+            android:fontFamily="@font/fonth3"
             android:gravity="start"/>
         <TextView
             android:id="@+id/tv_tongDoanhThu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5.000.000 "
+            android:fontFamily="@font/fonth3"
             android:layout_gravity="end"
-            android:textSize="20dp"/>
+            android:textSize="17dp"
+            />
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_doanhThu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingVertical="20dp"
-        android:paddingHorizontal="90dp"
-        android:text="Doanh thu"
-        android:background="@drawable/button_doanhthu_custom"
-        android:layout_marginVertical="10dp"/>
+
 </LinearLayout>
