@@ -43,6 +43,7 @@
         android:background="@drawable/custom_edt_banan"
         android:elevation="5dp"
         android:hint="Tuổi: "
+        android:inputType="number"
         android:paddingVertical="20dp"
         android:paddingLeft="15dp" />
 
