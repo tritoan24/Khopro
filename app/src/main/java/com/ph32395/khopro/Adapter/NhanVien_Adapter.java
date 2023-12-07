@@ -116,7 +116,9 @@ public class NhanVien_Adapter extends RecyclerView.Adapter<NhanVien_Adapter.View
                                 edmaNV.setError("Mã nhân viên không được để trống");
                             }  if (hoTen.isEmpty()) {
                                 edtHoTen.setError("Họ tên không được để trống");
-                            } if (TextUtils.isEmpty(tuoi)) {
+                            } if (!TextUtils.isDigitsOnly(hoTen)) {
+                                edtHoTen.setError("Họ tên không thể là số");
+                            }if (TextUtils.isEmpty(tuoi)) {
                                 // Chuỗi rỗng
                                 edTuoi.setError("Tuổi đang trống");
                             } else {
