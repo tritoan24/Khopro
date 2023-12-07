@@ -106,10 +106,9 @@ public class QLNhanVienFragment extends Fragment {
                    edmaNV.setError("Mã nhân viên không được để trống");
                }  if (hoTen.isEmpty()) {
                    edtHoTen.setError("Họ tên không được để trống");
-               }if (TextUtils.isDigitsOnly(hoTen)) {
-                   edtHoTen.setError("Sai họ tên");
-               }
-               if (TextUtils.isEmpty(tuoi)) {
+               }if (!TextUtils.isDigitsOnly(hoTen)) {
+                                edtHoTen.setError("Họ tên không thể là số");
+                            }if (TextUtils.isEmpty(tuoi)) {
                    // Chuỗi rỗng
                    edTuoi.setError("Tuổi đang trống");
                } else {
