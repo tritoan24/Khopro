@@ -155,13 +155,13 @@ public class GiamGia_Adapter extends RecyclerView.Adapter<GiamGia_Adapter.ViewHo
 
                         // Kiểm tra xem số có là số âm không
                         if (number < 0) {
-                            ed_updateMucGiamGia.setError("Tuổi đang là số âm");
+                            ed_updateMucGiamGia.setError("Mức giảm giá đang là số âm");
                         } else {
 //                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
                         }
                     } catch (NumberFormatException e) {
                         // Nếu có ngoại lệ, đây không phải là số
-                        ed_updateMucGiamGia.setError("Tuổi đang không là số");
+                        ed_updateMucGiamGia.setError("Mức giảm giá đang không là số");
                     }
                 }
                 if (TextUtils.isEmpty(soluotdung)) {
@@ -174,7 +174,7 @@ public class GiamGia_Adapter extends RecyclerView.Adapter<GiamGia_Adapter.ViewHo
 
                         // Kiểm tra xem số có là số âm không
                         if (number < 0) {
-                            ed_updateSoLuotDung.setError("Lượt đang là số âm");
+                            ed_updateSoLuotDung.setError("Lượt dùng đang là số âm");
                         } else {
 //                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
                         }
