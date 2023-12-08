@@ -103,13 +103,13 @@ public class QLMaGiamGiaFragment extends Fragment {
 
                         // Kiểm tra xem số có là số âm không
                         if (number < 0) {
-                            ed_Mucgiamgia.setError("Tuổi đang là số âm");
+                            ed_Mucgiamgia.setError("Mức giảm giá đang là số âm");
                         } else {
 //                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
                         }
                     } catch (NumberFormatException e) {
                         // Nếu có ngoại lệ, đây không phải là số
-                        ed_Mucgiamgia.setError("Tuổi đang không là số");
+                        ed_Mucgiamgia.setError("Mức giảm giá đang không là số");
                     }
                 }
                 if (TextUtils.isEmpty(soluotdung)) {
@@ -122,7 +122,7 @@ public class QLMaGiamGiaFragment extends Fragment {
 
                         // Kiểm tra xem số có là số âm không
                         if (number < 0) {
-                            edLuotGiamGia.setError("Lượt đang là số âm");
+                            edLuotGiamGia.setError("Lượt dùng đang là số âm");
                         } else {
 //                           Toast.makeText(getApplicationContext(), "Chuỗi không phải là số âm", Toast.LENGTH_SHORT).show();
                         }
